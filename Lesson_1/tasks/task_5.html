@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 5</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            .label {
+                display: flex;
+                gap: 15px;
+                font-size: 25px;
+
+            }
+
+            .text {
+                font-size: 30px;
+            }
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            .res {
+                display: flex;
+                flex-direction: column;
+                font-size: 30px;
+            }
+
+            .red-text {
+                color: red;
+                font-size: 30px;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 5. Додаток містить масив об’єктів (логін, пароль) -- інсуючі логіни і паролі. Користувач вводить логін і пароль, а програма повідомляє чи може користувач бути авторизованим (чи є він одним з масиву).
+            </h1>
+            <div id="app">
+                <label class="label">
+                    Login
+                    <input type="text" v-model="userLogin">
+                </label>
+                <label class="label">
+                    Password
+                    <input type="password" v-model="userPass">
+                </label>
+                <button @click="authorization">Go</button>
+                <span class="red-text">{{addText}}</span>
+            </div>
+            <script>
+
+
+                const { createApp } = Vue
+                const userList = [
+                    {
+                        login: "admin",
+                        password: "admin",
+                    },
+                    {
+                        login: "ivanAdmin",
+                        password: "Admin32",
+                    },
+                    {
+                        login: "banana",
+                        password: "orange1",
+                    },
+                    {
+                        login: "olga",
+                        password: "akimova_4",
+                    }
+                ]
+                const app = createApp({
+                    data() {
+                        return {
+                            userLogin: null,
+                            userPass: null,
+                            addText: " "
+                        }
+                    },
+                    methods: {
+                        authorization() {
+                            const user = userList.find((el) => el.login === this.userLogin && el.password === this.userPass)
+                            if (user) {
+                                setTimeout(() => {
+                                    window.location.href = `https://www.ukr.net/`
+                                }, 2000);
+                            } else {
+                                this.onClear()
+                                return this.addText = "Невірний Логін або Пароль"
+                            }
+                        },
+                        onClear() {
+                            setTimeout(() => {
+                                this.userLogin = null
+                                this.userPass = null
+                                this.addText = " "
+                            }, 5000)
+                        }
+                    },
+                    computed: {
+
+                    }
+                }).mount('#app')
+            </script>
+        </div>
+    </body>
+
+</html>

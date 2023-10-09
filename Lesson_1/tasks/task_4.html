@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 4</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            .label {
+                display: flex;
+                gap: 15px;
+                font-size: 25px;
+
+            }
+
+            .text {
+                font-size: 30px;
+            }
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            .res {
+                display: flex;
+                flex-direction: column;
+                font-size: 30px;
+            }
+
+            .err {
+                font-size: 30px;
+                color: red;
+            }
+
+            .red-text {
+                background-color: rgba(118, 13, 6, 0.954);
+            }
+
+            .green-text {
+                background-color: rgba(0, 128, 0, 0.265);
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 4. “Рахунок у банку”
+                <p>Вимоги:</p>
+                <ul>
+                    <li>Спочатку сума дорівнює 0грн. Змінити суму у гривнях можна або зарахуванням на рахунок, або зняттям.
+                    </li>
+                    <li>Сума автоматично переводиться у долари та євро (фіксований курс задається у data).
+                    </li>
+                    <li>можливість зарахувати суму (контролювати, щоб не була від’ємною)
+                    </li>
+                    <li>можливість зняти (щоб не можна зняти більше ніж є на рахунку)
+                    </li>
+                    <li>при виконанні зняття і зарахування коштів вираховувати 3% від суми (відображати кількість відсотків автоматично)</li>
+                </ul>
+                <p>При зміні суми :
+                </p>
+                <ol>
+                    <li>якщо було зняття, то суму відоражати червоним
+                    </li>
+                    <li>якщо було зарахування, то суму відображати зеленим</li>
+                    <li>Якщо сума валюти менша за 100 то відображати червоним кольором, інакше - зеленим</li>
+                </ol>
+            </h1>
+            <div id="app">
+                <div :class="currentColorClass">
+                    <p class="text"> Сума на рахунку : <span>{{currentBalance}} ₴</span></p>
+                </div>
+                <label class="label">
+                    Зарахувати на рахунку
+                    <input type="number" v-model="deposited">
+                    <button @click="setAddMoney">Add Money</button>
+                </label>
+                <label class="label">
+                    Зняти з рахунку
+                    <input type="number" v-model="withdraw">
+                    <button @click="setWithdraw">Withdraw Money</button>
+                </label>
+                <p class="err">{{err}}</p>
+                <p class="text"> Комісія за послуги : {{commissionValue}} ₴</p>
+                <p class="text"> Сума у долорах : {{isRateUsd}} $ </p>
+                <p class="text"> Сума у євро : {{isRateEur}} €</p>
+            </div>
+            <script>
+                const { createApp } = Vue
+                const app = createApp({
+                    data() {
+                        return {
+                            deposited: null,
+                            withdraw: null,
+                            currentBalance: 0,
+                            rateUsd: 38.21,
+                            rateEur: 40.73,
+                            commissionValue: 0,
+                            err: " ",
+                            currentColorClass: " ",
+                        }
+                    },
+                    methods: {
+                        setAddMoney() {
+                            if (this.deposited < 0) return this.getErrText()
+                            this.currentBalance = this.currentBalance + this.deposited
+                            this.commissionValue = this.calcCommissions(this.deposited)
+                            this.currentColorClass = this.setChangeColor(this.currentBalance)
+                            this.onClean()
+                        },
+                        getErrText() {
+                            this.err = "Введена некорректна сума "
+                        },
+                        onClean() {
+                            this.deposited = null
+                            this.withdraw = null
+                            this.err = " "
+                        },
+                        setWithdraw() {
+                            if (this.withdraw < 0 || this.withdraw > this.currentBalance)
+                                return this.getErrText()
+                            this.currentBalance = this.currentBalance - this.withdraw
+                            this.commissionValue = this.calcCommissions(this.withdraw)
+                            this.currentColorClass = "red-text"
+                            this.onClean()
+                        },
+                        calcCommissions(currentAmount) {
+                            return (currentAmount * 0.03 / 100).toFixed(2)
+                        },
+
+                        setChangeColor(amount) {
+                            return amount < 100 ? "red-text" : "green-text"
+                        }
+                    },
+                    computed: {
+                        isRateUsd() {
+                            return (this.currentBalance / this.rateUsd).toFixed(2)
+                        },
+                        isRateEur() {
+                            return (this.currentBalance / this.rateEur).toFixed(2)
+                        },
+                    }
+                }).mount('#app')
+            </script>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 3</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            .res {
+                display: flex;
+                flex-direction: column;
+                font-size: 30px;
+            }
+
+            img {
+                width: 400px;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 3. Задано початок та кінець діапазону. При натисканні на кнопку випадковим чином генерувати значення з вказаного діапазону та відображати його.
+            </h1>
+            <div id="app">
+                <label>
+                    Введіть початок діапазону
+                    <input type="number" v-model="numMin">
+                </label>
+                <label>
+                    Введіть кінець діапазону
+                    <input type="number" v-model="numMax">
+                </label>
+                <button @click="getRes">result</button>
+                <div class="res">{{addResText}}</div>
+            </div>
+            <script>
+                const { createApp } = Vue
+                const app = createApp({
+                    data() {
+                        return {
+                            numMin: null,
+                            numMax: null,
+                            addResText: " "
+                        }
+                    },
+                    computed: {
+                        randomNumber() {
+                            return this.numMin + Math.floor(Math.random() * (this.numMax - this.numMin + 1))
+                        }
+                    },
+                    methods: {
+                        onClear() {
+                            this.numMin = null
+                            this.numMax = null
+                        },
+                        getRes() {
+                            this.addResText = this.randomNumber
+                            // невпевнений  що це вірний спосіб очищення імпута
+                            this.onClear()
+                        }
+                    }
+                }).mount('#app')
+            </script>
+    </body>
+    </body>
+
+</html>
