@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 5</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            .label {
+                display: flex;
+                gap: 15px;
+                font-size: 25px;
+
+            }
+
+            .text {
+                font-size: 30px;
+            }
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* ========================================================================================= */
+
+            .link-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                background-color: rgba(0, 0, 0, 0.205);
+                font-size: 18px;
+                padding: 10px;
+                width: 500px;
+            }
+
+            .head-item {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .head-text {
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .head-link {
+                opacity: 0.1;
+            }
+
+            .link-title {
+                font-weight: bold;
+            }
+
+            .link-article {
+                font-weight: 500;
+                font-style: italic;
+                cursor: default;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 5. Самостійно сформуйте масив даних та виведіть фрагмент на зразок поданого (дані не обов’язково повинні співпадати)
+            </h1>
+            <div id="app">
+                <div class="link-container" v-for="webSite in webSiteObj" :key="webSite.id">
+                    <a class="head-item" :href="webSite.link">
+                        <img class="head-img" :src="webSite.sub.image">
+                        <div class="head-text">
+                            <div class="head-subtitle">{{webSite.sub.subtitle}}</div>
+                            <link class="head-link">{{webSite.sub.text}}</link>
+                        </div>
+                    </a>
+                    <a class="link-title" :href="webSite.titleLink">{{webSite.title}}</a>
+                    <p class="link-article">{{webSite.article}}</p>
+                </div>
+            </div>
+            <script>
+
+
+                const { createApp } = Vue
+                const app = createApp({
+                    data() {
+                        return {
+                            webSiteObj: [
+                                {
+                                    id: Symbol(),
+                                    link: "https://vuejs.org/",
+                                    sub: {
+                                        subId: Symbol(),
+                                        image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAhFBMVEX///+44Myw3cetyL+rsbjh4+XB5NIlsnY1tX0lOVQmPlUhOlNFV2lewJI+t4FCuINCu4Q9kHQ0P1s1SV6zub/f8edDvoU2VWGDzKg/pHs0PFuLlJ4rs3k5bGg1RV0ML0rp6+0vRFpteYY7hHDT699wxZ0+mXfr9vA3X2SZ1LdAq346d2zD7XyeAAABIklEQVR4Aa3RBbaDUAxF0Vt/aCh1N+rzn99Pgua77XqBLLIO/q7VFp2u6EH19EenLVroD5zwfN8PQqgw4B+eE4M+EMVElAzT0WgUjMHGAX9Nhwn/HUcAJgNi09mIBWDBiM2mxAYTsLmTEYsl/+2vgJXPX5YLGeDmUGsdsdnygd1+v+OP7UYHrJFrOxJyF4fj8SB3QMK1USCRnLZyhhzfnhISKGVrPWNU0ePrDJWzrnpJRyq96Ipn1K75qrftiG1v+YpXNNwdscdyxJYPYu4Ow8Uy4skjtk8ZEDtY/TUJOYHEug+rSlJHsKokzQjWPF81X3EOq06SJHkEyyQxESyqwLJJbARLkmgEyybRCJZNohEsm0QifKK1XrfwqSjC57IM/+0FV60eh/8r7TcAAAAASUVORK5CYII=",
+                                        subtitle: "Vue.js",
+                                        text: "https://vuejs.org"
+                                    },
+                                    titleLink: "https://vuejs.org/",
+                                    title: "Vue.js - The Progressive JavaScript Framework | Vue.js",
+                                    article: "Vue.js - The Progressive JavaScript Framework"
+                                },
+                                {
+                                    id: Symbol(),
+                                    link: "https://v2.nuxt.com/",
+                                    sub: {
+                                        subId: Symbol(),
+                                        image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwAt2wAtmwAHREAx3UA3oMA0nwAnl0A3IIAXDcAw3MAq2UAjVMAzXkAvnAAAAAAu26zvWPIAAAAEXRSTlMAlqUf4f//Yf8yyn5L9roLsUIq0RIAAADRSURBVHgB1JDhDoMgDISHeniiFt7/aRd6ZF3I4v99iYm0cNfr699Iy/rY34D81N9BYnm4kNmRyXH8GAAEiTLMzrm/9uYJ4pIZ53kLei0Tt8wkFVwgkr/FKbMu9cUNZrkzk7DbpYJuvvv4YKe6VPRrJjb9NpBIkqoqqYqRvILMkkJTSQebzSweDbkwm21jIL1bJy1tR8h5ip6036hNy6uMtZZhFkdWdy3NzFohNNdqzSmejiQBkv7d1VMJdl6GD4QpVdArqQ2WUwGXFrzHODSyGwAI/Aq+5N2q7wAAAABJRU5ErkJggg==",
+                                        subtitle: "Nuxt 2",
+                                        text: "https://v2.nuxt.com/"
+                                    },
+                                    titleLink: "https://v2.nuxt.com/",
+                                    title: "Nuxt 2 - The Intuitive Vue Framework",
+                                    article: "Build your Vue 2 application with confidence using Nuxt 2. An open source framework making web development simple and powerful."
+                                },
+                                {
+                                    id: Symbol(),
+                                    link: "https://www.turing.com/blog/top-vuejs-frameworks-for-web-development/",
+                                    sub: {
+                                        subId: Symbol(),
+                                        image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAABgUlEQVR4Ab2TIYzEIBREQZAvMN/hEHWY+qCqamvWrT9drypOr0Uj8XWV6+pwlTgEAi+aHHRzl1zSrtwRI8hL+jq05BOhiJyBkOJVrBQwRKSEAq0AjtOo+9mbtnfeau2863U5Q4qdqIT0OT63fc/PLe/Z+1pryl7CsIxYgTVuD5f2UCtaG/fkTNg3ydR3BwXg/dAJ5cIklYvfTfOIRskpWEEYHhKUc6A4+h5KDZzf/BdC74sDR6wAaxogYkmm1Ut2upvzoluTFq2qaQGEsQ1tQpF8Fr/1kHweFYtpAXCaxGFqi2Sa57Tn2YYcZ7vFtQIMkR2mUtnip0y0St7N2Mhu6PnfnABA+Ze/Ab/7O6dcID3O/m0uXbJta5OTlJwFhmq65j30cArwe9jTO4A2Lhn15hGkSA4vSXIaKn9fU5wD0IfXUJskF5KxTp3qwBeSc561Pq7oPDj6G399jucRJkxIARm5iNyyE9A91BUhfXQCx2WAS4epXKTQSN/8QpRQRsln8wM2mc4j1kPnDwAAAABJRU5ErkJggg==",
+                                        subtitle: "Turing",
+                                        text: "https://www.turing.com/blog/top-vuejs-frameworks-for-web-development/"
+                                    },
+                                    titleLink: "https://www.turing.com/blog/top-vuejs-frameworks-for-web-development/",
+                                    title: "Turing: Hire the World's Most Deeply Vetted Remote Developers",
+                                    article: "Turing is the leading Talent Cloud for companies to hire the most deeply vetted remote developers & teams. Learn more about hiring software engineers or ..."
+                                },
+                                {
+                                    id: Symbol(),
+                                    link: "https://retool.com/",
+                                    sub: {
+                                        subId: Symbol(),
+                                        image: "https://tpc.googlesyndication.com/simgad/15707569389238271896?sqp=-oaymwEKCCAQICABUAFYAQ&rs=AOga4qltwBo3QaQzyVe3eLKpqIEY_cKIeA",
+                                        subtitle: "Nuxt 2",
+                                        text: "https://retool.com/"
+                                    },
+                                    titleLink: "https://retool.com/",
+                                    title: "Build a Vue.js app 10x faster - 100+ pre-built UI components",
+                                    article: "Save hundreds of hours with pre-made templates, integrations, and components. Connect to any data source or API, drag-and-drop a UI and program with JavaScript. Sign-up for Free."
+                                },
+                            ]
+                        }
+                    },
+                }).mount('#app')
+            </script>
+        </div>
+    </body>
+
+</html>

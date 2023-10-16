@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 1</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 20px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 10 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* =========================================================== */
+            .smile {
+                width: 150px;
+                height: 150px;
+                border: 2 solid yellow;
+            }
+
+            .error-message-ivan {
+                color: blue;
+            }
+
+            .error-message {
+                color: red
+            }
+
+            /* =========================================================== */
+        </style>
+        <div class="container">
+            <div>
+                <h1>Задача 1. Вводимо логіна і пароль. Якщо логін вірний відображаємо смайл. Якщо ні, то:
+                    <br> 1) якщо логін = Іван – колір повідомлення про помилку синій
+                    <br> 2) якщо хтось інший, то колір повідомлення червоний
+                </h1>
+            </div>
+            <div id="app">
+                <label>Login <input type="text" v-model="loginValue"> </label>
+                <label>Password <input type="password" v-model="passwordValue"> </label>
+                <button type="button" @click="onClick">Go</button>
+                <div>
+                    <div v-if="showSmile"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsOSV3nBlfGwtarTSk5p9BgHw87i0iaqnzAA&usqp=CAU" class="smile"></div>
+                    <div v-else-if="showMessage" :class="[colorMessage]">Логін і Пароль не вірні!</div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const userLoginList = [{
+                login: "іван",
+                password: 123
+            },
+            { login: "user1", password: "password1" },
+            { login: "johnDoe", password: "P@ssw0rd" },
+            { login: "randomUser", password: "R4nD0mP@ss" },
+            { login: "webDev123", password: "WebD3vSecr3t" },
+            { login: "guestUser", password: "Gu3stPa55" }]
+            const app = createApp({
+                data() {
+                    return {
+                        loginValue: null,
+                        passwordValue: null,
+                        showSmile: false,
+                        showMessage: false,
+                        colorMessage: false,
+                    }
+                },
+                computed: {
+                    userLogin: {
+                        get() {
+                            return this.loginValue
+                        },
+                        set() {
+                            if (this.loginValue) {
+                                return this.loginValue.toLowerCase()
+                            }
+                        },
+                    },
+                    userPassword: {
+                        get() {
+                            return this.passwordValue
+                        },
+                        set() {
+                            if (this.passwordValue) {
+                                return this.passwordValue.toLowerCase()
+                            }
+                        }
+                    },
+                    isCorrectLogin() {
+                        if (this.userLogin && this.userPassword)
+                            return userLoginList.some((el) => el.login == this.userLogin && el.password == this.userPassword)
+                    },
+                },
+                methods: {
+                    onClick() {
+                        if (this.isCorrectLogin)
+                            this.showSmile = true
+                        else if (this.userLogin == "іван") {
+                            this.colorMessage = "error-message-ivan"
+                            this.showSmile = false
+                            this.showMessage = true
+                        }
+                        else {
+                            this.colorMessage = "error-message"
+                            this.showSmile = false
+                            this.showMessage = true
+                        }
+                    },
+                }
+            }).mount('#app')
+        </script>
+    </body>
+
+</html>

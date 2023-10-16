@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 4</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            /* =================================================== */
+
+            .workers {
+                font-size: 30px;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                4. Вивести список як маркований список з елементами у форматі (name: salary)
+            </h1>
+            <div id="app">
+                <ol class="workers">
+                    <li v-for="(worker) of workersList" :key="worker.id">
+                        Призвіще: {{worker.name}}. Зарплата = {{worker.salary}}
+                    </li>
+                </ol>
+            </div>
+            <script>
+                const { createApp } = Vue
+                const app = createApp({
+                    data() {
+                        return {
+                            workersList: [
+                                {
+                                    id: '111',
+                                    name: 'Іванов',
+                                    salary: 10000,
+                                },
+                                {
+                                    id: '112',
+                                    name: 'Петров',
+                                    salary: 20000,
+                                },
+                                {
+                                    id: '113',
+                                    name: 'Сидоров',
+                                    salary: 50000,
+                                },
+                            ],
+                        }
+                    },
+                }).mount('#app')
+            </script>
+        </div>
+    </body>
+
+</html>

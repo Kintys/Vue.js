@@ -1,0 +1,111 @@
+     *,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+li {
+    list-style: none;
+}
+a {
+    color: inherit;
+}
+a:link,
+a:visited {
+    text-decoration: none;
+}
+img {
+    vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+} *
+body{
+    background: rgba(0, 0, 0, 0.647);
+    color:  white;
+    font-size: 30PX;
+    background: url("https://www.omeecron.com/wp-content/uploads/2022/06/vuejs.png") center center/cover no-repeat fixed;
+}
+
+
+[class*="__container"] {
+    height: 100%;
+    max-width: 1440px;
+    padding: 100px 50px 100px 50px;
+    display: grid;
+    row-gap: 30px;
+    justify-content: center;   
+    }
+
+.page__container{
+    display: grid;
+    row-gap: 30px;
+    
+}
+.page__container h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    color: rgb(190, 21, 44);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    
+}
+.page__container h1::after{
+    content: "";
+    height: 3px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    background: #000;
+}
+.links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.links__list{
+    display: inline-block;
+}
+.links__item{
+    color: rgba(4, 28, 243, 0.775);
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    max-width: 100%;
+    transition: all 0.3s ease 0s;
+    padding: 30px 30px;
+    border-radius: 10px;
+}
+.links__item:hover{
+    background: #000;
+}
+.links__item:not(:last-child){
+    margin-bottom: 20px;
+}
+.links__url:visited{
+    color: aqua;
+}
+
+
+.tast1__head-block {
+}
+.block-head {
+    display: grid;
+    row-gap: 30px;
+    grid-template-columns: minmax(100px,400px);
+    justify-items: center;
+
+}
+/* ========================================================================== */
+ 

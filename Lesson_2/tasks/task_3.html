@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 3</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                position: relative;
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* =================================================== */
+            .game {
+                position: absolute;
+                width: 200px;
+                height: 450px;
+                display: flex;
+                flex-direction: column;
+                font-size: 20px;
+            }
+
+            .game-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+                gap: 15px;
+            }
+
+            .game-container img {
+                max-width: 100%;
+            }
+
+            .text-green {
+                color: green;
+            }
+
+            .text-red {
+                color: red;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 3. Елемент тренажера англійської. Виводимо зображення елемента і слово. Користувач вводить відповідь. Якщо вірно – відтворюємо фразу «Добре. Молодець!» (і додаємо зелену рамку до елемента), якщо ні - то відтворюємо фразу «Невірно, спробуйте ще раз» (і додаємо червону рамку).
+            </h1>
+            <div id="app">
+                <div class="game">
+                    <div>
+                        <div v-if="messageResult === 'yes'" class="text-green">
+                            «Добре. Молодець!»
+                        </div>
+                        <div v-else-if="messageResult === 'no' " class="text-red">
+                            «Невірно, спробуйте ще раз»
+                        </div>
+                    </div>
+                    <div class="game-container" :style="{border:changeBorderColor}">
+                        <img :src="card.image">
+                        <p>{{card.title}}</p>
+                        <label>
+                            <input placeholder="Ваша відповідь" type="text" v-model="userAnswer">
+                        </label>
+                        <button type="button" @click="checkAnswer">Перевірити</button>
+                        <button type="button" @click="nextCard">Наступна картка &#x2192;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        userAnswer: null,
+                        card: {
+                            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfb43NHHG0ClZGZI5figCms0YtO8LvRgOH0g&usqp=CAU",
+                            title: "vase",
+                            translateAnswer: "ваза"
+                        },
+                        changeBorderColor: "none",
+                        messageResult: false,
+                    }
+                },
+                computed: {
+                },
+                methods: {
+                    nextCard() {
+                        let index = Math.floor(Math.random() * 10)
+                        this.card = gameObj[index]
+                        this.messageResult = false
+                        this.changeBorderColor = "none"
+                        this.userAnswer = null
+                    },
+                    checkAnswer() {
+                        if (this.userAnswer) {
+                            if (this.card.translateAnswer === this.userAnswer) {
+                                this.changeBorderColor = "5px solid green"
+                                this.messageResult = 'yes'
+                            }
+                            else {
+                                this.changeBorderColor = "5px solid red",
+                                    this.messageResult = 'no'
+                            }
+                        }
+                    }
+                }
+            }).mount('#app')
+            const gameObj = [
+                {
+                    image: "https://mdr-sosna.ru/images/stories/virtuemart/product/cb175a4fc582426918b78c6a0ad90b3831.jpg",
+                    title: "table",
+                    translateAnswer: "стіл"
+                },
+                {
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfb43NHHG0ClZGZI5figCms0YtO8LvRgOH0g&usqp=CAU",
+                    title: "vase",
+                    translateAnswer: "ваза"
+                }, {
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly0HwMd0tQvYlhQMVeCQ2OJKXgYilwnnlWCnzr3E6&s",
+                    title: "car",
+                    translateAnswer: "машина"
+                },
+                {
+                    image: "https://m.media-amazon.com/images/I/418QpEn9JKL._AC_UF894,1000_QL80_DpWeblab_.jpg",
+                    title: "chair",
+                    translateAnswer: "стілець"
+                },
+                {
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQGciMsoISsc4hXNIb9LFFgvnkrBLWtbftjQ&usqp=CAU", title: "book",
+                    translateAnswer: "книга"
+                },
+                {
+                    image: "https://images.urbndata.com/is/image/Anthropologie/68893742_074_b",
+                    title: "lamp",
+                    translateAnswer: "лампа"
+                },
+                {
+                    image: "data:image/jpeg;base64,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",
+                    title: "bicycle",
+                    translateAnswer: "велосипед"
+                },
+                {
+                    image: "data:image/jpeg;base64,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",
+                    title: "computer",
+                    translateAnswer: "комп'ютер"
+                },
+                {
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtgTHC0tqwlMOfN7c9TNZNqSG7Y_3iVScTPbOZ7y6X1Sc1XTxfONx30A5a8JMSbjVSe3o&usqp=CAU", title: "shoes",
+                    translateAnswer: "взуття"
+                },
+                {
+                    image: "https://dictionary.cambridge.org/pl/images/thumb/house_noun_002_18270.jpg?version=5.0.341", title: "house",
+                    translateAnswer: "дім"
+                }]
+        </script>
+    </body>
+
+</html>

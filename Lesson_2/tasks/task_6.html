@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 6</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            .label {
+                display: flex;
+                gap: 15px;
+                font-size: 25px;
+
+            }
+
+            .text {
+                font-size: 30px;
+            }
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* ========================================================================================= */
+            .table {
+                display: flex;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .table-line {
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        </style>
+        <div class="container">
+            <h1 class="headline">
+                Задача 6. Задача. На кухню поступають замовлення. Спочатку ми додаємо їх у список “Очікують на виконання”, якщо повар береться робити — замовлення переходить у список “Виконуються”, якщо замовлення виконано — переходить у список “Готові до виносу”. Якщо натиснути на “Подано” - страва зникає з таблиці
+            </h1>
+            <div id="app">
+                <table border="2" class="table">
+                    <tbody>
+                        <tr>
+                            <th class="table-line">Очікують на виконання</th>
+                        </tr>
+                        <tr v-for="(wait,index) of waitingList" :key="wait.id">
+                            <th class="table-line">{{wait.mealsName}} <button @click="onPrepareFood(index)" type="button">Готувати</button></th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <th class="table-line">Очікують на виконання</th>
+                        </tr>
+                        <tr v-for="(process,index) of processingList" :key="process.id">
+                            <th class="table-line">{{process.mealsName}} <button @click="onCookedFood(index)" type="button">Приготовлено</button></th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <th class="table-line">Готові до виносу</th>
+                        </tr>
+                        <tr v-for="(complete,index) of completedList" :key="complete.id">
+                            <th class="table-line">{{complete.mealsName}} <button @click="onFoodService(index)" type="button">Подано</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                const { createApp } = Vue
+                const app = createApp({
+                    data() {
+                        return {
+                            waitingList: [
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Голубці",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Вареники",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Бограч",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Деруни",
+                                },],
+                            processingList: [
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Блінчики з сиром",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: 'Салат "Цезарь" ',
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: 'Салат "Грецький"',
+                                },
+                            ],
+                            completedList: [
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Борщ",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Плов з овочами",
+
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Банош",
+                                },
+                                {
+                                    id: Symbol(),
+                                    mealsName: "Капусняк",
+                                },
+                            ]
+                        }
+                    },
+                    methods: {
+                        onPrepareFood(index) {
+                            this.processingList.push(this.waitingList[index])
+                            this.waitingList.splice(index, 1)
+                        },
+                        onCookedFood(index) {
+                            this.completedList.push(this.processingList[index])
+                            this.processingList.splice(index, 1)
+                        },
+                        onFoodService(index) {
+                            this.completedList.splice(index, 1)
+                        }
+                    },
+                }).mount('#app')
+            </script>
+        </div>
+    </body>
+
+</html>
