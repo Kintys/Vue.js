@@ -168,10 +168,7 @@
                 }
             }).mount('#app2')
         </script> -->
-        <style>
-
-        </style>
-        <div id="app3">
+        <!-- <div id="app3">
             <input type="number" :style="{ backgroundColor: currentColor }" v-model="temp">
         </div>
         <script>
@@ -198,6 +195,81 @@
 
                 }
             }).mount('#app3')
+        </script> -->
+        <style>
+            .low {
+                background-color: orange;
+            }
+
+            .normal {
+                background-color: green;
+            }
+
+            .danger {
+                background-color: red;
+            }
+        </style>
+        <div id="app4">
+            <div>
+                <label>
+                    Дозволена швидкість
+                    <input type="number" v-model="limitSpeed">
+                </label>
+                <label>
+                    Поточни швидкість
+                    <input type="number" v-model="currentSpeed" :class="{ [currentClass]:isValidData}" :disabled=" !limitSpeed">
+                </label>
+                <div>{{currentSpeedRate}} % </div>
+                <div v-show="isAlertVisible">Увага!</div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app4 = createApp({
+                data() {
+                    return {
+                        limitSpeed: null,
+                        currentSpeed: null,
+                        isAlertVisible: false,
+                        intervalId: null
+                    }
+                },
+                computed: {
+                    currentSpeedRate() {
+                        return (this.currentSpeed * 100) / this.limitSpeed
+                    },
+                    currentClass() {
+                        let currentClass = null
+                        if (this.currentSpeedRate < 50) currentClass = "low"
+                        else if (this.currentSpeedRate < 100) currentClass = "normal"
+                        else currentClass = "danger"
+                        return currentClass
+                    },
+                    warningMessage() {
+                        if (((this.currentSpeed * 100) / this.limitSpeed) > 90)
+                            this.startDisplayAlert()
+                        else this.endDisplayAlert()
+                    },
+                    isValidData() {
+                        return this.limitSpeed && this.currentSpeed
+                    }
+                },
+                methods: {
+                    startDisplayAlert() {
+                        if (!this.intervalId) {
+                            this.intervalId = setInterval(() => {
+                                this.isAlertVisible = !this.isAlertVisible
+                            }, 1000)
+                        }
+                    },
+                    endDisplayAlert() {
+                        if (this.intervalId) {
+                            clearInterval(this.intervalId)
+                            this.intervalId = null
+                        }
+                    }
+                }
+            }).mount('#app4')
         </script>
     </body>
 
