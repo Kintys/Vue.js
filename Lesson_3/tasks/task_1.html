@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 1</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 20px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 10 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* =========================================================== */
+        </style>
+        <div class="container">
+            <div>
+                <h1>
+                    Задача 8. Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з використанням випадаючого списку (контент цих випадаючих списків сформувати у залежності від переданого списку).
+                </h1>
+            </div>
+            <div id="app">
+                <label>Виберіть марку
+                    <select v-model="selectBrand">
+                        <option v-for="brand in isBrandList" :key="brand.id" :value="brand">{{brand}}</option>
+                    </select>
+                </label>
+                <label>
+                    Виберіть рік випуску
+                    <select v-model="selectYear">
+                        <option v-for="year in isYearList" :key="year.id" :value="year">{{year}}</option>
+                    </select>
+                </label>
+                <label>
+                    Виберіть рік випуску
+                    <select v-model="selectPrice">
+                        <option v-for="price in isPriceList" :key="price.id" :value="price">{{price}}</option>
+                    </select>
+                </label>
+                <button type="button" @click="filterCarsList()">Додати</button>
+                <ul v-if="newListCar.length">
+                    <li v-for="car in newListCar" :key="car.id">{{car.brand}} - {{car.year}} - {{car.price}}</li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        selectBrand: " ",
+                        selectYear: " ",
+                        selectPrice: " ",
+                        newListCar: [],
+                        autoList: [
+                            {
+                                brand: 'Toyota',
+                                year: 2020,
+                                price: 20000,
+                            },
+                            {
+                                brand: 'Honda',
+                                year: 2019, price:
+                                    18000
+                            },
+                            {
+                                brand: 'Ford',
+                                year: 2018,
+                                price: 15000
+                            },
+                            {
+                                brand: 'Chevrolet',
+                                year: 2021,
+                                price: 22000
+                            },
+                            {
+                                brand: 'Volkswagen',
+                                year: 2017,
+                                price: 16000
+                            },
+                            {
+                                brand: 'Nissan',
+                                year: 2019,
+                                price: 19000
+                            },
+                            {
+                                brand: 'Hyundai',
+                                year: 2018,
+                                price: 17000
+                            },
+                            {
+                                brand: 'Mazda',
+                                year: 2019,
+                                price: 18500
+                            },
+                            {
+                                brand: 'Kia',
+                                year: 2022,
+                                price: 21000
+                            },
+                            {
+                                brand: 'Subaru',
+                                year: 2016,
+                                price: 14000
+                            },
+                        ]
+                    }
+                },
+                computed: {
+                    isBrandList() {
+                        let newBrandList = [...new Set(this.autoList.map((el) => el.brand))]
+                        newBrandList.id = Date.now()
+                        return newBrandList
+                    },
+                    isYearList() {
+                        let newYearList = [...new Set(this.autoList.map((el) => el.year))]
+                        newYearList.id = Date.now()
+                        return newYearList
+                    },
+                    isPriceList() {
+                        let newPriceList = [...new Set(this.autoList.map((el) => el.price))]
+                        newPriceList.id = Date.now()
+                        return newPriceList
+                    },
+                },
+                methods: {
+                    filterCarsList() {
+                        let car, yearValue, priceValue
+                        if (this.selectBrand)
+                            car = this.isBrandList.find(brand => brand === this.selectBrand)
+                        if (this.selectYear)
+                            yearValue = this.isYearList.find(year => year === this.selectYear)
+                        if (this.selectPrice)
+                            priceValue = this.isPriceList.find(price => price === this.selectPrice)
+
+                        this.newListCar.push({
+                            id: Date.now(),
+                            brand: car,
+                            year: yearValue,
+                            price: priceValue
+                        })
+                        console.log(this.newListCar)
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </body>
+
+</html>

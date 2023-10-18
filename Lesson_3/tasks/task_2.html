@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Задача 2</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 50px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 25 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* =================================================== */
+            .business-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 10px;
+                height: 100vh;
+                width: 100vh;
+                color: red;
+                font-size: 50px;
+            }
+
+            .business-container::before {
+                content: "";
+                background-image: url("https://st5.depositphotos.com/26782142/65036/i/450/depositphotos_650365720-stock-photo-ultra-modern-interior-of-a.jpg");
+                background-size: cover;
+                background-position: center;
+                position: absolute;
+                width: 100vh;
+                height: 100vh;
+                z-index: -1;
+                opacity: 0.6;
+            }
+
+            .business-container div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .economy-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 10px;
+                height: 100vh;
+                width: 100vh;
+                color: red;
+                font-size: 50px;
+            }
+
+            .economy-container::before {
+                content: "";
+                background-image: url("https://newacropolis.org.ua/uploads/production/ckeditor/picture/data/fd2/0b6/17-/fd20b617-8444-4586-a09d-b43e931e9305/content.png");
+                background-size: cover;
+                background-position: center;
+                position: absolute;
+                width: 100vh;
+                height: 100vh;
+                z-index: -1;
+                opacity: 0.6;
+            }
+
+            .economy-container div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+        </style>
+        <div class="container">
+            <h1>
+                Задача 2. З випадаючого списку вибираємо клас квитка у літаку. Якщо
+                <br> 1) бізнес - виводимо елементи для вибору газети та коньяку (якщо вибрано коньяк, то запропонувати закуску (так/ні)), на фоні зображення бізнес кают
+                <br> 2) економ – виводимо елементи для вибору типу пива і чипсів, на фоні хмарки.
+            </h1>
+            <div id="app">
+                <select v-model="selectClass">
+                    <option value="business">Бізнес клас</option>
+                    <option value="economy">Економ клас</option>
+                </select>
+                <div v-if="selectClass === 'business'" class="business-container">
+                    <p>Чого бажаете?</p>
+                    <select v-model="businessChoose">
+                        <option value="wine">коньяк</option>
+                        <option value="newspaper">газета</option>
+                    </select>
+                    <div v-if="businessChoose === 'wine'">
+                        <p>Закуску бажаете?</p>
+                        <select v-model="businessSnack">
+                            <option>так</option>
+                            <option>ні</option>
+                        </select>
+                    </div>
+                </div>
+                <div v-else-if="selectClass === 'economy'" class="economy-container">
+                    <p>Чого бажаете?</p>
+                    <select v-model="economyChoose">
+                        <option value="beer">пиво</option>
+                        <option value="chips">чіпси</option>
+                    </select>
+                    <div v-if="economyChoose === 'beer' ">
+                        <select>
+                            <option value="corona">Corona Extra</option>
+                            <option value="staropramen">Staropramen</option>
+                        </select>
+                    </div>
+                    <div v-if="economyChoose === 'chips'">
+                        <select>
+                            <option value="pringles">Pringles</option>
+                            <option value="lay's">Lay's</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        selectClass: " ",
+                        businessChoose: " ",
+                        businessSnack: " ",
+                        economyChoose: " ",
+
+                    }
+                },
+            }).mount('#app')
+        </script>
+    </body>
+    </body>
+
+</html>

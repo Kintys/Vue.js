@@ -80,8 +80,8 @@
                     </label>
                 </div>
                 <div @change="isDressesAndPhotos">
-                    <img :src="imgScr" alt="">
-                    <span class="res">{{addText}}</span>
+                    <img :src="isDressesAndPhotos.photo" alt="">
+                    <span class="res">{{isDressesAndPhotos.message}}</span>
                 </div>
             </div>
         </div>
@@ -119,48 +119,49 @@
                 data() {
                     return {
                         numMonth: null,
-                        imgScr: " ",
-                        addText: " ",
+
                     }
                 },
                 computed: {
                     isDressesAndPhotos() {
-                        let index = 0
-                        switch (this.numMonth) {
-                            case 12:
-                            case 1:
-                            case 2:
-                                index = dataSrc.findIndex((el) => { return el.title === "winter" })
-                                this.imgScr = dataSrc[index].photo
-                                this.addText = dataSrc[index].message
-                                break
-                            case 3:
-                            case 4:
-                            case 5:
-                                index = dataSrc.findIndex((el) => { return el.title === "string" })
-                                this.imgScr = dataSrc[index].photo
-                                this.addText = dataSrc[index].message
-                                break
-                            case 6:
-                            case 7:
-                            case 8:
-                                index = dataSrc.findIndex((el) => { return el.title === "summer" })
-                                this.imgScr = dataSrc[index].photo
-                                this.addText = dataSrc[index].message
-                                break
-                            case 9:
-                            case 10:
-                            case 11:
-                                index = dataSrc.findIndex((el) => { return el.title === "autumn" })
-                                this.imgScr = dataSrc[index].photo
-                                this.addText = dataSrc[index].message
-                                break
-                            default:
-                                index = dataSrc.findIndex((el) => { return el.title === "error" })
-                                this.imgScr = dataSrc[index].photo
-                                this.addText = dataSrc[index].message
-                                break
-                        }
+                        let obj = {}
+                        if (this.numMonth === 12 || this.numMonth <= 2)
+                            obj = dataSrc.find((el) => { return el.title === "winter" })
+                        else if (this.numMonth <= 5)
+                            obj = dataSrc.find((el) => { return el.title === "string" })
+                        else if (this.numMonth <= 8)
+                            obj = dataSrc.find((el) => { return el.title === "summer" })
+                        else if (this.numMonth <= 11)
+                            obj = dataSrc.find((el) => { return el.title === "autumn" })
+                        else obj = dataSrc.find((el) => { return el.title === "error" })
+                        return obj
+
+
+                        // switch (this.numMonth) {
+                        //     case 12:
+                        //     case 1:
+                        //     case 2:
+                        //         this.obj = dataSrc.find((el) => { return el.title === "winter" })
+                        //         break
+                        //     case 3:
+                        //     case 4:
+                        //     case 5:
+                        //         this.obj = dataSrc.find((el) => { return el.title === "string" })
+                        //         break
+                        //     case 6:
+                        //     case 7:
+                        //     case 8:
+                        //         this.obj = dataSrc.find((el) => { return el.title === "summer" })
+                        //         break
+                        //     case 9:
+                        //     case 10:
+                        //     case 11:
+                        //         this.obj = dataSrc.find((el) => { return el.title === "autumn" })
+                        //         break
+                        //     default:
+                        //         this.obj = dataSrc.find((el) => { return el.title === "error" })
+                        //         break
+                        // }
                     },
                 },
             }).mount('#app')

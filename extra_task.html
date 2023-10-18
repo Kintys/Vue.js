@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>extra_task</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <!-- <div id="app">
+            <div v-for="season in seasonsReport">
+                <h2>{{season.title}}</h2>
+                <div>{{season.averaheTemp}}</div>
+                <div>{{season.visitors}}</div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        seasonsReport: {
+                            spring: {
+                                title: 'Весна',
+                                averaheTemp: 12,
+                                visitors: 1239,
+                            },
+                            summer: {
+                                title: 'Літо',
+                                averaheTemp: 32,
+                                visitors: 6231,
+                            },
+                            fall: {
+                                title: 'Осінь',
+                                averaheTemp: 20,
+                                visitors: 2230,
+                            },
+                            winter: {
+                                title: 'Зима',
+                                averaheTemp: 12,
+                                visitors: 642,
+                            },
+                        }
+                    }
+                },
+                computed: {
+
+                },
+                methods: {
+
+                }
+            }).mount('#app')
+        </script> -->
+        <!-- <div id="app1">
+
+            <div>
+                <h1>Сума на рахунку: {{balance}}</h1>
+                <div>
+                    <label>
+                        Додати на рахунок: <input type="number" v-model="addMoney" @focus="onFocus">
+                    </label>
+                    <button type="button" @click="isAddMoney">Додати</button>
+                </div>
+                <div>
+                    <label>
+                        Зняти з рахунку
+                        <input type="number" v-model="withdrawMoney" @focus="onFocus">
+                    </label>
+                    <button type="button" @click="isWithdrawMoney">Зняти</button>
+                </div>
+                <div>
+                    <p>Ціна за обслуговування : {{showTaxRate}}</p>
+                </div>
+                <div>
+                    <p>Рахунок в доларах {{dollarValue}}</p>
+                    <p>Рахунок в євро: {{euroValue}}</p>
+                </div>
+                <div v-if="message">{{message}}</div>
+            </div>
+
+        </div>
+        <script>
+            const { createApp } = Vue
+            const TAX_PERCENTAGE = 3
+            const DOLLAR_RATE = 38
+            const EURO_RATE = 40
+            const app1 = createApp({
+                data() {
+                    return {
+                        balance: null,
+                        addMoney: null,
+                        withdrawMoney: null,
+                        message: " "
+                    }
+                },
+                computed: {
+                    taxRate() {
+                        let sum = (this.addMoney ?? 0) + (this.withdrawMoney ?? 0)
+                        return (sum * TAX_PERCENTAGE) / 100
+                    },
+                    showTaxRate() {
+                        return this.taxRate.toFixed(2)
+                    },
+                    dollarValue() {
+                        return (this.balance / DOLLAR_RATE).toFixed(2)
+                    },
+                    euroValue() {
+                        return (this.balance / EURO_RATE).toFixed(2)
+                    }
+                },
+                methods: {
+                    isAddMoney() {
+                        if (this.addMoney < 0) {
+                            this.message = "Сума має бути додатною "
+                            return
+                        }
+                        this.balance += this.addMoney - this.taxRate
+                        this.addMoney = null
+                    },
+                    isWithdrawMoney() {
+                        const valueToSubtract = this.withdrawMoney + this.taxRate
+                        if (valueToSubtract > this.balance) {
+                            this.message = "Недостатньо коштів"
+                            return
+                        }
+                        this.balance -= valueToSubtract
+                        this.withdrawMoney = null
+                    },
+                    onFocus() {
+                        this.message = null
+                    }
+                }
+            }).mount('#app1')
+        </script> -->
+        <!-- <div id="app2">
+            <label>
+                CM
+                <input type="number" v-model="cmValue">
+            </label>
+            <p>Метри {{isMeters}}</p>
+            <p>Кілометри {{isKilo}}</p>
+        </div>
+
+        <script>
+            const { createApp } = Vue
+            const app2 = createApp({
+                data() {
+                    return {
+                        cmValue: null
+                    }
+                },
+                computed: {
+                    isMeters() {
+                        return (this.cmValue / 100).toFixed(2)
+                    },
+                    isKilo() {
+                        return (this.cmValue / 100000).toFixed(2)
+                    }
+                },
+                methods: {
+
+                }
+            }).mount('#app2')
+        </script> -->
+        <style>
+
+        </style>
+        <div id="app3">
+            <input type="number" :style="{ backgroundColor: currentColor }" v-model="temp">
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app3 = createApp({
+                data() {
+                    return {
+                        temp: null
+                    }
+                },
+                computed: {
+                    currentColor() {
+                        let resColor = "white"
+                        if (this.temp) {
+                            if (this.temp <= 0) resColor
+                            else if (this.temp < 10) resColor = "blue"
+                            else if (this.temp < 22) resColor = "green"
+                            else resColor = "red"
+                        }
+                        return resColor
+                    }
+                },
+                methods: {
+
+                }
+            }).mount('#app3')
+        </script>
+    </body>
+
+
+</html>
