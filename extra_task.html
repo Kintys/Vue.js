@@ -196,7 +196,7 @@
                 }
             }).mount('#app3')
         </script> -->
-        <style>
+        <!-- <style>
             .low {
                 background-color: orange;
             }
@@ -229,12 +229,21 @@
                 data() {
                     return {
                         limitSpeed: null,
-                        currentSpeed: null,
+                        currentSpeedValue: null,
                         isAlertVisible: false,
                         intervalId: null
                     }
                 },
                 computed: {
+                    currentSpeed: {
+                        get() { return this.currentSpeedValue },
+                        set(newValue) {
+                            this.currentSpeedValue = newValue
+                            if ((newValue * 100) / this.limitSpeed > 90)
+                                this.startDisplayAlert()
+                            else this.endDisplayAlert()
+                        }
+                    },
                     currentSpeedRate() {
                         return (this.currentSpeed * 100) / this.limitSpeed
                     },
@@ -244,11 +253,6 @@
                         else if (this.currentSpeedRate < 100) currentClass = "normal"
                         else currentClass = "danger"
                         return currentClass
-                    },
-                    warningMessage() {
-                        if (((this.currentSpeed * 100) / this.limitSpeed) > 90)
-                            this.startDisplayAlert()
-                        else this.endDisplayAlert()
                     },
                     isValidData() {
                         return this.limitSpeed && this.currentSpeed
@@ -269,8 +273,119 @@
                         }
                     }
                 }
-            }).mount('#app4')
-        </script>
+            }).mount('#app4') -->
+        <!-- <style>
+            #app5 {
+                display: flex;
+                gap: 4px;
+            }
+
+            .game-item {
+                width: 40px;
+                height: 40px;
+                border: 2px solid red;
+            }
+
+            .closed {
+                background: grey;
+            }
+
+            .mine {
+                background-color: red;
+            }
+
+            .free {
+                background-color: green;
+            }
+        </style>
+        <div id="app5">
+            <div v-for="(cell,index) in gameField" class="game-item" :class="{
+        'closed':cell.isClosed,
+        'mine':!cell.isClosed &&cell.hasMine,
+        'free':!cell.isClosed &&!cell.hasMine,
+        }" @click="onClick(index)"></div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app5 = createApp({
+                data() {
+                    return {
+                        gameField: [
+                            {
+                                hasMine: 1,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 1,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 1,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                            {
+                                hasMine: 0,
+                                isClosed: true,
+                            },
+                        ],
+                    }
+                },
+                computed: {
+                },
+                methods: {
+                    onClick(index) {
+                        this.gameField[index].isClosed = false
+                        if (this.gameField[index].hasMine === 0)
+                            for (let i = index + 1; i < this.gameField.length; i++) {
+                                if (this.gameField[i].hasMine === 0)
+                                    this.gameField[i].isClosed = false
+                                else break
+                            }
+                        for (let r = index - 1; r >= 0; r--) {
+                            if (this.gameField[r].hasMine === 0)
+                                this.gameField[r].isClosed = false
+                            else break
+                        }
+                    }
+                }
+            }).mount('#app5') 
+        </script> -->
     </body>
 
 
