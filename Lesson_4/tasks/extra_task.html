@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>extra_task</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <style>
+            body {
+                background-color: rgba(36, 38, 81, 0.377);
+            }
+
+            .container {
+                margin: 20px 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+
+            }
+
+            .container h1 {
+                font-size: 10 px;
+                padding: 0px 30px 0px 30px;
+                border-bottom: 2px solid black;
+            }
+
+            #app {
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                flex-direction: column;
+            }
+
+            #app input {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .value {
+                display: flex;
+                gap: 15px;
+            }
+
+            #app label {
+                font-size: 25px;
+            }
+
+
+            #app button {
+                padding: 10px 30px;
+                border-radius: 8px;
+                background-color: rgba(4, 46, 62, 0.313);
+            }
+
+            /* =========================================================== */
+        </style>
+        <!-- Приклад. При відкритті сайту перевіряється вік користувача.
+            1)якщо не ввів, просимо ввести (поміщаємо фокус в елемент вводу)
+            2)якщо вік менше 18 років – доступ заборонено
+            3)якщо вік більше за 18 років – доступ дозволено -->
+
+        <!-- <div class="container">
+            <div id="app">
+                <div>
+                    <label ref="myLabel">
+                        Введіть вік :
+                        <input ref="userAge" type="number" v-model="age" />
+                    </label>
+                    <button @click="onStart">Go</button>
+                </div>
+                <div v-for="massege">{{massege}}</div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        age: null,
+                        massege: null
+                    }
+                },
+                methods: {
+                    onStart() {
+                        if (!this.age) {
+                            this.$refs.userAge.focus()
+                            this.massege = "Введіть ваш вік"
+                        }
+                    }
+                },
+            }).mount('#app')
+        </script> -->
+        <!-- <div class="container">
+            <div id="app">
+                <div>
+                    <label ref="myLabel">
+                        Введіть вік :
+                        <input ref="userAge" type="number" v-model="age" />
+                    </label>
+                    <button @click="onStart">Go</button>
+                </div>
+                <div v-for="massege">{{massege}}</div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        age: null,
+                        massege: null
+                    }
+                },
+                methods: {
+                    onStart() {
+                        if (!this.age) {
+                            this.$refs.userAge.focus()
+                            this.massege = "Введіть ваш вік"
+                        }
+                    }
+                },
+            }).mount('#app')
+        </script> -->
+        <!-- <div class="container">
+            <div id="app">
+                <div>
+                    <label>
+                        Login :
+                        <input ref="login" type="text" v-model="login" />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Password :
+                        <input ref="password" type="password" v-model="password" />
+                    </label>
+                </div>
+                <button @click.prevent="onLogin">Go</button>
+
+                <div v-if="message && isMessageVisible">{{message}}</div>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        login: null,
+                        password: null,
+                        prettyName: null,
+                        message: null
+                    }
+                },
+                computed: {
+                    isMessageVisible() {
+                        return this.prettyName && !this[this.prettyName]
+                    }
+                },
+                methods: {
+                    onLogin() {
+                        if (!this.login) {
+                            this.$refs.login.focus()
+                            this.prettyName = "login"
+                            this.message = "Задайте login"
+                        } else if (!this.password)
+                            this.$refs.password.focus()
+                        this.prettyName = "password"
+                        this.message = "Задайте password"
+                    }
+                },
+            }).mount('#app')
+        </script> -->
+
+
+        <!-- <div class="container">
+                    <div id="app">
+                        <div>
+                            <label ref="myLabel">
+                                Введіть вік :
+                                <input ref="userAge" type="number" v-model="age" />
+                            </label>
+                            <button @click="onStart">Go</button>
+                        </div>
+                        <div v-for="massege">{{massege}}</div>
+                    </div>
+                </div>
+                <script>
+                    const { createApp } = Vue
+                    const app = createApp({
+                        data() {
+                            return {
+                                age: null,
+                                massege: null
+                            }
+                        },
+                        methods: {
+                            onStart() {
+                                if (!this.age) {
+                                    this.$refs.userAge.focus()
+                                    this.massege = "Введіть ваш вік"
+                                }
+                            }
+                        },
+                    }).mount('#app')
+                </script> -->
+        <div class="container">
+            <div id="app">
+                <div v-for="i in 3" :key="i">
+                    <label>
+                        Оцінка № {{i}} :
+                        <input ref="mark" type="number" v-model="marks[i-1]" />
+                    </label>
+                </div>
+
+                <button @click="getAverage">Знайти мінімальну оцінку</button>
+
+                <div v-if="message">{{message}}</div>
+            </div>
+        </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        marks: [],
+                        message: null
+                    }
+                },
+                computed: {
+                },
+                methods: {
+                    getAverage() {
+                        let notValidInputIndex = -1
+                        for (let i = 0; i < 3; i++) {
+                            if (!this.marks[i]) {
+                                notValidInputIndex = i
+                                break
+                            }
+                        }
+                        if (notValidInputIndex !== -1) {
+                            this.$refs.mark[notValidInputIndex].focus()
+                            this.message = `Задайте оцінку № ${notValidInputIndex + 1}`
+                        } else {
+                            this.message = `Найменша оцінка: ${Math.min(...this.marks)}`
+                        }
+                    },
+
+                    // getAverage() {
+                    //     let notValidInputIndex = -1
+                    //     for (let i = 0; i < 3; i++) {
+                    //         if (!this.marks[i]) {
+                    //             notValidInputIndex = i
+                    //             break
+                    //         }
+                    //     }
+                    //     // let notValidInputIndex = this.marks.findIndex(el => !el)
+                    //     if (notValidInputIndex !== -1) {
+                    //         this.$refs.marks[notValidInputIndex].focus()
+                    //         this.message = `Введіть число ${notValidInputIndex + 1}`
+                    //     }
+                    // }
+                },
+            }).mount('#app')
+        </script>
+    </body>
+
+
+
+
+</html>
