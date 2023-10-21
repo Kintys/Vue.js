@@ -83,6 +83,13 @@
                 Задача 6. Задача. На кухню поступають замовлення. Спочатку ми додаємо їх у список “Очікують на виконання”, якщо повар береться робити — замовлення переходить у список “Виконуються”, якщо замовлення виконано — переходить у список “Готові до виносу”. Якщо натиснути на “Подано” - страва зникає з таблиці
             </h1>
             <div id="app">
+                <div>
+                    <label>
+                        Нова замовленна страва
+                        <input type="text" v-model="newMeal">
+                        <button type="button" @click="addMeal">Додати</button>
+                    </label>
+                </div>
                 <table border="2" class="table">
                     <tbody>
                         <tr>
@@ -117,57 +124,65 @@
                         return {
                             waitingList: [
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Голубці",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Вареники",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Бограч",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Деруни",
                                 },],
                             processingList: [
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Блінчики з сиром",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: 'Салат "Цезарь" ',
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: 'Салат "Грецький"',
                                 },
                             ],
                             completedList: [
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Борщ",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Плов з овочами",
 
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Банош",
                                 },
                                 {
-                                    id: Date.now(),
+                                    id: Symbol(),
                                     mealsName: "Капусняк",
                                 },
-                            ]
+                            ],
+                            newMeal: null
                         }
                     },
                     methods: {
+                        addMeal() {
+                            if (this.newMeal)
+                                this.waitingList.push({
+                                    id: Symbol(),
+                                    mealsName: this.newMeal
+                                })
+                        },
                         onPrepareFood(index) {
                             this.processingList.push(this.waitingList[index])
                             this.waitingList.splice(index, 1)

@@ -118,7 +118,8 @@
                         get() {
                             return this.loginValue
                         },
-                        set() {
+                        set(newValue) {
+                            this.loginValue = newValue
                             if (this.loginValue) {
                                 return this.loginValue.toLowerCase()
                             }
@@ -128,10 +129,8 @@
                         get() {
                             return this.passwordValue
                         },
-                        set() {
-                            if (this.passwordValue) {
-                                return this.passwordValue.toLowerCase()
-                            }
+                        set(newValue) {
+                            return this.passwordValue = newValue
                         }
                     },
                     isCorrectLogin() {

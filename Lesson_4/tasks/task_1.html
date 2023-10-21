@@ -69,19 +69,24 @@
             <div id="app">
                 <label>Виберіть марку
                     <select v-model="selectBrand">
-                        <option></option>
-                        <option v-for="(brand,index) in isBrandList" :key="index" :value="brand">{{brand}}</option>
+                        <option v-for="brand in isBrandList" :key="brand.id" :value="brand">{{brand}}</option>
                     </select>
                 </label>
                 <label>
                     Виберіть рік випуску
                     <select v-model="selectYear">
-                        <option></option>
-                        <option v-for="(year,index) in isYearList" :key="index" :value="year"> {{year}}</option>
+                        <option v-for="year in isYearList" :key="year.id" :value="year">{{year}}</option>
                     </select>
                 </label>
-                <ul>
-                    <li v-for="(newCar,index) in filterCarsList" :key="index">{{newCar.brand}} - {{newCar.year}} - {{newCar.price}}</li>
+                <label>
+                    Виберіть рік випуску
+                    <select v-model="selectPrice">
+                        <option v-for="price in isPriceList" :key="price.id" :value="price">{{price}}</option>
+                    </select>
+                </label>
+                <button type="button" @click="filterCarsList()">Додати</button>
+                <ul v-if="newListCar.length">
+                    <li v-for="car in newListCar" :key="car.id">{{car.brand}} - {{car.year}} - {{car.price}}</li>
                 </ul>
             </div>
         </div>
@@ -90,125 +95,100 @@
             const app = createApp({
                 data() {
                     return {
+                        selectBrand: " ",
+                        selectYear: " ",
+                        selectPrice: " ",
+                        newListCar: [],
                         autoList: [
                             {
-                                id: 1,
                                 brand: 'Toyota',
                                 year: 2020,
                                 price: 20000,
                             },
                             {
-                                id: 45,
-                                brand: 'Toyota',
-                                year: 2015,
-                                price: 13000,
-                            },
-                            {
-                                id: 1756,
-                                brand: 'Toyota',
-                                year: 2019,
-                                price: 18000,
-                            },
-                            {
-                                id: 2,
                                 brand: 'Honda',
-                                year: 2019,
-                                price: 18000
+                                year: 2019, price:
+                                    18000
                             },
                             {
-                                id: 312,
-                                brand: 'Honda',
-                                year: 2015,
-                                price: 15000
-                            },
-                            {
-                                id: 241,
-                                brand: 'Honda',
-                                year: 2019,
-                                price: 14000
-                            },
-                            {
-                                id: 254,
-                                brand: 'Honda',
-                                year: 2020,
-                                price: 19000
-                            },
-                            {
-                                id: 3,
                                 brand: 'Ford',
                                 year: 2018,
                                 price: 15000
                             },
                             {
-                                id: 4,
                                 brand: 'Chevrolet',
                                 year: 2021,
                                 price: 22000
                             },
                             {
-                                id: 5,
                                 brand: 'Volkswagen',
                                 year: 2017,
                                 price: 16000
                             },
                             {
-                                id: 6,
                                 brand: 'Nissan',
                                 year: 2019,
                                 price: 19000
                             },
                             {
-                                id: 7,
                                 brand: 'Hyundai',
                                 year: 2018,
                                 price: 17000
                             },
                             {
-                                id: 553,
                                 brand: 'Mazda',
                                 year: 2019,
                                 price: 18500
                             },
                             {
-                                id: 51,
                                 brand: 'Kia',
                                 year: 2022,
                                 price: 21000
                             },
                             {
-                                id: 31,
                                 brand: 'Subaru',
                                 year: 2016,
                                 price: 14000
                             },
-                        ],
-                        selectBrand: null,
-                        selectYear: null,
+                        ]
                     }
                 },
                 computed: {
-
-                    filterCarsList() {
-                        let newListCar
-                        if (!this.selectBrand && !this.selectYear)
-                            return newListCar = this.autoList
-                        else if (this.selectBrand && !this.selectYear)
-                            return newListCar = this.autoList.filter((car) => car.brand == this.selectBrand)
-                        else if (!this.selectBrand && this.selectYear)
-                            return newListCar = this.autoList.filter((car) => car.year == this.selectYear)
-                        else return newListCar = this.autoList.filter((car) => car.brand == this.selectBrand && car.year == this.selectYear)
-
-                    },
                     isBrandList() {
-                        return newBrandList = [...new Set(this.autoList.map((el) => el.brand))]
+                        let newBrandList = [...new Set(this.autoList.map((el) => el.brand))]
+                        newBrandList.id = Date.now()
+                        return newBrandList
                     },
                     isYearList() {
-                        return newYearList = [...new Set(this.autoList.map((el) => el.year))]
+                        let newYearList = [...new Set(this.autoList.map((el) => el.year))]
+                        newYearList.id = Date.now()
+                        return newYearList
+                    },
+                    isPriceList() {
+                        let newPriceList = [...new Set(this.autoList.map((el) => el.price))]
+                        newPriceList.id = Date.now()
+                        return newPriceList
                     },
                 },
                 methods: {
-                },
+                    filterCarsList() {
+                        let car, yearValue, priceValue
+                        if (this.selectBrand)
+                            car = this.isBrandList.find(brand => brand === this.selectBrand)
+                        if (this.selectYear)
+                            yearValue = this.isYearList.find(year => year === this.selectYear)
+                        if (this.selectPrice)
+                            priceValue = this.isPriceList.find(price => price === this.selectPrice)
 
+                        this.newListCar.push({
+                            id: Date.now(),
+                            brand: car,
+                            year: yearValue,
+                            price: priceValue
+                        })
+                        console.log(this.newListCar)
+                    }
+                }
             }).mount('#app')
         </script>
     </body>
