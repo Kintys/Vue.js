@@ -212,7 +212,7 @@
                         },
                     }).mount('#app')
                 </script> -->
-        <div class="container">
+        <!-- <div class="container">
             <div id="app">
                 <div v-for="i in 3" :key="i">
                     <label>
@@ -239,21 +239,21 @@
                 computed: {
                 },
                 methods: {
-                    getAverage() {
-                        let notValidInputIndex = -1
-                        for (let i = 0; i < 3; i++) {
-                            if (!this.marks[i]) {
-                                notValidInputIndex = i
-                                break
-                            }
-                        }
-                        if (notValidInputIndex !== -1) {
-                            this.$refs.mark[notValidInputIndex].focus()
-                            this.message = `Задайте оцінку № ${notValidInputIndex + 1}`
-                        } else {
-                            this.message = `Найменша оцінка: ${Math.min(...this.marks)}`
-                        }
-                    },
+                    // getAverage() {
+                    //     let notValidInputIndex = -1
+                    //     for (let i = 0; i < 3; i++) {
+                    //         if (!this.marks[i]) {
+                    //             notValidInputIndex = i
+                    //             break
+                    //         }
+                    //     }
+                    //     if (notValidInputIndex !== -1) {
+                    //         this.$refs.mark[notValidInputIndex].focus()
+                    //         this.message = `Задайте оцінку № ${notValidInputIndex + 1}`
+                    //     } else {
+                    //         this.message = `Найменша оцінка: ${Math.min(...this.marks)}`
+                    //     }
+                    // },
 
                     // getAverage() {
                     //     let notValidInputIndex = -1
@@ -271,7 +271,283 @@
                     // }
                 },
             }).mount('#app')
+        </script> -->
+
+
+        <!-- <div class="container">
+            <div id="app">
+                <h1>Поточний час</h1>
+                <h2>{{currentTime}}</h2>
+            </div>
+        </div>
+        <script> -->
+        <!-- 
+            // const { createApp } = Vue
+            // const app = createApp({
+            //     data() {
+            //         return {
+            //             currentTime: null
+            //         }
+            //     },
+            //     computed: {
+            //     },
+            //     methods: {
+            //         setCurrentTime() {
+            //             this.currentTime = new Date().toLocaleTimeString()
+            //         },
+            //     },
+
+            //     created() {
+            //         setInterval(() => {
+            //             this.setCurrentTime()
+            //         }, 1000)
+            //     }
+            // }).mount('#app') -->
+
+        <!-- <div class="container">
+            <div id="app">
+                <div v-if="isLoading">... Завнтаження ...</div>
+                <div v-else v-for="item in resData">
+                    <hr />
+                    <h1>{{item.attributes.titles.en}}</h1>
+                    <img :src="item.attributes.posterImage.medium" />
+                    <div>{{item.attributes.description}}</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const { createApp } = Vue
+            const app = createApp({
+                data() {
+                    return {
+                        resData: null,
+                        isLoading: true
+                    }
+                },
+                computed: {
+
+                },
+                methods: {
+                    loadData() {
+                        fetch('https://kitsu.io/api/edge/anime?page[limit]=5&page[offset]=0')
+                            .then((response) => response.json())
+                            .then((rData) => {
+                                console.log(rData)
+                                this.resData = rData.data,
+                                    this.isLoading = false
+                            })
+                    }
+                },
+                created() {
+                    setTimeout(() => {
+                        this.loadData()
+                    }, 4000)
+                } -->
+        <!-- }).mount('#app') -->
+        <!-- <div id="app">
+            <div>
+                <label>
+                    Введіть вік :
+                    <input ref="age" type="number" v-model="age" />
+                </label>
+            </div>
+
+            <button @click="onStart">Go</button>
+
+            <div v-if="message" class="error">{{message}}</div>
+        </div>
+        <script>
+            const { createApp } = Vue
+
+            const app = createApp({
+                data() {
+                    return {
+                        age: null,
+                        message: null,
+                    }
+                },
+
+                methods: {
+                    onStart() {
+                        if (!this.age) {
+                            this.$refs.age.focus()
+                            this.message = 'Введіть вік'
+                        } else {
+                            if (this.age < 18) this.message = 'Вхід заборонено'
+                            else this.message = 'Вхід дозволено'
+                        }
+                    },
+                },
+
+                mounted() {
+                },
+            }).mount('#app') -->
+        <!-- <div id="app">
+            <div>
+                <label>
+                    Назва товару :
+                    <input type="text" v-model="product.title" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Ціна товару :
+                    <input type="number" v-model="product.price" />
+                </label>
+            </div>
+            <button @click="saveData">Зберегти дані</button>
+        </div>
+        <script>
+            const { createApp } = Vue
+
+            const app = createApp({
+                data() {
+                    return {
+                        product: {
+                            title: null,
+                            price: null,
+                        },
+                    }
+                },
+                methods: {
+                    saveData() {
+                        localStorage.setItem("product", JSON.stringify(this.product))
+                    },
+                    onLoad() {
+                        if (localStorage.getItem('product'))
+                            this.product = JSON.parse(localStorage.getItem('product'))
+                    }
+                },
+                mounted() {
+                    setTimeout(() => {
+                        this.onLoad()
+                    }, 3000)
+                },
+            }).mount('#app')
+        </script> -->
+        <!-- <div id="app">
+            <div>
+                <label>
+                    Введіть ім’я :
+                    <input type="text" v-model="userName" />
+                </label>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+
+            const app = createApp({
+                data() {
+                    return {
+                        userName: null
+                    }
+                },
+                // computed: {
+                //     userName: {
+                //         get() {
+                //             return this.userNameValue
+                //         },
+                //         set(newValue) {
+                //             this.userNameValue = newValue
+                //             localStorage.setItem('userName', newValue)
+                //         }
+                //     }
+                // },
+                watch: {
+                    userName(newValue, oldValue) {
+                        console.log(`${newValue}  ${oldValue}`)
+                        localStorage.setItem("userName", newValue)
+                    }
+                },
+                mounted() {
+                    this.userName = localStorage.getItem('userName')
+                },
+            }).mount('#app')
+        </script> -->
+        <!-- <div id="app">
+            <div>
+                <label>
+                    Введіть ім’я :
+                    <input type="text" v-model="user.name" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Введіть вік :
+                    <input type="number" v-model="user.age" />
+                </label>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+
+            const app = createApp({
+                data() {
+                    return {
+                        user: {
+                            name: null,
+                            age: null,
+                        },
+                    }
+                },
+
+                watch: {
+                    'user.name'(newValue, oldValue) {
+                        localStorage.setItem('user', JSON.stringify(this.user))
+                    },
+                    'user.age'(newValue, oldValue) {
+                        localStorage.setItem('user', JSON.stringify(this.user))
+                    },
+                },
+
+                mounted() {
+                    this.user = JSON.parse(localStorage.getItem('user'))
+                },
+            }).mount('#app') -->
+
+
+
+        <div id="app">
+            <div>
+                <label>
+                    Введіть ім’я :
+                    <input type="text" v-model="user.name" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Введіть вік :
+                    <input type="number" v-model="user.age" />
+                </label>
+            </div>
+        </div>
+        <script>
+            const { createApp } = Vue
+
+            const app = createApp({
+                data() {
+                    return {
+                        user: {},
+                    }
+                },
+
+                watch: {
+                    user: {
+                        handler(newValue, oldValue) {
+                            console.log(`${newValue} ${oldValue}`)
+                            localStorage.setItem("user", JSON.stringify(newValue))
+                        },
+                        deep: true,
+                    },
+                },
+
+                mounted() {
+                    this.user = JSON.parse(localStorage.getItem('user'))
+                },
+            }).mount('#app') 
         </script>
+        </div>
     </body>
 
 
