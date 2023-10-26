@@ -1,15 +1,15 @@
 <template>
-  <task-manager :tasksData="tasksList" :workersData="workersList" />
+  <worker-list :workerData="workersList[0]" :workerTasksData="tasksList" />
 </template>
 
 <script>
-import TaskManager from './components/TaskManager.vue'
+import WorkerList from './components/WorkerList.vue'
 import { workersList, tasksList } from './constants/6_tasks_devider'
 
 export default {
   name: 'App',
   components: {
-    TaskManager,
+    WorkerList,
   },
 
   data() {

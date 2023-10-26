@@ -1,23 +1,16 @@
 <template>
-  <task-manager :tasksData="tasksList" :workersData="workersList" />
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import TaskManager from './components/TaskManager.vue'
-import { workersList, tasksList } from './constants/6_tasks_devider'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    TaskManager,
-  },
-
-  data() {
-    return {
-      tasksList,
-      workersList,
-    }
-  },
+    HelloWorld
+  }
 }
 </script>
 
