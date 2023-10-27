@@ -2,22 +2,29 @@
   <div class="section">
     <fruits-product-panel :product-list-data="raspberryList" />
     <computer-panel-box :shop-card-list-data="notebooksList" />
+    <task-box-performer :worker-data="workersList" :task-list-performer="[]" />
   </div>
 </template>
 
 <script>
 import ComputerPanelBox from "./components/ComputerPanelBox";
 import FruitsProductPanel from "./components/FruitsProductPanel.vue";
+import TaskBoxPerformer from "./extraTask/TaskBoxPerformer";
 // ================================
 import { raspberryList } from "./constants/2_data_raspberry.js";
 import { notebooksList } from "./constants/3_data_notebooks";
+import { tasksList, workersList } from "./constants/6_tasks_devider.js";
 export default {
   name: "App",
 
-  components: { FruitsProductPanel, ComputerPanelBox },
+  components: {
+    FruitsProductPanel,
+    ComputerPanelBox,
+    TaskBoxPerformer,
+  },
 
   data() {
-    return { raspberryList, notebooksList };
+    return { raspberryList, notebooksList, tasksList, workersList };
   },
 };
 </script>
