@@ -3,18 +3,19 @@
     <div class="card-number">
       <div class="card-label">CARD NUMBER</div>
       <label>
-        <input
-          ref="cardNumberRef"
-          :key="cardId"
-          type="text"
-          v-model="newNumberCard"
-        />
+        <input v-model="newNumberCard" type="text" @keydown="onKeyDown" />
       </label>
     </div>
     <div class="card-date-secure-code">
       <div class="data-block">
         <div class="data-card-label">EXPIRY DATE</div>
-        <input ref="cardItem" class="input" type="text" v-model="currentData" />
+        <input
+          v-model="expDate"
+          class="input"
+          type="text"
+          maxlength="7"
+          @keydown="onKeyDown"
+        />
       </div>
       <div class="data-block">
         <div class="data-card-label">SECURE CODE</div>
@@ -46,7 +47,7 @@ export default {
   },
   data() {
     return {
-      cardId: 0,
+      expDate: "",
     };
   },
   computed: {
@@ -55,30 +56,26 @@ export default {
         return (this.cardNumber ?? "").replace(/(\d{4}(?=\S+))/g, "$1 ");
       },
       set(cardNumberValue) {
-        if (this.cardNumberModifiers.onlyDigits) {
-          cardNumberValue = cardNumberValue.replace(/\D/g, "");
-          this.$nextTick(() => {
-            this.cardId++;
-            this.$nextTick(() => {
-              this.$refs.cardNumberRef.focus();
-            });
-          });
-        }
         this.$emit("update:cardNumber", cardNumberValue);
       },
     },
-    currentData: {
-      get() {
-        return (this.cardDate ?? "").slice(0, 7);
-      },
-      set(cardDate) {
-        if (this.cardDateModifiers.separateSlash) {
-          if (cardDate.length >= 2 && cardDate.length < 3)
-            cardDate = cardDate.replace(/(\d{2})/g, "$1 / ");
-          this.$refs.cardItem.focus();
-        }
-        this.$emit("update:cardDate", cardDate);
-      },
+  },
+  watch: {
+    expDate(newValue, oldValue) {
+      if (newValue.length === 2 && oldValue.length === 1) {
+        this.expDate = newValue + " / ";
+      } else if (newValue.length === 4 && oldValue.length === 5) {
+        this.expDate = newValue[0];
+      }
+      this.$emit("update:cardDate", this.expDate);
+    },
+  },
+  methods: {
+    onKeyDown(event) {
+      const key = event.key;
+      const isDigit = /\d/g.test(key);
+      const isBackspace = key === "Backspace";
+      if (!isDigit && !isBackspace) event.preventDefault();
     },
   },
 };

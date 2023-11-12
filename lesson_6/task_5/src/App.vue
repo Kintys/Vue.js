@@ -1,18 +1,13 @@
 <template>
   <div class="container">
-    <five-task-product
-      :product-data-list="dataListProduct"
-      :brand-list="dataBrandList"
-      :seller-list="dataSellerList"
-    />
+    <five-task-product :product-data-list="dataListProduct" />
   </div>
 </template>
 <script>
 import FiveTaskProduct from "./components/FiveTaskProduct";
 
-import { laptopList, brandList } from "./data/2_data_laptopList.js";
+import { laptopList } from "./data/2_data_laptopList.js";
 
-import { sellerList } from "./data/3_data_seller.js";
 export default {
   name: "App",
   components: {
@@ -21,8 +16,6 @@ export default {
   data() {
     return {
       dataListProduct: laptopList,
-      dataSellerList: sellerList,
-      dataBrandList: brandList,
     };
   },
 };

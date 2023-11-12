@@ -2,8 +2,8 @@
   <div class="block">
     <div class="filter-block">
       <products-filters
-        :seller-list-data="sellerList"
-        :brand-list-data="brandList"
+        :seller-list-data="isFilterListSeller"
+        :brand-list-data="isFilterListBrand"
         v-model:seller.check="sellerValue"
         v-model:brand.check="brandValue"
       />
@@ -29,18 +29,27 @@ export default {
       type: Array,
       required: true,
     },
-    sellerList: { type: Array, default: () => [] },
-    brandList: { type: Array, default: () => [] },
   },
   data() {
     return {
-      sellerValue: null,
-      brandValue: null,
+      sellerValue: [],
+      brandValue: [],
     };
   },
   computed: {
+    isFilterListSeller() {
+      return [
+        ...new Set(this.productDataList.map((category) => category.seller)),
+      ];
+    },
+    isFilterListBrand() {
+      return [
+        ...new Set(this.productDataList.map((category) => category.brand)),
+      ];
+    },
     isFilteredDataProductList() {
-      if (this.brandValue && this.sellerValue) {
+      console.log(this.brandValue);
+      if (this.brandValue.length > 0 || this.sellerValue.length > 0) {
         return this.productDataList.filter((laptop) =>
           this.isProductFilterPartly(laptop)
         );

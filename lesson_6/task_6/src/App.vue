@@ -1,7 +1,7 @@
 <template>
   <credit-card
-    v-model:cardDate.separateSlash="userCardDate"
-    v-model:cardNumber.onlyDigits="userCardNumber"
+    v-model:cardDate="userCardDate"
+    v-model:cardNumber="userCardNumber"
   />
 </template>
 
