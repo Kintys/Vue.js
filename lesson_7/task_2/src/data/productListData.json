@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Хліб",
+    "price": "24.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Молоко",
+    "price": "30.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Яйця",
+    "price": "12.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Сир",
+    "price": "45.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Помідори",
+    "price": "15.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Картопля",
+    "price": "8.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "М'ясо",
+    "price": "60.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Риба",
+    "price": "50.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Солодощі",
+    "price": "20.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  },
+  {
+    "title": "Фрукти",
+    "price": "40.00",
+    "currencyTitle": "Грн.",
+    "count": 1
+  }
+]
