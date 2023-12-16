@@ -51,17 +51,6 @@ class DbOperations {
                 })
         })
     }
-    // deleteValue(docId, filesId) {
-    //     return new Promise((resolve, reject) => {
-    //         deleteField(this.dbCollection, docId, filesId)
-    //             .then(() => {
-    //                 resolve(true)
-    //             })
-    //             .catch((error) => {
-    //                 reject(error)
-    //             })
-    //     })
-    // }
     updateItem(itemId, data) {
         return new Promise((resolve, reject) => {
             const oldDocRef = doc(this.dbCollection, itemId)
