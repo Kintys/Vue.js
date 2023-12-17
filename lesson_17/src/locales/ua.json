@@ -1,0 +1,40 @@
+{
+    "menu": {
+        "home": "Головна сторінка",
+        "product": "Сторінка продуктів",
+        "contacts": "Контакти"
+    },
+    "home": {
+        "welcome": "Ласкаво просимо до нашого інтернет-магазину"
+    },
+    "actionTitles": {
+        "login": "Увійти",
+        "logout": "Вийти",
+        "addTask": "Додати задачу"
+    },
+    "message": {
+        "notAuth": "АВТОРИЗУЙТЕСЯ для доступу на наш сайт"
+    },
+    "currentLanguage": "Українська",
+    "product": {
+        "button": "Додати"
+    },
+    "filter": {
+        "inputPlaceholder": "Пошук"
+    },
+    "editorButton": {
+        "add": "Додати",
+        "save": "Зберегти"
+    },
+    "editor": {
+        "title": "Заголовок",
+        "seller": "Продавець",
+        "brand": "Бред",
+        "descriptionUa": "Опис - UA",
+        "descriptionGb": "Опис - EN",
+        "priceUa": "Ціна - UA",
+        "priceGb": "Ціна - GB",
+        "link": "Лінк",
+        "photo": "Фото"
+    }
+}

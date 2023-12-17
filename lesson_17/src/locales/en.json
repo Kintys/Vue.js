@@ -1,0 +1,40 @@
+{
+    "menu": {
+        "home": "Home page",
+        "product": "Product page",
+        "contacts": "Contacts page"
+    },
+    "home": {
+        "welcome": "Welcome to our online store"
+    },
+    "actionTitles": {
+        "login": "Login",
+        "logout": "Logout",
+        "addTask": "Add task"
+    },
+    "message": {
+        "notAuth": "SIGN IN to access our site"
+    },
+    "currentLanguage": "English",
+    "product": {
+        "button": "Add"
+    },
+    "filter": {
+        "inputPlaceholder": "Search"
+    },
+    "editorButton": {
+        "add": "Add",
+        "save": "Save"
+    },
+    "editor": {
+        "title": "Title",
+        "seller": "Seller",
+        "brand": "Brand",
+        "descriptionUa": "description - UA",
+        "descriptionGb": "description - EN",
+        "priceUa": "Price - UA",
+        "priceGb": "Price - GB",
+        "link": "Link",
+        "photo": "Photo"
+    }
+}
