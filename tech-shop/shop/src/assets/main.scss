@@ -1,0 +1,149 @@
+@use "sass:math";
+@import './adaptive.scss';
+@import './scss/icons.scss';
+
+
+//&display=swap - додати при підключенні через плагін
+
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,200,300,regular,500,600,700,800,900&display=swap);
+
+
+
+@import "./null";
+
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	line-height: normal;
+	@supports (overflow: clip) {
+		overflow: clip;
+	}
+	// Притискаємо footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фікс для слайдерів
+	> * {
+		min-width: 0;
+	}
+}
+// Обмежуючий контейнер ======================================================================================================================================================================================================================
+
+@if ($responsiveType==1) {
+	// Чуйна
+	[class*="__container"] {
+		@if ($maxWidthContainer>0) {
+			max-width: toRem($containerWidth);
+			margin: 0 auto;
+		}
+		@if ($containerPadding>0) {
+			@if ($maxWidthContainer>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			} @else {
+				@include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
+				@include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
+			}
+		}
+	}
+} @else {
+	// Брейк-поїнтами
+	[class*="__container"] {
+		margin: 0 auto;
+		@if ($maxWidthContainer>0) {
+			max-width: toRem($containerWidth);
+		} @else {
+			@if ($containerPadding>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			}
+		}
+		@media (max-width: $pc) {
+			max-width: toRem(970);
+		}
+		@media (max-width: $tablet) {
+			max-width: toRem(750);
+		}
+		@media (max-width: $mobile) {
+			max-width: none;
+			@if ($containerPadding>0 and $maxWidthContainer>0) {
+				padding: 0 toRem(math.div($containerPadding, 2));
+			}
+		}
+	}
+}
+
+.button {
+    padding: toRem(30) toRem(35);
+    background-color: #0156ff;
+    border-radius: toRem(50);
+	align-items: center;
+	display: flex;
+	justify-content: center;
+    color: #fff;
+	font-size: toRem(14);
+    font-weight: 600;
+	box-shadow: none;
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: #fff;
+            outline: solid toRem(1) #0156ff;
+            transition: all 0.3s;
+            color: #0156ff;
+        }
+    }
+	&--small{
+		padding: toRem(10) toRem(15);
+		
+	}
+	&--bg{
+		padding: toRem(8) toRem(26);
+		background-color: #fff;
+		color: #0156ff;
+		border: toRem(1) solid #0156ff;
+		@media (any-hover: hover) {
+            &:hover {
+				box-shadow: none;
+                background-color: #0156ff;
+			    color: #fff;
+				outline: none;
+				border: toRem(1) solid #0156ff;
+            }
+        }
+	}
+}
+.ibg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	&--top {
+		object-position: top;
+	}
+	&--bottom {
+		object-position: bottom;
+	}
+	&--left {
+		object-position: left;
+	}
+	&--right {
+		object-position: right;
+	}
+	&--contain {
+		object-fit: contain;
+	}
+}
+
+
+[class*="__nav-indicator"] {
+        position: absolute;
+        top: 45%;
+        width: toRem(50);
+        z-index: 2;
+        height: toRem(50);
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: rgba(128, 128, 128, 0.511);
+                border-radius: 50% 0 0 50%;
+            }
+        }
+    }

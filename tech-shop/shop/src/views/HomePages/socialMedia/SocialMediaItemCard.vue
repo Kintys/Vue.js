@@ -1,0 +1,70 @@
+<template>
+    <a href="#" class="social-card">
+        <div class="social-card__img">
+            <img src="../../../assets/img/socialMedia/inst.png" alt="#" />
+        </div>
+        <div class="social-card__content">
+            <p class="social-card__text">
+                If you’ve recently made a desktop PC or laptop purchase, you might want to consider adding peripherals
+                to enhance your home office setup, your gaming rig, or your business workspace...
+            </p>
+            <div class="social-card__post-date">01.09.2020</div>
+        </div>
+    </a>
+</template>
+
+<script setup>
+defineProps({
+    socialItemData: {
+        type: Object
+    }
+})
+</script>
+
+<style lang="scss" scoped>
+@import '@/assets/adaptive.scss';
+.social-card {
+    // .social-card__img
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: toRem(225);
+    height: toRem(322);
+    padding: toRem(1);
+    @media (any-hover: hover) {
+        &:hover {
+            outline: toRem(1) solid #ccc;
+        }
+    }
+    &__img {
+        max-height: toRem(151);
+        img {
+            width: 100%;
+        }
+    }
+
+    // .social-card__content
+
+    &__content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding: toRem(10) toRem(20);
+    }
+
+    // .social-card__text
+
+    &__text {
+        flex-grow: 1;
+        font-size: toRem(12);
+    }
+
+    // .social-card__post-date
+
+    &__post-date {
+        font-size: toRem(10);
+        color: #a2a6b0;
+    }
+}
+</style>

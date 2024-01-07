@@ -1,0 +1,72 @@
+{
+    "loginPage": {
+        "pageTitle": "Customer Login"
+    },
+    "loginBox": {
+        "title": "Registered Customers",
+        "subTitle": "If you have an account, sign in with your email address.",
+        "inputLogin": {
+            "label": "Email",
+            "placeholder": "Your Email",
+            "error": "The email is incorrect. Please make sure all fields are filled in."
+        },
+        "inputPassword": {
+            "label": "Password",
+            "placeholder": "Your Password"
+        },
+        "buttons": {
+            "signIn": "Sign In",
+            "ressPasword": "Forgot Your Password?"
+        }
+    },
+    "customerBox": {
+        "title": "New Customer?",
+        "button": "Create An Account"
+    },
+    "benefits": {
+        "title": "Creating an account has many benefits:",
+        "list": {
+            "item1": "Check out faster",
+            "item2": "Keep more than one address",
+            "item3": "Track orders and more"
+        }
+    },
+    "createAccPage": {
+        "title": "Create a Free Account",
+        "button": "Register"
+    },
+    "productCard": {
+        "itemCard": {
+            "status": {
+                "inStock": "in stock",
+                "absence": "check availability"
+            },
+            "textRev": "Reviews"
+        }
+    },
+    "newProductSection": {
+        "title": "New Products",
+        "info-link": "See All New Products",
+        "offerBlock": {
+            "text": "<b>own</b> it now, up to 6 months interest free",
+            "titleLink": "learn more"
+        }
+    },
+    "socialMediaSection": {
+        "title": "Follow us on Instagram for News, Offers & More"
+    },
+    "footerInfo": {
+        "productSupport": {
+            "title": "Product Support",
+            "description": "Up to 3 years on-site warranty available for your peace of mind."
+        },
+        "personalAccount": {
+            "title": "Personal Account",
+            "description": "With big discounts, free delivery and a dedicated support specialist."
+        },
+        "amazingSavings": {
+            "title": "Amazing Savings",
+            "description": "Up to 70% off new Products, you can be sure of the best price."
+        }
+    }
+}
