@@ -1,9 +1,12 @@
 <template>
-    <MainMasterPage><FilterAsidePanel style="margin-top: 100px" /> </MainMasterPage>
+    <MainMasterPage><FilterPanel style="margin-top: 100px" /> <FilterBrandPanel /> </MainMasterPage>
 </template>
 
 <script setup>
-import FilterAsidePanel from './FilterSection/FilterAsidePanel.vue'
+import FilterPanel from './FilterSection/FilterPanel.vue'
+
+import FilterBrandPanel from '@/views/CatalogPage/FilterSection/FilterBrandPanel.vue'
+
 import MainMasterPage from '@/master-page/MainMasterPage.vue'
 </script>
 

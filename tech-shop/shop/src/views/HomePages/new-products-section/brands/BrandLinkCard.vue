@@ -10,7 +10,7 @@ defineProps({
 })
 
 const getImageUrl = (name) => {
-    return new URL(`../../assets/${name}`, import.meta.url).href
+    return new URL(`../../../../assets/${name}`, import.meta.url).href
 }
 </script>
 
@@ -32,8 +32,7 @@ const getImageUrl = (name) => {
     // .brand__img
 
     &__img {
-        width: 77%; /* 154/200 */
-        height: 53.333333%; /* 80/150 */
+        width: 100%; /* 154/200 */
         display: flex;
         justify-content: center;
         align-items: center;
