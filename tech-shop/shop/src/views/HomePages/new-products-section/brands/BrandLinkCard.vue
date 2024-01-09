@@ -1,12 +1,18 @@
 <template>
-    <a class="brand" :href="brandData.link">
+    <a v-if="useLink" class="brand" :href="brandData.link">
         <div class="brand__img"><img :src="getImageUrl(brandData.img)" :alt="`brand ${brandData.link}`" /></div>
     </a>
+    <div v-else class="brand">
+        <div class="brand__img"><img :src="getImageUrl(brandData.img)" :alt="`brand ${brandData.link}`" /></div>
+    </div>
 </template>
 
 <script setup>
 defineProps({
-    brandData: { type: Object }
+    brandData: { type: Object },
+    useLink: {
+        type: Boolean
+    }
 })
 
 const getImageUrl = (name) => {

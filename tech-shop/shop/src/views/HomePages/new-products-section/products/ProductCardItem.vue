@@ -47,7 +47,7 @@ const props = defineProps({
 })
 
 const showShortDescription = computed(() => {
-    if (props.cardItemData.description.length > 50) return props.cardItemData.description.slice(0, 89) + '...'
+    if (props.cardItemData.description.length > 50) return props.cardItemData.description.slice(0, 53) + '...'
     else return props.cardItemData.description
 })
 </script>

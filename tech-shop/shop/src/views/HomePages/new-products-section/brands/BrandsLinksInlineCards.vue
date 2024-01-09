@@ -1,6 +1,6 @@
 <template>
     <div class="brands-cards">
-        <BrandLinkCard v-for="brand in brandsList" :key="brand.img" :brand-data="brand" />
+        <BrandLinkCard v-for="brand in brandsList" :key="brand" :brand-data="brand" :use-link="true" />
     </div>
 </template>
 

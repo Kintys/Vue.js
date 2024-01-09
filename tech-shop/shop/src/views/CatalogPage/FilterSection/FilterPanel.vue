@@ -1,15 +1,17 @@
 <template>
     <div class="filter-panel">
-        <h2 class="filter-panel__title">Filters</h2>
-        <v-btn class="filter-panel__button button">Clear Filter</v-btn>
-        <div class="filter-panel__spollers">
-            <MExpansionPanels label="category"></MExpansionPanels>
-            <MExpansionPanels label="price"></MExpansionPanels>
-            <MExpansionPanels label="color"></MExpansionPanels>
-        </div>
-        <div class="filter-panel__spoller-filter">
-            <MExpansionPanels label="filter-name"></MExpansionPanels>
-            <v-btn class="filter-panel__button button">Apply Filters (2)</v-btn>
+        <div class="filter-panel__content">
+            <h2 class="filter-panel__title">Filters</h2>
+            <v-btn class="filter-panel__button button">Clear Filter</v-btn>
+            <div class="filter-panel__spollers">
+                <MExpansionPanels label="category"></MExpansionPanels>
+                <MExpansionPanels label="price"></MExpansionPanels>
+                <MExpansionPanels label="color"></MExpansionPanels>
+            </div>
+            <div class="filter-panel__spoller-filter">
+                <MExpansionPanels label="filter-name"></MExpansionPanels>
+                <v-btn class="filter-panel__button button">Apply Filters (2)</v-btn>
+            </div>
         </div>
     </div>
 </template>
@@ -23,10 +25,14 @@ import MExpansionPanels from '@/components/MExpansionPanels.vue'
 .filter-panel {
     background: #f5f7ff;
     // .filter-panel__title
-    width: 16.25%; /* 234/1440 */
-    display: flex;
-    flex-direction: column;
-    padding: toRem(28) toRem(16);
+    // display: flex;
+    // flex-direction: column;
+    // padding: toRem(28) toRem(16);
+    &__content {
+        display: flex;
+        flex-direction: column;
+        padding: toRem(28) toRem(16);
+    }
     &__title {
         font-size: toRem(16);
         font-weight: 700;

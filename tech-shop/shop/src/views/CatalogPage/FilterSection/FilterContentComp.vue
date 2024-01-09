@@ -1,12 +1,20 @@
 <template>
     <div class="filter-brand-panel">
-        <header class="filter-brand-panel__header">
-            <h3 class="filter-brand-panel__title">Brand</h3>
-            <v-btn class="filter-brand-panel__button button"> All brand</v-btn>
-        </header>
-        <div class="filter-brand-panel__brands">
-            <BrandLinkCard v-for="brand in brandsList" :key="brand.id" :brand-data="brand" />
-        </div>
+        <slot name="filter-card">
+            <header class="filter-brand-panel__header">
+                <h3 class="filter-brand-panel__title">Brand</h3>
+                <v-btn class="filter-brand-panel__button button"> All brand</v-btn>
+            </header>
+            <div class="filter-brand-panel__brands">
+                <BrandLinkCard
+                    v-for="brand in brandsList"
+                    :key="brand.id"
+                    :brand-data="brand"
+                    class="filter-brand-panel__item-brand"
+                    :use-link="false"
+                />
+            </div>
+        </slot>
     </div>
 </template>
 
@@ -19,7 +27,6 @@ import { brandsList } from '@/views/HomePages/new-products-section/brands/settin
 @import '@/assets/adaptive.scss';
 .filter-brand-panel {
     background: #f5f7ff;
-    width: 16.25%; /* 234/1440 */
     display: flex;
     flex-direction: column;
 
@@ -45,9 +52,13 @@ import { brandsList } from '@/views/HomePages/new-products-section/brands/settin
     // .filter-brand-panel__brands
 
     &__brands {
+        background: #fff;
         display: grid;
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(3, auto);
+    }
+    &__item-brand {
+        border: toRem(0.5) solid rgba(102, 102, 102, 0.209);
     }
 }
 .button {

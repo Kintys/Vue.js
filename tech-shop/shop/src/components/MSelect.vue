@@ -2,10 +2,10 @@
     <div class="m-select" ref="dropDown">
         <div class="m-select__label">
             <span v-if="prefix" class="m-select__prefix">{{ prefix }}</span
-            ><span @click="onOpen()">{{ currentLabel }}</span>
+            ><span class="m-select__label-text" @click="onOpen()">{{ currentLabel }}</span>
             <span
-                ><span v-if="clearBtn" @click="onClearLabel" class="m-select__clear"
-                    ><font-awesome-icon icon="circle-xmark" /></span
+                ><span v-if="clearBtn && selectedOption" @click="onClearLabel" class="m-select__clear"
+                    ><font-awesome-icon icon="circle-xmark" size="xl" /></span
                 ><v-icon
                     @click="onOpen()"
                     class="m-select__icon"
@@ -14,19 +14,20 @@
                     >mdi-menu-down</v-icon
                 ></span
             >
-            <div v-if="isMenuVisible" class="m-select__options">
-                <span
-                    v-for="(option, i) in optionsList"
-                    @click="onSelect(option)"
-                    :key="i"
-                    class="m-select__options-item"
-                    >{{ option.name ?? option }}</span
-                >
-            </div>
+            <transition name="slide-fade">
+                <div v-if="isMenuVisible" class="m-select__options">
+                    <span
+                        v-for="(option, i) in optionsList"
+                        @click="onSelect(option)"
+                        :key="i"
+                        class="m-select__options-item"
+                        >{{ option.name ?? option }}</span
+                    >
+                </div>
+            </transition>
         </div>
     </div>
 </template>
-
 <script setup>
 import { computed, ref, defineEmits, onMounted, onBeforeUnmount } from 'vue'
 const props = defineProps({
@@ -63,7 +64,7 @@ function onSelect(opt) {
     isMenuVisible.value = false
 }
 function onOpen() {
-    isMenuVisible.value = true
+    !isMenuVisible.value ? (isMenuVisible.value = true) : (isMenuVisible.value = false)
 }
 
 function onClose(element) {
@@ -72,7 +73,7 @@ function onClose(element) {
     }
 }
 function onClearLabel() {
-    selectedOption.value = props.label || null
+    selectedOption.value = null
 }
 onMounted(() => {
     window.addEventListener('click', onClose)
@@ -88,14 +89,30 @@ onBeforeUnmount(() => {
     // .m-select__label
 
     &__label {
-        padding: toRem(20);
-        border: 1px solid black;
+        padding: toRem(20) toRem(16);
+        border: toRem(2) solid #cacdd8;
         position: relative;
+        width: toRem(200);
+        align-items: center;
+        font-size: toRem(13);
+        display: flex;
+        flex-wrap: nowrap;
+        border-radius: toRem(2);
+        text-wrap: nowrap;
     }
-
+    &__label-text {
+        margin-left: toRem(2);
+        justify-self: none;
+        flex-grow: 1;
+        font-weight: 600;
+        line-height: 210%;
+    }
     // .m-select__prefex
 
     &__prefix {
+        color: #a2a6b0;
+        font-weight: 600;
+        line-height: 210%; /* 27.3px */
     }
 
     // .m-select__options
@@ -104,27 +121,46 @@ onBeforeUnmount(() => {
         display: none;
         position: absolute;
         display: flex;
-        top: 64px;
-        left: 0;
-        width: 100%;
+        left: -2px;
+        top: 102%;
+        width: 102%;
         flex-direction: column;
+        padding: toRem(2);
         background: #fff;
+        border: toRem(2) solid #cacdd8;
+        border-radius: 0 0 toRem(10) toRem(10);
         z-index: 2;
-
-        span {
-            padding: toRem(10);
-            border: 1px solid black;
-            @media (any-hover: hover) {
-                &:hover {
-                    background-color: grey;
-                }
-            }
+        :last-child {
+            border-radius: 0 0 toRem(10) toRem(10);
         }
     }
 
     // .m-select__options-item
 
     &__options-item {
+        padding: toRem(10);
+        &:not(:last-child) {
+            margin-bottom: toRem(1);
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: #0156ff32;
+                transition: all 0.3s;
+            }
+        }
+    }
+    .slide-fade-enter-active {
+        transition: all 0.3s ease-out;
+    }
+
+    .slide-fade-leave-active {
+        transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateY(-5px);
+        opacity: 0;
     }
     &__icon {
         transition: all 0.3s;
