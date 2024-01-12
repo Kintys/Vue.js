@@ -6,13 +6,14 @@
                 <v-btn class="filter-brand-panel__button button"> All brand</v-btn>
             </header>
             <div class="filter-brand-panel__brands">
-                <BrandLinkCard
-                    v-for="brand in brandsList"
-                    :key="brand.id"
-                    :brand-data="brand"
-                    class="filter-brand-panel__item-brand"
-                    :use-link="false"
-                />
+                <div v-for="(brand, i) in brandsList" :key="brand.id" ref="focusesList">
+                    <BrandLinkCard
+                        :brand-data="brand"
+                        class="filter-brand-panel__item-brand"
+                        :use-link="false"
+                        @click="selectedBrand(brand.name, i)"
+                    />
+                </div>
             </div>
         </slot>
     </div>
@@ -20,7 +21,16 @@
 
 <script setup>
 import BrandLinkCard from '@/views/HomePages/new-products-section/brands/BrandLinkCard.vue'
+import { useFocus } from '@/compositionFunctions/focusFunc.js'
+import { useCatalogStore } from '@/stores/catalog'
+const { addBrandValue } = useCatalogStore()
 import { brandsList } from '@/views/HomePages/new-products-section/brands/settings'
+
+const { focusesList, onFocus } = useFocus()
+function selectedBrand(name, index) {
+    addBrandValue(name)
+    onFocus(index, 'add-focus')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -56,11 +66,14 @@ import { brandsList } from '@/views/HomePages/new-products-section/brands/settin
         display: grid;
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(3, auto);
+        gap: toRem(3);
     }
     &__item-brand {
         border: toRem(0.5) solid rgba(102, 102, 102, 0.209);
     }
 }
-.button {
+
+.add-focus {
+    outline: toRem(2) solid blue;
 }
 </style>

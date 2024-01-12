@@ -5,7 +5,7 @@
             ><span class="m-select__label-text" @click="onOpen()">{{ currentLabel }}</span>
             <span
                 ><span v-if="clearBtn && selectedOption" @click="onClearLabel" class="m-select__clear"
-                    ><font-awesome-icon icon="circle-xmark" size="xl" /></span
+                    ><font-awesome-icon icon="circle-xmark" color="red" size="xl" /></span
                 ><v-icon
                     @click="onOpen()"
                     class="m-select__icon"

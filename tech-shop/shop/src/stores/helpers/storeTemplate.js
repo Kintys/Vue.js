@@ -11,10 +11,9 @@ export default function getStoreTemplate(collectionTitle) {
     const itemsLimitedList = ref(null)
 
     async function loadItemsList() {
-        const newArr = await generalApiOperation({
+        itemsList.value = await generalApiOperation({
             operation: () => collectionDB.loadItemsList()
         })
-        itemsList.value = dividedintoPagesitemList(newArr)
     }
     async function loadShortItemList(num) {
         itemsLimitedList.value = await generalApiOperation({
@@ -78,8 +77,12 @@ export default function getStoreTemplate(collectionTitle) {
         })
         itemsList.value = itemsList.value.filter((item) => item.id !== itemId)
     }
-
-    const getItemsList = computed(() => itemsList.value ?? [])
+    async function loadFilteredList(obj) {
+        itemsList.value = await generalApiOperation({
+            operation: () => collectionDB.loadFilteredDataListWithParams(obj)
+        })
+    }
+    const getItemsList = computed(() => dividedintoPagesitemList(itemsList.value) ?? [])
     const getCurrentItem = computed(() => currentItem.value)
     const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
     const getItemsListWithNumber = computed(() => {
@@ -87,10 +90,11 @@ export default function getStoreTemplate(collectionTitle) {
     })
 
     const getItemListWithPageNumber = computed(() => {
+        const arr = getItemsList.value
+        console.log(arr)
         return (pageNumber) => itemsList?.value?.filter((item) => item.pageNumber === pageNumber)
     })
     const getPageNumbers = computed(() => itemsList?.value?.reduce((max, item) => Math.max(max, item.pageNumber), 0))
-
     return {
         loadItemsList,
         addItem,
@@ -108,6 +112,7 @@ export default function getStoreTemplate(collectionTitle) {
         getLimitedItemList,
         getItemsListWithNumber,
         getItemListWithPageNumber,
-        getPageNumbers
+        getPageNumbers,
+        loadFilteredList
     }
 }

@@ -13,10 +13,10 @@
 import { computed } from 'vue'
 import ProductInlineCards from './ProductInlineCards.vue'
 import { usePcListStore } from '@/stores/pcList'
-import { uselaptopListStore } from '@/stores/laptop'
+import { useLaptopListStore } from '@/stores/laptop'
 import { useMonitorsStore } from '@/stores/monitoris'
 import { categorySettings } from './settings'
-const { getItemsListWithNumber: shortLaptopList } = uselaptopListStore()
+const { getItemsListWithNumber: shortLaptopList } = useLaptopListStore()
 const { getItemsListWithNumber: shortPcList } = usePcListStore()
 const { getItemsListWithNumber: shortMonitorsList } = useMonitorsStore()
 

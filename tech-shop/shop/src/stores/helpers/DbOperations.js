@@ -13,8 +13,7 @@ import {
     query,
     where,
     documentId,
-    limit,
-    orderBy
+    limit
 } from 'firebase/firestore/lite'
 
 class DbOperations {
@@ -155,6 +154,18 @@ class DbOperations {
     }
     loadFilteredData(fieldTitle, compareOperator, valueToCompare) {
         const q = query(this.dbCollection, where(fieldTitle, compareOperator, valueToCompare))
+        return new Promise((resolve, reject) => {
+            getDocs(q)
+                .then((querySnapshot) => {
+                    resolve(this.getListFromSnapshot(querySnapshot))
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+    loadFilteredDataListWithParams({ firstVal, secondVal }) {
+        const q = query(this.dbCollection, where(...firstVal), where(...secondVal))
         return new Promise((resolve, reject) => {
             getDocs(q)
                 .then((querySnapshot) => {

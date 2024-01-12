@@ -1,5 +1,6 @@
 <template>
     <div class="card">
+        <div class="card__chips-bar"><ChipsBar :chips-list-data="getFilterValue" /></div>
         <div class="card__products">
             <ProductCardItem v-for="item in list" :key="item.id" :card-item-data="item" />
         </div>
@@ -10,14 +11,17 @@
 </template>
 
 <script setup>
-import { useGeneralStore } from '@/stores/general'
 import { onBeforeMount, onMounted, ref, computed } from 'vue'
-import ProductCardItem from '@/views/HomePages/new-products-section/products/ProductCardItem.vue'
-import { uselaptopListStore } from '@/stores/laptop'
-import { storeToRefs } from 'pinia'
 
-const { getPageNumbers } = storeToRefs(uselaptopListStore())
-const { loadItemsList, getItemListWithPageNumber } = uselaptopListStore()
+import ChipsBar from '@/components/ChipsBar.vue'
+import ProductCardItem from '@/views/HomePages/new-products-section/products/ProductCardItem.vue'
+
+import { storeToRefs } from 'pinia'
+import { useLaptopListStore } from '@/stores/laptop'
+
+const { getPageNumbers, getFilterValue } = storeToRefs(useLaptopListStore())
+const { loadItemsList, getItemListWithPageNumber } = useLaptopListStore()
+
 const page = ref(1)
 const list = computed(() => getItemListWithPageNumber(page.value))
 

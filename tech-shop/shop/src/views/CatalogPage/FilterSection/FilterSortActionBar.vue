@@ -5,13 +5,13 @@
         </div>
         <div class="sort-bar__item-info">items 1-35 of 61</div>
         <div class="sort-bar__select-block">
-            <MSelect label="Select" prefix="Sort by:" :clear-btn="true" :options-list="sortList" v-model="sortData" />
+            <MSelect label="Select" prefix="Sort by:" :clear-btn="true" :options-list="sortList" v-model="valueSort" />
             <MSelect
                 label="Select"
                 prefix="Show:"
                 :clear-btn="true"
                 :options-list="pageNumbersList"
-                v-model="pageSortNumber"
+                v-model="pageSortByNumber"
             />
         </div>
         <div class="sort-bar__show-card">
@@ -52,13 +52,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import MSelect from '@/components/MSelect.vue'
+import { useCatalogStore } from '@/stores/catalog.js'
+
+const { addSortValue, addShowPageSelectValue } = useCatalogStore()
 
 const isSelectedStyle = ref(true)
-const sortData = ref(null)
-const pageSortNumber = ref(null)
-const sortList = ref(['Position', 'Review', 'InStock', 'HighPrice', 'LowPrice'])
+const valueSort = ref(null)
+const pageSortByNumber = ref(null)
+const sortList = ref(['Position', 'Review', 'High price', 'Low price'])
+
 const pageNumbersList = ref([
     {
         name: '20 per page',
@@ -69,6 +73,10 @@ const pageNumbersList = ref([
         value: 35
     }
 ])
+watch([valueSort, pageSortByNumber], ([newVal_1, newVal_2]) => {
+    addSortValue(newVal_1)
+    addShowPageSelectValue(newVal_2)
+})
 </script>
 
 <style lang="scss" scoped>

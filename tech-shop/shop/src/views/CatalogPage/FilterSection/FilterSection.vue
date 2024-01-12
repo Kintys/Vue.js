@@ -1,17 +1,21 @@
 <template>
     <section class="filter">
         <div class="filter__container">
-            <h2 class="filter__title">MSI PS Series (20)</h2>
+            <h2 class="filter__title">MSI PS Series</h2>
             <FilterSortActionBar />
             <div class="filter__body">
-                <FilterAsidePanel />
-                <FilteredProductsCards />
+                <FilterAsidePanel @selectCat="selectedCategoryArr(event)" />
+                <FilteredProductsCards :selected-category-arr="selectedCategoryArr" />
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+const selectedCategoryArr = computed(() => {
+    return (arr) => arr
+})
 import FilterAsidePanel from './FilterAsidePanel.vue'
 import FilteredProductsCards from './FilteredProductsCards.vue'
 import FilterSortActionBar from './FilterSortActionBar.vue'
