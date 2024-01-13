@@ -1,7 +1,7 @@
 <template>
     <div class="chips-bar">
         <div class="chips-bar__block">
-            <div class="chips-bar__action btn-chips" v-for="(chips, i) in catalog.filterValue" :key="`${chips - i}`">
+            <div class="chips-bar__action btn-chips" v-for="(chips, i) in chipsList" :key="`${chips - i}`">
                 {{ chips }}
                 <button @click="onClearChips(chips)">
                     <font-awesome-icon icon="circle-xmark" color="red" size="xl" />
@@ -15,9 +15,11 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useCatalogStore } from '@/stores/catalog.js'
 const catalog = useCatalogStore()
 
+const chipsList = computed(() => catalog.getFilterValueList)
 function onClearChips(name) {
     catalog.deleteFilterValue(name)
 }

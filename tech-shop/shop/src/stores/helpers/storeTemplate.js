@@ -1,11 +1,14 @@
 import DbOperations from './DbOperations'
 import { useGeneralStore } from '../general'
 import { ref, computed } from 'vue'
-import { dividedintoPagesitemList } from './devidePage'
+import { helpersFunc } from './helpersFunc'
+import { useCatalogStore } from '@/stores/catalog'
 
 export default function getStoreTemplate(collectionTitle) {
     const collectionDB = new DbOperations(collectionTitle)
     const { generalApiOperation } = useGeneralStore()
+    const { dividedIntoPagesItemList } = helpersFunc()
+    const { sortListObject } = useCatalogStore()
     const itemsList = ref(null)
     const currentItem = ref(null)
     const itemsLimitedList = ref(null)
@@ -82,7 +85,7 @@ export default function getStoreTemplate(collectionTitle) {
             operation: () => collectionDB.loadFilteredDataListWithParams(obj)
         })
     }
-    const getItemsList = computed(() => dividedintoPagesitemList(itemsList.value) ?? [])
+    const getItemsList = computed(() => dividedIntoPagesItemList([], sortListObject.pageNumber))
     const getCurrentItem = computed(() => currentItem.value)
     const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
     const getItemsListWithNumber = computed(() => {
@@ -90,11 +93,9 @@ export default function getStoreTemplate(collectionTitle) {
     })
 
     const getItemListWithPageNumber = computed(() => {
-        const arr = getItemsList.value
-        console.log(arr)
-        return (pageNumber) => itemsList?.value?.filter((item) => item.pageNumber === pageNumber)
+        return (pageNumber) => getItemsList.value.filter((item) => item.pageNumber === pageNumber)
     })
-    const getPageNumbers = computed(() => itemsList?.value?.reduce((max, item) => Math.max(max, item.pageNumber), 0))
+    const getPageNumbers = computed(() => getItemsList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0))
     return {
         loadItemsList,
         addItem,

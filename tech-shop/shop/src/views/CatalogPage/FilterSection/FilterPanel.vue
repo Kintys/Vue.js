@@ -38,7 +38,7 @@
                     ></template>
                 </MExpansionPanels>
                 <div width="100%">
-                    <v-btn @click="onFilter" class="filter-panel__button button"
+                    <v-btn @click="isSelectedFilterValue" class="filter-panel__button button"
                         >Apply Filters ({{ selected.length }})</v-btn
                     >
                 </div>
@@ -53,9 +53,13 @@ import { useCatalogStore } from '@/stores/catalog.js'
 import { ref, watch } from 'vue'
 import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { useLaptopListStore } from '@/stores/laptop'
+import { storeToRefs } from 'pinia'
+
 const { loadFilteredList } = useLaptopListStore()
 const { focusesList, onFocus } = useFocus()
-const { addFilterValue, changeColorValue } = useCatalogStore()
+
+const { filterValueObject } = storeToRefs(useCatalogStore())
+const { addFilterValueObject } = useCatalogStore()
 const currentColor = ref(null)
 const selected = ref([])
 
@@ -74,20 +78,27 @@ const filterCheckboxParams = ref([
         value: 'HP/COMPAQ PCS'
     }
 ])
+
 function onSelectColor(index) {
     onFocus(index, 'focus-btn')
 }
-function onFilter() {
-    // loadFilteredData('color', '==', '#red')
+function isSelectedFilterValue() {
     loadFilteredList({
-        firstVal: ['color', '==', '#red'],
-        secondVal: ['params', '==', 'CUSTOM PCS']
+        firstOpt: ['color', '==', '#red'],
+        secondOpt: ['params', '==', 'CUSTOM PCS'],
+        thirdOpt: ['brand', '==', 'msi']
     })
 }
 
-watch([selected, currentColor], ([newVal_1, newVal_2]) => {
-    addFilterValue(newVal_1)
-    changeColorValue(newVal_2)
+watch(currentColor, (newVal) => {
+    addFilterValueObject({
+        colorValue: newVal
+    })
+})
+watch(selected, (newVal_1) => {
+    addFilterValueObject({
+        filterValue: newVal_1
+    })
 })
 </script>
 

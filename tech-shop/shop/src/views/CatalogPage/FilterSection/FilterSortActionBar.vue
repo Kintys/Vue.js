@@ -48,6 +48,7 @@
                 </svg>
             </button>
         </div>
+        {{ sortListObject }}
     </div>
 </template>
 
@@ -56,7 +57,7 @@ import { ref, watch } from 'vue'
 import MSelect from '@/components/MSelect.vue'
 import { useCatalogStore } from '@/stores/catalog.js'
 
-const { addSortValue, addShowPageSelectValue } = useCatalogStore()
+const { addSortListObject, sortListObject } = useCatalogStore()
 
 const isSelectedStyle = ref(true)
 const valueSort = ref(null)
@@ -73,9 +74,15 @@ const pageNumbersList = ref([
         value: 35
     }
 ])
-watch([valueSort, pageSortByNumber], ([newVal_1, newVal_2]) => {
-    addSortValue(newVal_1)
-    addShowPageSelectValue(newVal_2)
+watch(valueSort, (newVal_1) => {
+    addSortListObject({
+        selectedSort: newVal_1
+    })
+})
+watch(pageSortByNumber, (newVal_2) => {
+    addSortListObject({
+        numberPage: newVal_2
+    })
 })
 </script>
 

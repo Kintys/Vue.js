@@ -4,18 +4,14 @@
             <h2 class="filter__title">MSI PS Series</h2>
             <FilterSortActionBar />
             <div class="filter__body">
-                <FilterAsidePanel @selectCat="selectedCategoryArr(event)" />
-                <FilteredProductsCards :selected-category-arr="selectedCategoryArr" />
+                <FilterAsidePanel />
+                <FilteredProductsCards />
             </div>
         </div>
     </section>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-const selectedCategoryArr = computed(() => {
-    return (arr) => arr
-})
 import FilterAsidePanel from './FilterAsidePanel.vue'
 import FilteredProductsCards from './FilteredProductsCards.vue'
 import FilterSortActionBar from './FilterSortActionBar.vue'

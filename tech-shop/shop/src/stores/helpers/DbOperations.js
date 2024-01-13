@@ -13,7 +13,9 @@ import {
     query,
     where,
     documentId,
-    limit
+    limit,
+    or,
+    and
 } from 'firebase/firestore/lite'
 
 class DbOperations {
@@ -164,8 +166,14 @@ class DbOperations {
                 })
         })
     }
-    loadFilteredDataListWithParams({ firstVal, secondVal }) {
-        const q = query(this.dbCollection, where(...firstVal), where(...secondVal))
+    loadFilteredDataListWithParams({ firstOpt, secondOpt, thirdOpt }) {
+        const q = query(
+            this.dbCollection,
+            and(
+                or(where(...firstOpt), where(...secondOpt), where(...thirdOpt)),
+                or(where(...firstOpt), where(...secondOpt))
+            )
+        )
         return new Promise((resolve, reject) => {
             getDocs(q)
                 .then((querySnapshot) => {

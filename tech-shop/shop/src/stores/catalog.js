@@ -1,49 +1,34 @@
+import { helpersFunc } from './helpers/helpersFunc'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useCatalogStore = defineStore('catalog', () => {
-    const filterValue = ref(null)
-    const colorValue = ref(null)
-    const sortValue = ref(null)
-    const showPageSelectValue = ref(null)
-    const brandValue = ref(null)
+const { changeObjectToArr, isNewFilterObject } = helpersFunc()
 
-    function addFilterValue(value) {
-        filterValue.value = value
+export const useCatalogStore = defineStore('catalog', () => {
+    const filterValueObject = ref({})
+    const sortListObject = ref({})
+    function addSortListObject(obj) {
+        sortListObject.value = { ...sortListObject.value, ...obj }
     }
-    function addSortValue(value) {
-        sortValue.value = value
-    }
-    function addShowPageSelectValue(value) {
-        showPageSelectValue.value = value
-    }
-    function addBrandValue(value) {
-        showPageSelectValue.value = value
-    }
-    function changeColorValue(value) {
-        colorValue.value = value
+    function addFilterValueObject(obj) {
+        filterValueObject.value = { ...filterValueObject.value, ...obj }
     }
     function deleteFilterValue(name) {
-        filterValue.value = filterValue.value.filter((item) => item !== name)
+        filterValueObject.value = isNewFilterObject(filterValueObject, name)
     }
-
     function clearFilterValue() {
-        filterValue.value = null
+        filterValueObject.value = {}
     }
-    const getFilterValueList = computed(() => filterValue.value ?? [])
-
+    const getFilterValueList = computed(() => changeObjectToArr(filterValueObject))
+    const getSortList = computed(() => sortListObject.value)
     return {
-        filterValue,
-        colorValue,
-        sortValue,
-        showPageSelectValue,
-        addSortValue,
-        addBrandValue,
-        addShowPageSelectValue,
-        addFilterValue,
+        getSortList,
+        sortListObject,
+        filterValueObject,
         deleteFilterValue,
         clearFilterValue,
-        changeColorValue,
-        getFilterValueList
+        getFilterValueList,
+        addFilterValueObject,
+        addSortListObject
     }
 })
