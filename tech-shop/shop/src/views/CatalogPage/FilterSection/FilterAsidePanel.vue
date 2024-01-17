@@ -37,7 +37,7 @@ import FilterContentComp from './FilterContentComp.vue'
 @import '@/assets/adaptive.scss';
 .filter-aside-block {
     display: grid;
-    row-gap: toRem(7);
+    margin-right: toRem(10);
 }
 .filter-content-box {
     text-align: center;

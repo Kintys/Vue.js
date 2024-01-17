@@ -30,25 +30,29 @@
         </div>
         <p class="card-item__description">{{ showShortDescription }}</p>
         <div class="card-item__prises">
-            <div class="card-item__old-price">${{ cardItemData.price.oldPrice }}</div>
-            <div class="card-item__price">${{ cardItemData.price.currentPrice }}</div>
+            <div class="card-item__old-price">${{ cardItemData.oldPrice }}</div>
+            <div class="card-item__price">${{ cardItemData.currentPrice }}</div>
         </div>
     </article>
 </template>
 
 <script setup>
 import StarRating from 'vue-star-rating'
-import { computed } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 const props = defineProps({
     cardItemData: {
         type: Object,
         default: () => ({})
     }
 })
-
+const currentLocal = ref(null)
 const showShortDescription = computed(() => {
-    if (props.cardItemData.description.length > 50) return props.cardItemData.description.slice(0, 53) + '...'
-    else return props.cardItemData.description
+    if (props.cardItemData.description[currentLocal.value].length > 50)
+        return props.cardItemData.description[currentLocal.value].slice(0, 53) + '...'
+    else return props.cardItemData.description[currentLocal.value]
+})
+onBeforeMount(() => {
+    currentLocal.value = localStorage.getItem('lastLocale')
 })
 </script>
 

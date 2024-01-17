@@ -1,18 +1,13 @@
 <template>
     <div class="sort-bar">
-        <div class="sort-bar__back">
-            <router-link :to="{ name: 'home' }"><font-awesome-icon icon="chevron-left" /> Back</router-link>
+        <div class="sort-bar__action-block">
+            <div class="sort-bar__back">
+                <router-link :to="{ name: 'home' }"><font-awesome-icon icon="chevron-left" /> Back</router-link>
+            </div>
         </div>
-        <div class="sort-bar__item-info">items 1-35 of 61</div>
         <div class="sort-bar__select-block">
-            <MSelect label="Select" prefix="Sort by:" :clear-btn="true" :options-list="sortList" v-model="valueSort" />
-            <MSelect
-                label="Select"
-                prefix="Show:"
-                :clear-btn="true"
-                :options-list="pageNumbersList"
-                v-model="pageSortByNumber"
-            />
+            <MSelect label="Select" prefix="Sort by:" :options-list="sortList" v-model="valueSort" />
+            <MSelect label="Select" prefix="Show:" :options-list="pageNumbersList" v-model="pageSortByNumber" />
         </div>
         <div class="sort-bar__show-card">
             <button
@@ -48,40 +43,56 @@
                 </svg>
             </button>
         </div>
-        {{ sortListObject }}
     </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue'
 import MSelect from '@/components/MSelect.vue'
-import { useCatalogStore } from '@/stores/catalog.js'
-
-const { addSortListObject, sortListObject } = useCatalogStore()
+import { useLaptopListStore } from '@/stores/laptop.js'
+const { addSortListObject } = useLaptopListStore()
 
 const isSelectedStyle = ref(true)
 const valueSort = ref(null)
 const pageSortByNumber = ref(null)
-const sortList = ref(['Position', 'Review', 'High price', 'Low price'])
+const sortList = ref([
+    {
+        name: 'Position',
+        value: 'position'
+    },
+    {
+        name: 'Review',
+        value: 'review'
+    }
+])
 
 const pageNumbersList = ref([
     {
-        name: '20 per page',
-        value: 20
+        name: '10 per page',
+        value: 10
     },
     {
-        name: '35 per page',
-        value: 35
+        name: '15 per page',
+        value: 15
+    },
+    {
+        name: '20 per page',
+        value: 20
     }
 ])
 watch(valueSort, (newVal_1) => {
     addSortListObject({
-        selectedSort: newVal_1
+        sortValue: newVal_1
     })
 })
 watch(pageSortByNumber, (newVal_2) => {
     addSortListObject({
         numberPage: newVal_2
+    })
+})
+watch(isSelectedStyle, (newVal) => {
+    addSortListObject({
+        isSelectedStyle: newVal
     })
 })
 </script>
@@ -93,17 +104,15 @@ watch(pageSortByNumber, (newVal_2) => {
     // .sort-bar__back-link
     width: 100%;
     align-items: center;
+    &__action-block {
+        flex-grow: 1;
+        position: relative;
+    }
     &__back {
         font-weight: 600;
-        width: 17.524823%;
         display: flex;
         justify-content: center;
-        margin-right: toRem(10);
-    }
-
-    &__item-info {
-        flex-grow: 1;
-        cursor: pointer;
+        width: toRem(235);
     }
 
     // .sort-bar__select

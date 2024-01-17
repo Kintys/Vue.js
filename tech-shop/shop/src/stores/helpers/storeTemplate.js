@@ -1,25 +1,34 @@
 import DbOperations from './DbOperations'
 import { useGeneralStore } from '../general'
 import { ref, computed } from 'vue'
-import { helpersFunc } from './helpersFunc'
-import { useCatalogStore } from '@/stores/catalog'
+
+import { helpersFunc } from '@/stores/helpers/helpersFunc'
+const { dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
 
 export default function getStoreTemplate(collectionTitle) {
     const collectionDB = new DbOperations(collectionTitle)
     const { generalApiOperation } = useGeneralStore()
-    const { dividedIntoPagesItemList } = helpersFunc()
-    const { sortListObject } = useCatalogStore()
+
     const itemsList = ref(null)
     const currentItem = ref(null)
     const itemsLimitedList = ref(null)
 
+    const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
+
+    function addSortListObject(obj) {
+        sortListObject.value = { ...sortListObject.value, ...obj }
+    }
+
+    // function loadItemsList() {
+    //     itemsList.value = newArr
+    // }
     async function loadItemsList() {
         itemsList.value = await generalApiOperation({
             operation: () => collectionDB.loadItemsList()
         })
     }
     async function loadShortItemList(num) {
-        itemsLimitedList.value = await generalApiOperation({
+        itemsList.value = await generalApiOperation({
             operation: () => collectionDB.loadItemLimitedList(num)
         })
     }
@@ -85,18 +94,45 @@ export default function getStoreTemplate(collectionTitle) {
             operation: () => collectionDB.loadFilteredDataListWithParams(obj)
         })
     }
-    const getItemsList = computed(() => dividedIntoPagesItemList([], sortListObject.pageNumber))
+    const getItemsList = computed(() => itemsList.value)
     const getCurrentItem = computed(() => currentItem.value)
     const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
     const getItemsListWithNumber = computed(() => {
         return (number) => (itemsLimitedList.value ?? []).slice(0, number)
     })
 
-    const getItemListWithPageNumber = computed(() => {
-        return (pageNumber) => getItemsList.value.filter((item) => item.pageNumber === pageNumber)
+    const getDividedAndSortList = computed(() => {
+        const newArr = sortItemListWithParams(getItemsList.value, sortListObject.value.sortValue)
+        return dividedIntoPagesItemList(newArr ?? [], sortListObject.value.numberPage)
     })
-    const getPageNumbers = computed(() => getItemsList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0))
+    const getItemListWithPageNumber = computed(() => {
+        return (pageNumber) => getDividedAndSortList.value.filter((item) => item.pageNumber === pageNumber)
+    })
+    const getPageNumbers = computed(() =>
+        getDividedAndSortList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0)
+    )
+
+    const getStyleValue = computed(() => sortListObject.value.isSelectedStyle)
+    const getMaxAndMinPrice = computed(() => {
+        if (getItemsList.value) {
+            const initPrice = getItemsList.value[0].currentPrice
+            return getItemsList.value.reduce(
+                (obj, item) => {
+                    return {
+                        minVal: Math.min(obj.minVal, item.currentPrice),
+                        maxVal: Math.max(obj.maxVal, item.currentPrice)
+                    }
+                },
+                { minVal: initPrice, maxVal: initPrice }
+            )
+        } else return 0
+    })
+    const getCurrentColor = computed(() => getItemsList?.value?.map((item) => item.color).flat())
     return {
+        getCurrentColor,
+        getMaxAndMinPrice,
+        sortListObject,
+        getStyleValue,
         loadItemsList,
         addItem,
         addItemWithCustomId,
@@ -114,6 +150,7 @@ export default function getStoreTemplate(collectionTitle) {
         getItemsListWithNumber,
         getItemListWithPageNumber,
         getPageNumbers,
-        loadFilteredList
+        loadFilteredList,
+        addSortListObject
     }
 }

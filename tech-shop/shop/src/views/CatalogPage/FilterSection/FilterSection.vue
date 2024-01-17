@@ -34,7 +34,8 @@ import FilterSortActionBar from './FilterSortActionBar.vue'
 
     &__body {
         display: grid;
-        column-gap: toRem(20);
+        column-gap: toRem(40);
+        align-items: start;
         grid-template-columns: 17.524823% auto;
     }
 }

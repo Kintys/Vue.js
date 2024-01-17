@@ -2,26 +2,32 @@
     <div class="card-item">
         <div class="card-item__media">
             <a href="#" class="card-item__img">
-                <v-img src="@/assets/img/homePage/newProduct/laptop/ad1.png" :width="250" aspect-ratio="4/3"></v-img>
+                <v-img :src="cardItemData.img" alt="#" :width="250" aspect-ratio="4/3"></v-img>
             </a>
             <div class="card-item__opinion">
                 <span class="card-item__stars"
-                    ><star-rating :inline="true" :star-size="13" :read-only="true" :show-rating="false" :rating="4"
+                    ><star-rating
+                        :inline="true"
+                        :star-size="13"
+                        :read-only="true"
+                        :show-rating="false"
+                        :rating="cardItemData.review"
                 /></span>
-                <span class="card-item__reviews"><span>Reviews (4)</span> </span>
+                <span class="card-item__reviews"
+                    >{{ $t('productCard.itemCard.textRev') }}<span>({{ cardItemData.review }})</span>
+                </span>
             </div>
         </div>
         <div class="card-item__content">
-            <h4 class="card-item__title">SKU D5515AI</h4>
+            <h4 class="card-item__title">{{ cardItemData.title }}</h4>
             <div class="card-item__info-wrapper">
                 <div class="card-item__info-text">
                     <p class="card-item__description">
-                        MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER
-                        MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop
+                        {{ showShortDescription }}
                     </p>
                     <div class="card-item__prises">
-                        <div class="card-item__old-price">$499.00</div>
-                        <div class="card-item__price">$499.00</div>
+                        <div class="card-item__old-price">${{ cardItemData.oldPrice }}</div>
+                        <div class="card-item__price">${{ cardItemData.currentPrice }}</div>
                     </div>
                 </div>
                 <div class="card-item__info-params">
@@ -33,14 +39,15 @@
             <v-btn class="card-item__add-cart button"> <font-awesome-icon icon="cart-shopping" /> Add to Cart</v-btn>
         </div>
         <div class="card-item__status">
-            <!-- <span v-if="!cardItemData.count" class="card-item__status-info card-item__status-info--absence">
-                <font-awesome-icon :icon="['fas', 'circle-xmark']" size="xl" />
-            </span>
+            <span v-if="!cardItemData.count" class="card-item__status-info card-item__status-info--absence">
+                <font-awesome-icon :icon="['fas', 'circle-xmark']" size="xl" />{{
+                    $t('productCard.itemCard.status.absence')
+                }}</span
+            >
             <span v-else class="card-item__status-info card-item__status-info--in-stock"
-                ><font-awesome-icon :icon="['fas', 'circle-check']" size="xl"
-            />in stoke</span> -->
-            <span class="card-item__status-info card-item__status-info--in-stock"
-                ><font-awesome-icon :icon="['fas', 'circle-check']" size="xl" />in stock</span
+                ><font-awesome-icon :icon="['fas', 'circle-check']" size="xl" />{{
+                    $t('productCard.itemCard.status.inStock')
+                }}</span
             >
         </div>
     </div>
@@ -48,6 +55,22 @@
 
 <script setup>
 import StarRating from 'vue-star-rating'
+import { computed, onBeforeMount, ref } from 'vue'
+const props = defineProps({
+    cardItemData: {
+        type: Object,
+        default: () => ({})
+    }
+})
+const currentLocal = ref(null)
+const showShortDescription = computed(() => {
+    if (props.cardItemData.description[currentLocal.value].length > 50)
+        return props.cardItemData.description[currentLocal.value].slice(0, 53) + '...'
+    else return props.cardItemData.description[currentLocal.value]
+})
+onBeforeMount(() => {
+    currentLocal.value = localStorage.getItem('lastLocale')
+})
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +135,9 @@ import StarRating from 'vue-star-rating'
             margin-bottom: toRem(21.5);
         }
     }
-
+    &__status {
+        text-wrap: nowrap;
+    }
     // .card-item__info-wrapper
 
     &__info-wrapper {

@@ -166,12 +166,19 @@ class DbOperations {
                 })
         })
     }
-    loadFilteredDataListWithParams({ firstOpt, secondOpt, thirdOpt }) {
+    loadFilteredDataListWithParams({ firstOpt, secondOpt, thirdOpt, fourthOpt }) {
+        console.log(secondOpt)
+
         const q = query(
             this.dbCollection,
-            and(
-                or(where(...firstOpt), where(...secondOpt), where(...thirdOpt)),
-                or(where(...firstOpt), where(...secondOpt))
+            or(
+                // where(...firstOpt),
+                // where(...secondOpt)
+                // where(...thirdOpt),
+                // where(...fourthOpt)
+                and(where(...firstOpt), where(...secondOpt), where(...thirdOpt), where(...fourthOpt)),
+                and(where(...firstOpt), where(...secondOpt), where(...thirdOpt)),
+                and(where(...firstOpt), where(...secondOpt))
             )
         )
         return new Promise((resolve, reject) => {

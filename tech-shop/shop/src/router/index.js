@@ -19,6 +19,11 @@ const router = createRouter({
             component: () => import('../components/EditorPage.vue')
         },
         {
+            path: '/product',
+            name: 'product',
+            component: () => import('@/views/productPage/singleProductPage/SingleProductPage.vue')
+        },
+        {
             path: '/login',
             children: [
                 {
