@@ -6,11 +6,9 @@
         </header>
         <slot name="about-product-content">
             <div class="about-product__content">
-                <p class="about-product__description">
-                    MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10
-                    Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop
-                </p>
-                <div class="about-product__colors"></div>
+                <slot name="item-window"> </slot>
+                <slot name="item-window-2"> </slot>
+                <slot name="item-window-3"> </slot>
             </div>
         </slot>
         <footer class="about-product__footer">
@@ -22,8 +20,8 @@
                 <p class="about-product__id">SKU D5515AI</p>
             </div>
         </footer>
-        <a href="#" class="about-product__info">+ More information</a>
     </div>
+    <a href="#" class="about-product__info"><b>+ More information</b></a>
 </template>
 
 <script setup></script>
@@ -31,6 +29,10 @@
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';
 .about-product {
+    &:not(:last-child) {
+        margin-bottom: toRem(100);
+    }
+    padding-left: toRem(60);
     // .about-product__header
 
     &__header {

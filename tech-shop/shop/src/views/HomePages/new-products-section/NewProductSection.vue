@@ -9,11 +9,7 @@
                 <ProductSlider />
             </div>
             <div class="home-new-product__offer">
-                <a class="home-new-product__offer-logo" href="#">
-                    <img src="../../assets/img/homePage/offerBlock/offerLogo.svg" alt="#" />
-                </a>
-                <p class="home-new-product__offer-text" v-html="$t('newProductSection.offerBlock.text')"></p>
-                <a class="home-new-product__offer-link" href="#"> {{ $t('newProductSection.offerBlock.titleLink') }}</a>
+                <ProductOfferLine />
             </div>
             <div class="home-new-product__category">
                 <ProductManager />
@@ -27,6 +23,7 @@
 import ProductSlider from './products/ProductSlider.vue'
 import ProductManager from './products/ProductManager.vue'
 import BrandsLinksInlineCards from './brands/BrandsLinksInlineCards.vue'
+import ProductOfferLine from './products/ProductOfferLine.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -61,47 +58,12 @@ import BrandsLinksInlineCards from './brands/BrandsLinksInlineCards.vue'
             margin-bottom: toRem(14);
         }
         background-color: #f5f7ff;
-        display: flex;
+        display: grid;
         width: 100%;
         height: toRem(70);
-        column-gap: toRem(2);
         justify-content: center;
-        align-items: center;
     }
     // .home-new-product__offer-logo
-    &__offer-logo {
-        margin-right: toRem(14);
-        width: toRem(77);
-        height: toRem(27);
-        padding-right: toRem(11);
-        img {
-            width: 100%;
-        }
-        border-right: toRem(2) solid #00aeb8;
-    }
-    // .home-new-product__offer-text
-    &__offer-text {
-        display: flex;
-        align-items: center;
-        column-gap: toRem(5);
-        color: #272560;
-        font-size: toRem(18);
-        line-height: 120.5%;
-        b {
-            font-weight: 600;
-        }
-    }
-    // .home-new-product__offer-link
-    &__offer-link {
-        color: #0156ff;
-        font-size: toRem(14);
-        @media (any-hover: hover) {
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-
     // .home-new-product__category
     &__category {
         &:not(:last-child) {
