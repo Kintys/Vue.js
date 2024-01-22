@@ -1,7 +1,7 @@
 <template>
     <div class="about-product">
         <header class="about-product__header">
-            <h2 class="about-product__title">MSI MPG Trident 3</h2>
+            <h2 class="about-product__title">{{ getCurrentItem?.title }}</h2>
             <a href="#" class="about-product__subtitle">Be the first to review this product</a>
         </header>
         <slot name="about-product-content">
@@ -24,7 +24,11 @@
     <a href="#" class="about-product__info"><b>+ More information</b></a>
 </template>
 
-<script setup></script>
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useLaptopListStore } from '@/stores/laptop'
+const { getCurrentItem } = storeToRefs(useLaptopListStore())
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';

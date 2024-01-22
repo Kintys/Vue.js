@@ -12,7 +12,7 @@
                 }}</span
             >
         </div>
-        <a href="#" class="card-item__picture">
+        <a @click="goToDetailsProduct" class="card-item__picture">
             <img class="card-item__img ibg" :src="cardItemData.img" alt="#" />
         </a>
         <div class="card-item__opinion">
@@ -28,6 +28,7 @@
                 >{{ $t('productCard.itemCard.textRev') }}<span>({{ cardItemData.review }})</span>
             </span>
         </div>
+
         <p class="card-item__description">{{ showShortDescription }}</p>
         <div class="card-item__prises">
             <div class="card-item__old-price">${{ cardItemData.oldPrice }}</div>
@@ -38,22 +39,34 @@
 
 <script setup>
 import StarRating from 'vue-star-rating'
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, ref, onBeforeMount } from 'vue'
 const props = defineProps({
     cardItemData: {
         type: Object,
         default: () => ({})
     }
 })
-const currentLocal = ref(null)
+
+import { useLocales } from '@/modulHelpers/i18n.js'
+const { currentLocale } = useLocales()
+
 const showShortDescription = computed(() => {
-    if (props.cardItemData.description[currentLocal.value].length > 50)
-        return props.cardItemData.description[currentLocal.value].slice(0, 53) + '...'
-    else return props.cardItemData.description[currentLocal.value]
+    if (props.cardItemData.description[currentLocale.value].length > 50)
+        return props.cardItemData.description[currentLocale.value].slice(0, 53) + '...'
+    else return props.cardItemData.description[currentLocale.value]
 })
-onBeforeMount(() => {
-    currentLocal.value = localStorage.getItem('lastLocale')
-})
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function goToDetailsProduct() {
+    router.push({
+        name: 'product',
+        params: {
+            id: props.cardItemData.id
+        }
+    })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -106,6 +119,7 @@ onBeforeMount(() => {
         align-self: center;
         width: toRem(150);
         height: toRem(150);
+        cursor: pointer;
     }
 
     &__opinion {

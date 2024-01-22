@@ -15,9 +15,9 @@
         <div class="actions-bar__add-actions">
             <div class="actions-bar__cost">
                 <span>On Sale from</span>
-                <b>$3,299.00</b>
+                <b>${{ priceWithCount }}</b>
             </div>
-            <input class="actions-bar__input" type="number" value="1" />
+            <input v-model="numberProduct" class="actions-bar__input" type="number" />
             <div class="actions-bar__buttons">
                 <v-btn class="actions-bar__button button">Add to Cart</v-btn>
                 <v-btn href="https://www.paypal.com/" class="actions-bar__pay-pal button"
@@ -73,15 +73,30 @@
 </template>
 
 <script setup>
-import { watch, ref } from 'vue'
+import { useLaptopListStore } from '@/stores/laptop'
+import { storeToRefs } from 'pinia'
+
+import { watch, ref, computed } from 'vue'
+
 defineProps({
     modelValue: {
         default: null
     }
 })
+const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const numberProduct = ref(1)
+const priceWithCount = computed(() => {
+    atLeastOne()
+    let price = (getCurrentItem?.value?.currentPrice * numberProduct.value).toString()
+    return price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+})
 const selectedTab = ref('one')
 
 const emit = defineEmits(['update:modelValue'])
+
+function atLeastOne() {
+    if (numberProduct.value < 1) numberProduct.value = 1
+}
 
 watch(selectedTab, (newVal) => {
     emit('update:modelValue', newVal)

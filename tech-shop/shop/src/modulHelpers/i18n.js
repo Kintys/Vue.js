@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-
+import { computed } from 'vue'
 export function useLocales() {
     const { t, locale } = useI18n({ useScope: 'global' })
 
@@ -14,11 +14,14 @@ export function useLocales() {
             setLocale(localStorage.getItem('lastLocale'))
             useRouter().go()
         }
+        return lastLocale
     }
+    const currentLocale = computed(() => checkLocale())
 
     window.addEventListener('storage', () => checkLocale())
 
     return {
+        currentLocale,
         locale,
         t,
         setLocale,
