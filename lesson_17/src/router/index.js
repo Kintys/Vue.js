@@ -23,7 +23,7 @@ const routes = [
         name: 'product',
         component: () => import(/* webpackChunkName: "product" */ '@/views/ProductView.vue'),
         meta: {
-            requiredAuth: true,
+            requiredAuth: false,
         },
     },
     {
@@ -31,7 +31,7 @@ const routes = [
         name: 'editor',
         component: () => import(/* webpackChunkName: "editor" */ '@/views/EditorView.vue'),
         meta: {
-            requireAuth: true,
+            requireAuth: false,
         },
     },
     {
@@ -39,7 +39,7 @@ const routes = [
         name: 'card',
         component: () => import(/* webpackChunkName: "card" */ '@/views/CardView.vue'),
         meta: {
-            requireAuth: true,
+            requireAuth: false,
         },
     },
 

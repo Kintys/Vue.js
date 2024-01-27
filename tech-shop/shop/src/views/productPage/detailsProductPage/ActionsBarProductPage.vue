@@ -19,7 +19,7 @@
             </div>
             <input v-model="numberProduct" class="actions-bar__input" type="number" />
             <div class="actions-bar__buttons">
-                <v-btn class="actions-bar__button button">Add to Cart</v-btn>
+                <v-btn class="actions-bar__button button" @click="addProductToCart">Add to Cart</v-btn>
                 <v-btn href="https://www.paypal.com/" class="actions-bar__pay-pal button"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -75,27 +75,39 @@
 <script setup>
 import { useLaptopListStore } from '@/stores/laptop'
 import { storeToRefs } from 'pinia'
-
+import { useCartStore } from '@/stores/cart'
 import { watch, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 defineProps({
     modelValue: {
         default: null
     }
 })
+
 const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const { addToCartList } = useCartStore()
 const numberProduct = ref(1)
+
+const route = useRoute()
+const selectedTab = ref('one')
+
+const emit = defineEmits(['update:modelValue'])
+
 const priceWithCount = computed(() => {
     atLeastOne()
     let price = (getCurrentItem?.value?.currentPrice * numberProduct.value).toString()
     return price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 })
-const selectedTab = ref('one')
-
-const emit = defineEmits(['update:modelValue'])
 
 function atLeastOne() {
     if (numberProduct.value < 1) numberProduct.value = 1
+}
+function addProductToCart(id) {
+    addToCartList({
+        inputCount: numberProduct.value,
+        productId: route.params.id
+    })
 }
 
 watch(selectedTab, (newVal) => {

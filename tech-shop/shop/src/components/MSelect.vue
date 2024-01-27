@@ -87,12 +87,13 @@ onBeforeUnmount(() => {
 @import '@/assets/adaptive.scss';
 .m-select {
     // .m-select__label
+    background: #fff;
 
     &__label {
         padding: toRem(20) toRem(16);
         border: toRem(2) solid #cacdd8;
         position: relative;
-        width: toRem(200);
+        width: 100%;
         align-items: center;
         font-size: toRem(13);
         display: flex;

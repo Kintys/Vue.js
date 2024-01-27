@@ -6,8 +6,12 @@
             </div>
         </div>
         <div class="sort-bar__select-block">
-            <MSelect label="Select" prefix="Sort by:" :options-list="sortList" v-model="valueSort" />
-            <MSelect label="Select" prefix="Show:" :options-list="pageNumbersList" v-model="pageSortByNumber" />
+            <div style="width: 200px">
+                <MSelect label="Select" prefix="Sort by:" :options-list="sortList" v-model="valueSort" />
+            </div>
+            <div style="width: 200px">
+                <MSelect label="Select" prefix="Show:" :options-list="pageNumbersList" v-model="pageSortByNumber" />
+            </div>
         </div>
         <div class="sort-bar__show-card">
             <button

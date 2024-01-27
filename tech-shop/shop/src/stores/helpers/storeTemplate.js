@@ -19,9 +19,6 @@ export default function getStoreTemplate(collectionTitle) {
         sortListObject.value = { ...sortListObject.value, ...obj }
     }
 
-    // function loadItemsList() {
-    //     itemsList.value = newArr
-    // }
     async function loadItemsList() {
         itemsList.value = await generalApiOperation({
             operation: () => collectionDB.loadItemsList()
@@ -94,11 +91,16 @@ export default function getStoreTemplate(collectionTitle) {
             operation: () => collectionDB.loadFilteredDataListWithParams(obj)
         })
     }
+
     const getItemsList = computed(() => itemsList.value)
     const getCurrentItem = computed(() => currentItem.value)
     const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
     const getItemsListWithNumber = computed(() => {
         return (number) => (itemsLimitedList.value ?? []).slice(0, number)
+    })
+
+    const getItemById = computed(() => {
+        return (productId) => getItemsList.value.find((product) => product.id === productId)
     })
 
     const getDividedAndSortList = computed(() => {
@@ -151,6 +153,7 @@ export default function getStoreTemplate(collectionTitle) {
         getItemListWithPageNumber,
         getPageNumbers,
         loadFilteredList,
-        addSortListObject
+        addSortListObject,
+        getItemById
     }
 }
