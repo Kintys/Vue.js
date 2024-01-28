@@ -75,28 +75,7 @@ let distUa = [
     'Ефективність поєднується зі стилем у цьому добре розробленому ноутбуці, створеному для сучасного професіонала.',
     'Вивчайте нові горизонти обчислень з універсальним і користувачем-дружнім ноутбуком.'
 ]
-let colorArr = [
-    '#ff8080',
-    '#00ff00',
-    '#0000ff',
-    '#aabbcc',
-    '#f0f0f0',
-    '#123456',
-    '#987654',
-    '#abcdef',
-    '#456789',
-    '#ffcc00',
-    '#660066',
-    '#0099cc',
-    '#ff9900',
-    '#663300',
-    '#ccffcc',
-    '#ff66cc',
-    '#339966',
-    '#996633',
-    '#cc99ff',
-    '#6600cc'
-]
+let colorArr = ['#ff8080', '#00ff00', '#0000ff', '#aabbcc']
 let brand = ['adata', 'msi', 'hp', 'roccat', 'razer', 'gigabyte', 'thermaltake']
 let categoryArr = ['CUSTOM PCS', 'MSI ALL-IN-ONE PCS', 'HP/COMPAQ PCS']
 
@@ -139,11 +118,19 @@ export function getSomeList() {
                 en: `${getRandomValuewithIndex(dist, dist.length)}`,
                 ua: `${getRandomValuewithIndex(distUa, distUa.length)}`
             },
-            category: `${getRandomValuewithIndex(categoryArr, categoryArr.length)}`,
+            category: `laptop`,
             currentPrice: currentPrice,
             oldPrice: currentPrice - newPrice,
 
             img: `${getRandomValuewithIndex(imageArr, imageArr.length)}`,
+            imgCard: [
+                'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/43/4389992/Laptop-HP-Pavilion-15-eg2009nw-przod.jpg',
+                'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/43/4389992/Laptop-HP-Pavilion-15-eg2009nw-tyl-prawy-skos.jpg',
+                'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/43/4389992/Laptop-HP-Pavilion-15-eg2009nw-lewy-bok.jpg',
+                'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/43/4389992/Laptop-HP-Pavilion-15-eg2009nw-prawy-bok.jpg',
+
+                'https://prod-api.mediaexpert.pl/api/images/gallery_500_500/thumbnails/images/43/4389992/Laptop-HP-Pavilion-15-eg2009nw-lifestyle.jpg'
+            ],
             review: getRandomNumber(3, 5)
         })
     }

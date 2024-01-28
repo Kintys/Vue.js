@@ -171,15 +171,13 @@ class DbOperations {
 
         const q = query(
             this.dbCollection,
-            or(
-                // where(...firstOpt),
-                // where(...secondOpt)
-                // where(...thirdOpt),
-                // where(...fourthOpt)
-                and(where(...firstOpt), where(...secondOpt), where(...thirdOpt), where(...fourthOpt)),
-                and(where(...firstOpt), where(...secondOpt), where(...thirdOpt)),
-                and(where(...firstOpt), where(...secondOpt))
-            )
+            where(...firstOpt),
+            where(...secondOpt),
+            where(...thirdOpt),
+            where(...fourthOpt)
+            // and(where(...firstOpt), where(...secondOpt), where(...thirdOpt), where(...fourthOpt)),
+            // and(where(...firstOpt), where(...secondOpt), where(...thirdOpt)),
+            // and(where(...firstOpt), where(...secondOpt))
         )
         return new Promise((resolve, reject) => {
             getDocs(q)

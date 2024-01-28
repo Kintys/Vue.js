@@ -5,7 +5,7 @@
             <div class="details-product__actions-bar"><ActionsBarProductPage v-model="tab" /></div>
             <div class="details-product__body">
                 <article class="details-product__product-description">
-                    <TabsWindowProductPage :product-data-item="getCurrentItem" :show-window="tab" />
+                    <TabsWindowProductPage :show-window="tab" />
                 </article>
                 <div class="details-product__product-picture"><ImageProductSlider /></div>
             </div>
@@ -17,14 +17,9 @@
 import ImageProductSlider from './ImageProductSlider.vue'
 import ActionsBarProductPage from './ActionsBarProductPage.vue'
 import TabsWindowProductPage from './TabsWindowProductPage'
-import { useLaptopListStore } from '@/stores/laptop'
 import { ref } from 'vue'
 
-import { storeToRefs } from 'pinia'
-
-const { getCurrentItem } = storeToRefs(useLaptopListStore())
-
-const tab = ref(null)
+const tab = ref('one')
 </script>
 
 <style lang="scss" scoped>

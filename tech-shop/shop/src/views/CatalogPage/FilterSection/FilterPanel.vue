@@ -2,7 +2,7 @@
     <div class="filter-panel">
         <div class="filter-panel__content">
             <h2 class="filter-panel__title">Filters</h2>
-            <v-btn class="filter-panel__button button">Clear Filter</v-btn>
+            <v-btn class="filter-panel__button button" @click="clearFilterValue">Clear Filter</v-btn>
             <div class="filter-panel__spollers">
                 <MExpansionPanels label="category">
                     <template #spoller-container>
@@ -17,7 +17,7 @@
                         ></v-checkbox
                     ></template>
                 </MExpansionPanels>
-                <MExpansionPanels label="price">
+                <!-- <MExpansionPanels label="price">
                     <template #spoller-container>
                         <v-slider
                             v-model="currentPrice"
@@ -27,7 +27,7 @@
                             thumb-label
                         ></v-slider>
                     </template>
-                </MExpansionPanels>
+                </MExpansionPanels> -->
                 <MExpansionPanels label="color">
                     <template #spoller-container>
                         <v-radio-group class="color__block" v-model="currentColor" inline>
@@ -47,7 +47,7 @@
             </div>
             <div class="filter-panel__spoller-filter">
                 <div width="100%">
-                    <v-btn @click="isSelectedFilterValue" class="filter-panel__button button"
+                    <v-btn @click="addSelectedParams" class="filter-panel__button button"
                         >Apply Filters ({{ selected.length }})</v-btn
                     >
                 </div>
@@ -60,60 +60,43 @@
 import MExpansionPanels from '@/components/MExpansionPanels.vue'
 
 import { useCatalogStore } from '@/stores/catalog.js'
-import { ref, watch, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { storeToRefs } from 'pinia'
-import { useLaptopListStore } from '@/stores/laptop'
-
-const { getCurrentColor, getMaxAndMinPrice } = storeToRefs(useLaptopListStore())
-
-const colorList = computed(() => [...new Set(getCurrentColor.value)])
 
 const { focusesList, onFocus } = useFocus()
+const { getCurrentColor } = storeToRefs(useCatalogStore())
+const { addFilterValueObject, clearFilterValue } = useCatalogStore()
 
-const { addFilterValueObject, loadFilterList } = useCatalogStore()
 const currentColor = ref(null)
 const selected = ref([])
-const currentPrice = ref(null)
 
 const filterCheckboxParams = ref([
     {
-        label: 'CUSTOM PCS',
-        value: 'CUSTOM PCS'
+        label: 'Laptop',
+        value: 'laptop'
     },
     {
-        label: 'MSI ALL-IN-ONE PCS',
-        value: 'MSI ALL-IN-ONE PCS'
+        label: 'PC',
+        value: 'pc'
     },
     {
-        label: 'HP/COMPAQ PCS',
-        value: 'HP/COMPAQ PCS'
+        label: 'Monitors',
+        value: 'monitor'
     }
 ])
+
+const colorList = computed(() => [...new Set(getCurrentColor.value)])
 
 function onSelectColor(index) {
     onFocus(index, 'focus-btn')
 }
-function isSelectedFilterValue() {
-    loadFilterList()
+function addSelectedParams() {
+    addFilterValueObject({
+        color: [`${currentColor.value}`],
+        category: selected.value
+    })
 }
-
-watch(currentColor, (newVal) => {
-    addFilterValueObject({
-        colorValue: [`${newVal}`]
-    })
-})
-watch(selected, (newVal_1) => {
-    addFilterValueObject({
-        filterValue: newVal_1
-    })
-})
-
-watch(currentPrice, (newVal_1) => {
-    addFilterValueObject({
-        selectedPriceValue: newVal_1
-    })
-})
 </script>
 
 <style lang="scss" scoped>

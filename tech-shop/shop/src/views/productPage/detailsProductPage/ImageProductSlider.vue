@@ -5,8 +5,8 @@
             :space-between="30"
             :pagination="{ clickable: true, el: '.image-product__pagination' }"
         >
-            <swiper-slide v-for="annotation in 3" :key="annotation">
-                <v-img src="@/assets/img/detailsPage/01.png" max-height="444" :aspect-ratio="1"></v-img>
+            <swiper-slide v-for="img in getCurrentItem?.imgCard" :key="img">
+                <v-img :src="img" max-height="444" :aspect-ratio="1"></v-img>
             </swiper-slide>
             <div class="image-product__offer">
                 <div class="image-product__box-offer">
@@ -34,10 +34,14 @@ import { ref } from 'vue'
 import ProductOfferLine from '@/views/HomePages/new-products-section/products/ProductOfferLine.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
-const modules = ref([Pagination])
 // Import Swiper styles
 import 'swiper/scss'
 import 'swiper/scss/pagination'
+import { useLaptopListStore } from '@/stores/laptop'
+import { storeToRefs } from 'pinia'
+
+const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const modules = ref([Pagination])
 </script>
 
 <style lang="scss" scoped>

@@ -26,5 +26,17 @@ export function helpersFunc() {
         }
         return newArr
     }
-    return { dividedIntoPagesItemList, isNewFilterObject, changeObjectToArr, sortItemListWithParams }
+    function isFilteredList(productList, filterObj) {
+        for (const props in filterObj) {
+            const params = filterObj[props].every((value) => {
+                if (Array.isArray(productList[props])) return productList[props].includes(...filterObj[props])
+                else return value === productList[props] || productList[props] <= value
+            })
+
+            if (filterObj[props] && !params) return false
+        }
+        return true
+    }
+
+    return { dividedIntoPagesItemList, isNewFilterObject, changeObjectToArr, sortItemListWithParams, isFilteredList }
 }

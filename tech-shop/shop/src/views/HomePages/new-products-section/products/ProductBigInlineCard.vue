@@ -1,7 +1,7 @@
 <template>
     <div class="card-item">
         <div class="card-item__media">
-            <a href="#" class="card-item__img">
+            <a @click="goToDetailsProduct" class="card-item__img">
                 <v-img :src="cardItemData.img" alt="#" :width="250" aspect-ratio="4/3"></v-img>
             </a>
             <div class="card-item__opinion">
@@ -71,6 +71,14 @@ const showShortDescription = computed(() => {
 onBeforeMount(() => {
     currentLocal.value = localStorage.getItem('lastLocale')
 })
+function goToDetailsProduct() {
+    router.push({
+        name: 'product',
+        params: {
+            id: props.cardItemData.id
+        }
+    })
+}
 </script>
 
 <style lang="scss" scoped>

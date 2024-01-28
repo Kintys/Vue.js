@@ -53,8 +53,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import MSelect from '@/components/MSelect.vue'
-import { useLaptopListStore } from '@/stores/laptop.js'
-const { addSortListObject } = useLaptopListStore()
+import { useCatalogStore } from '@/stores/catalog'
+const { addSortListObject } = useCatalogStore()
 
 const isSelectedStyle = ref(true)
 const valueSort = ref(null)

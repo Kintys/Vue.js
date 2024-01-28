@@ -80,12 +80,12 @@ const editObjct = ref({
     }
 })
 
-// function onSend() {
-//     const newArr = getSomeList()
-//     newArr.forEach((element) => {
-//         addItem(element)
-//     })
-// }
+function onSend() {
+    const newArr = getSomeList()
+    newArr.forEach((element) => {
+        addItem(element)
+    })
+}
 function loadImage(event) {
     const file = event.target.files[0]
     if (file) {

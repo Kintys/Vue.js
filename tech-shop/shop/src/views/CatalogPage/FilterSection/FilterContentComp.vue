@@ -23,12 +23,12 @@
 import BrandLinkCard from '@/views/HomePages/new-products-section/brands/BrandLinkCard.vue'
 import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { useCatalogStore } from '@/stores/catalog'
-const { addFilterValueObject } = useCatalogStore()
 import { brandsList } from '@/views/HomePages/new-products-section/brands/settings'
 
 const { focusesList, onFocus } = useFocus()
+const { addFilterValueObject } = useCatalogStore()
 function selectedBrand(name, index) {
-    addFilterValueObject({ brandValue: name })
+    addFilterValueObject({ brand: [`${name}`] })
     onFocus(index, 'add-focus')
 }
 </script>

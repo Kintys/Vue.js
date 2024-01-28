@@ -13,23 +13,19 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 import ProductBigInlineCard from '@/views/HomePages/new-products-section/products/ProductBigInlineCard.vue'
 import ProductCardItem from '@/views/HomePages/new-products-section/products/ProductCardItem.vue'
 
 import { storeToRefs } from 'pinia'
-import { useLaptopListStore } from '@/stores/laptop.js'
+import { useCatalogStore } from '@/stores/catalog'
 
-const { getPageNumbers, getStyleValue } = storeToRefs(useLaptopListStore())
-const { loadShortItemList, getItemListWithPageNumber } = useLaptopListStore()
+const { getPageNumbers, getStyleValue } = storeToRefs(useCatalogStore())
+const { getItemListWithPageNumber } = useCatalogStore()
 
 const page = ref(1)
 const list = computed(() => getItemListWithPageNumber(page.value))
-
-onBeforeMount(() => {
-    loadShortItemList(25)
-})
 
 onMounted(() => {
     list.value = getItemListWithPageNumber(page.value)

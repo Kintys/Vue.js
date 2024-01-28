@@ -95,6 +95,7 @@ export default function getStoreTemplate(collectionTitle) {
     const getItemsList = computed(() => itemsList.value)
     const getCurrentItem = computed(() => currentItem.value)
     const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
+
     const getItemsListWithNumber = computed(() => {
         return (number) => (itemsLimitedList.value ?? []).slice(0, number)
     })
