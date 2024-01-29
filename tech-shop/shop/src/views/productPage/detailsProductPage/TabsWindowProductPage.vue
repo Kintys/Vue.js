@@ -28,9 +28,9 @@
 <script setup>
 import { useLocales } from '@/modulHelpers/i18n.js'
 import DescriptionProductPage from './DescriptionProductPage.vue'
-import { useLaptopListStore } from '@/stores/laptop'
+import { useCatalogStore } from '@/stores/catalog'
 import { storeToRefs } from 'pinia'
-const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const { getCurrentItem } = storeToRefs(useCatalogStore())
 
 const { currentLocale } = useLocales()
 const props = defineProps({

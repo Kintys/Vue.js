@@ -1,7 +1,6 @@
 <template>
     <MainMasterPage>
-        <!-- <DetailsProductPage /> -->
-        {{ getCurrentItem }}
+        <DetailsProductPage />
     </MainMasterPage>
 </template>
 
@@ -14,12 +13,11 @@ import { computed, onBeforeMount } from 'vue'
 
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const { getCurrentItem } = storeToRefs(useCatalogStore())
-const { loadItem } = useCatalogStore()
+const { loadItemById } = useCatalogStore()
 const productId = computed(() => route.params.id)
 
 onBeforeMount(() => {
-    loadItem(productId.value)
+    loadItemById(productId.value)
 })
 </script>
 

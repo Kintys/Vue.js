@@ -26,8 +26,8 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useLaptopListStore } from '@/stores/laptop'
-const { getCurrentItem } = storeToRefs(useLaptopListStore())
+import { useCatalogStore } from '@/stores/catalog'
+const { getCurrentItem } = storeToRefs(useCatalogStore())
 </script>
 
 <style lang="scss" scoped>

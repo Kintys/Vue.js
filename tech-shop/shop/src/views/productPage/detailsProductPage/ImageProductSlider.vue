@@ -37,10 +37,10 @@ import { Pagination } from 'swiper/modules'
 // Import Swiper styles
 import 'swiper/scss'
 import 'swiper/scss/pagination'
-import { useLaptopListStore } from '@/stores/laptop'
+import { useCatalogStore } from '@/stores/catalog'
 import { storeToRefs } from 'pinia'
 
-const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const { getCurrentItem } = storeToRefs(useCatalogStore())
 const modules = ref([Pagination])
 </script>
 
