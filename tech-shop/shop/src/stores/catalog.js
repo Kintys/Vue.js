@@ -6,20 +6,40 @@ import { useMonitorsStore } from './monitoris'
 import { usePcListStore } from './pcList'
 import { useGeneralStore } from '@/stores/general'
 
-const { changeObjectToArr, isNewFilterObject, isFilteredList, dividedIntoPagesItemList, sortItemListWithParams } =
-    helpersFunc()
+const { isNewFilterObject, isFilteredList, dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
 
 export const useCatalogStore = defineStore('catalog', () => {
-    const { getItemsList: laptopList } = useLaptopListStore()
-    const { getItemsList: monitorsList } = useMonitorsStore()
-    const { getItemsList: pcList } = usePcListStore()
-    const { generalApiOperation } = useGeneralStore()
-    const filterValueObject = ref({})
+    const { getItemsList: laptopList, loadItemById: loadLaptopItem, getCurrentItem: laptopItem } = useLaptopListStore()
+    const {
+        getItemsList: monitorsList,
+        loadItemById: loadMonitorsItem,
+        getCurrentItem: monitorsItem
+    } = useMonitorsStore()
+    const { getItemsList: pcList, loadItemById: loadPcItem, getCurrentItem: pcItem } = usePcListStore()
+    const { setLoading, startLoading } = useGeneralStore()
 
+    const filterValueObject = ref({})
     const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
+    const catalogList = ref(null)
+    const currentItem = ref(null)
+    async function addNewList() {
+        return [...laptopList]
+    }
+    async function loadCatalogList() {
+        try {
+            startLoading(true)
+            catalogList.value = await addNewList()
+        } finally {
+            setLoading(false)
+        }
+    }
 
     function addSortListObject(obj) {
         sortListObject.value = { ...sortListObject.value, ...obj }
+    }
+    function loadItemById(id) {
+        console.log(id)
+        currentItem.value = catalogList.value.find((product) => product.id === id)
     }
     function addFilterValueObject(obj) {
         filterValueObject.value = { ...filterValueObject.value, ...obj }
@@ -30,12 +50,17 @@ export const useCatalogStore = defineStore('catalog', () => {
     function clearFilterValue() {
         filterValueObject.value = {}
     }
+    const getCatalogList = computed(() => catalogList?.value)
 
-    const getCatalogList = computed(() => [...laptopList])
-
-    const getFilterValueList = computed(() => changeObjectToArr(filterValueObject))
+    const getCurrentItemById = computed(() => {
+        return (id) => {
+            console.log(id)
+            catalogList?.value.find((product) => product.id === id)
+        }
+    })
+    const getCurrentItem = computed(() => currentItem.value)
     const getFilteredCatalogList = computed(() =>
-        getCatalogList.value.filter((product) => isFilteredList(product, filterValueObject?.value))
+        catalogList?.value?.filter((product) => isFilteredList(product, filterValueObject?.value))
     )
 
     const getDividedAndSortList = computed(() => {
@@ -51,14 +76,13 @@ export const useCatalogStore = defineStore('catalog', () => {
 
     const getStyleValue = computed(() => sortListObject.value.isSelectedStyle)
 
-    const getCurrentColor = computed(() => getCatalogList?.value.map((item) => item.color).flat())
+    const getCurrentColor = computed(() => catalogList?.value?.map((item) => item.color).flat())
 
     return {
         addFilterValueObject,
         filterValueObject,
         deleteFilterValue,
         clearFilterValue,
-        getFilterValueList,
         getCatalogList,
         getFilteredCatalogList,
         addSortListObject,
@@ -66,6 +90,10 @@ export const useCatalogStore = defineStore('catalog', () => {
         getPageNumbers,
         getStyleValue,
         getCurrentColor,
-        getCategoryList
+        loadCatalogList,
+        catalogList,
+        loadItemById,
+        getCurrentItem,
+        getCurrentItemById
     }
 })
