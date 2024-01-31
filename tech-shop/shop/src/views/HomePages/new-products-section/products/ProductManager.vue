@@ -1,12 +1,13 @@
 <template>
-    <ProductInlineCards
-        class="product-manager"
-        v-if="categoryProductsList"
-        v-for="(item, i) in categoryProductsList"
-        :product-list="item"
-        :key="i"
-        :category-card="categorySettings[i]"
-    />
+    <div v-if="categoryProductsList">
+        <ProductInlineCards
+            class="product-manager"
+            v-for="(item, i) in categoryProductsList"
+            :product-list="item"
+            :key="i"
+            :category-card="categorySettings[i]"
+        />
+    </div>
 </template>
 
 <script setup>
@@ -21,7 +22,7 @@ const { getItemsListWithNumber: shortPcList } = usePcListStore()
 const { getItemsListWithNumber: shortMonitorsList } = useMonitorsStore()
 
 const categoryProductsList = computed(() => {
-    return [shortLaptopList(5), shortPcList(5), shortMonitorsList(5)] 
+    return [shortLaptopList(5), shortPcList(5), shortMonitorsList(5)]
 })
 </script>
 

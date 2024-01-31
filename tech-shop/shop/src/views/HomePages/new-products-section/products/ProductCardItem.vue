@@ -39,7 +39,7 @@
 
 <script setup>
 import StarRating from 'vue-star-rating'
-import { computed, ref, onBeforeMount } from 'vue'
+import { computed } from 'vue'
 const props = defineProps({
     cardItemData: {
         type: Object,

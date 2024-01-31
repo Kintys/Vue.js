@@ -11,11 +11,11 @@ import ProductCardItem from './ProductCardItem.vue'
 defineProps({
     productList: {
         type: Array,
-        reqiuren: true
+        require: true
     },
     categoryCard: {
         type: Object,
-        reqiuren: true
+        require: true
     }
 })
 </script>

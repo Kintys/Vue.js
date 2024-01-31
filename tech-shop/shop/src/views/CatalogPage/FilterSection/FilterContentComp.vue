@@ -3,7 +3,7 @@
         <slot name="filter-card">
             <header class="filter-brand-panel__header">
                 <h3 class="filter-brand-panel__title">Brand</h3>
-                <v-btn class="filter-brand-panel__button button"> All brand</v-btn>
+                <v-btn @click="onClearBrandList" class="filter-brand-panel__button button"> All brand</v-btn>
             </header>
             <div class="filter-brand-panel__brands">
                 <div v-for="(brand, i) in brandsList" :key="brand.id" ref="focusesList">
@@ -25,11 +25,15 @@ import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { useCatalogStore } from '@/stores/catalog'
 import { brandsList } from '@/views/HomePages/new-products-section/brands/settings'
 
-const { focusesList, onFocus } = useFocus()
+const { focusesList, onFocus, offFocus } = useFocus()
 const { addFilterValueObject } = useCatalogStore()
 function selectedBrand(name, index) {
     addFilterValueObject({ brand: [`${name}`] })
     onFocus(index, 'add-focus')
+}
+function onClearBrandList() {
+    addFilterValueObject({ brand: [] })
+    offFocus('add-focus')
 }
 </script>
 

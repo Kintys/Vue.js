@@ -36,7 +36,9 @@
                     </p>
                 </div>
             </div>
-            <v-btn class="card-item__add-cart button"> <font-awesome-icon icon="cart-shopping" /> Add to Cart</v-btn>
+            <v-btn @click="addProductToCardList" class="card-item__add-cart button">
+                <font-awesome-icon icon="cart-shopping" /> Add to Cart</v-btn
+            >
         </div>
         <div class="card-item__status">
             <span v-if="!cardItemData.count" class="card-item__status-info card-item__status-info--absence">
@@ -56,12 +58,15 @@
 <script setup>
 import StarRating from 'vue-star-rating'
 import { computed, onBeforeMount, ref } from 'vue'
+import { useCartStore } from '@/stores/cart'
 const props = defineProps({
     cardItemData: {
         type: Object,
         default: () => ({})
     }
 })
+
+const { addToCartList } = useCartStore()
 const currentLocal = ref(null)
 const showShortDescription = computed(() => {
     if (props.cardItemData.description[currentLocal.value].length > 50)
@@ -71,12 +76,21 @@ const showShortDescription = computed(() => {
 onBeforeMount(() => {
     currentLocal.value = localStorage.getItem('lastLocale')
 })
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 function goToDetailsProduct() {
     router.push({
         name: 'product',
         params: {
             id: props.cardItemData.id
         }
+    })
+}
+function addProductToCardList() {
+    addToCartList({
+        inputCount: 1,
+        productId: props.cardItemData.id
     })
 }
 </script>
@@ -103,6 +117,7 @@ function goToDetailsProduct() {
     // .card-item__img
 
     &__img {
+        cursor: pointer;
         &:not(:last-child) {
             margin-bottom: toRem(10);
         }

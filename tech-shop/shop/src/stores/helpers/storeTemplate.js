@@ -11,7 +11,6 @@ export default function getStoreTemplate(collectionTitle) {
 
     const itemsList = ref(null)
     const currentItem = ref(null)
-    const itemsLimitedList = ref(null)
 
     const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
 
@@ -94,10 +93,9 @@ export default function getStoreTemplate(collectionTitle) {
 
     const getItemsList = computed(() => itemsList.value)
     const getCurrentItem = computed(() => currentItem.value)
-    const getLimitedItemList = computed(() => itemsLimitedList.value ?? [])
 
     const getItemsListWithNumber = computed(() => {
-        return (number) => (itemsLimitedList.value ?? []).slice(0, number)
+        return (number) => (getItemsList.value ?? []).slice(0, number)
     })
 
     const getItemById = computed(() => {
@@ -149,7 +147,6 @@ export default function getStoreTemplate(collectionTitle) {
         getCurrentItem,
         loadDocumentsFromIdsList,
         loadShortItemList,
-        getLimitedItemList,
         getItemsListWithNumber,
         getItemListWithPageNumber,
         getPageNumbers,

@@ -9,5 +9,10 @@ export function useFocus() {
             else item.classList.remove(addClass)
         })
     }
-    return { focusesList, onFocus }
+    function offFocus(addClass) {
+        focusesList.value.forEach((item) => {
+            item.classList.remove(addClass)
+        })
+    }
+    return { focusesList, onFocus, offFocus }
 }

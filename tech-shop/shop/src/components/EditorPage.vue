@@ -11,21 +11,6 @@
             <label>currentPrice<input type="number" v-model="editObjct.price.currentPrice" /></label>
             <v-btn @click="onSend">send</v-btn>
         </div>
-        <div>
-            <p>Razer</p>
-            <p>razer</p>
-            <p>HP</p>
-            <p>hp</p>
-            <p>MSI</p>
-            <p>msi</p>
-            <p>adata</p>
-            <p>ADT</p>
-            <p>Gigabyte</p>
-            <p>gigabyte</p>
-            <p>Roccat</p>
-            <p>roccat</p>
-            EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH
-        </div>
     </div>
     <!-- <div class="card">
         <LoadingPage v-if="isLoading" />
@@ -53,18 +38,13 @@ import { useGeneralStore } from '@/stores/general'
 import LoadingPage from '@/components/LoadingPage.vue'
 import { onBeforeMount, onMounted, ref, watch, computed } from 'vue'
 import ProductCardItem from '@/views/HomePages/new-products-section/products/ProductCardItem.vue'
-import { useLaptopListStore } from '@/stores/laptop'
 import { storeToRefs } from 'pinia'
 import { getSomeList } from '@/stores/firebase.js'
 const { isLoading, hasError } = storeToRefs(useGeneralStore())
-const { getPageNumbers } = storeToRefs(useLaptopListStore())
-const { addItem, loadItemsList, getItemListWithPageNumber } = useLaptopListStore()
 const page = ref(1)
+import { useMonitorsStore } from '@/stores/monitoris'
+const { addItem } = useMonitorsStore()
 // const list = ref(null)
-const list = computed(() => getItemListWithPageNumber(page.value))
-// watch(page, (newVal) => {
-//     list.value = getItemListWithPageNumber(newVal)
-// })
 
 const editObjct = ref({
     title: null,

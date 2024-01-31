@@ -9,13 +9,9 @@ import { useGeneralStore } from '@/stores/general'
 const { isNewFilterObject, isFilteredList, dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
 
 export const useCatalogStore = defineStore('catalog', () => {
-    const { getItemsList: laptopList, loadItemById: loadLaptopItem, getCurrentItem: laptopItem } = useLaptopListStore()
-    const {
-        getItemsList: monitorsList,
-        loadItemById: loadMonitorsItem,
-        getCurrentItem: monitorsItem
-    } = useMonitorsStore()
-    const { getItemsList: pcList, loadItemById: loadPcItem, getCurrentItem: pcItem } = usePcListStore()
+    const { getItemsList: laptopList } = useLaptopListStore()
+    const { getItemsList: monitorsList } = useMonitorsStore()
+    const { getItemsList: pcList } = usePcListStore()
     const { setLoading, startLoading } = useGeneralStore()
 
     const filterValueObject = ref({})
@@ -23,7 +19,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     const catalogList = ref(null)
     const currentItem = ref(null)
     async function addNewList() {
-        return [...laptopList]
+        return [...laptopList, ...pcList, ...monitorsList]
     }
     async function loadCatalogList() {
         try {

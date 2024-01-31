@@ -2,12 +2,13 @@
     <swiper
         :modules="swiperModules"
         :slides-per-view="6"
+        :loop="true"
         :navigation="{
             nextEl: '.next-arrow',
             prevEl: '.prev-arrow'
         }"
     >
-        <swiper-slide class="swiper-box" v-for="product in getLimitedItemList" :key="product.id">
+        <swiper-slide class="swiper-box" v-for="product in getItemsList" :key="product.id">
             <ProductCardItem :card-item-data="product"
         /></swiper-slide>
         <button class="card__nav-indicator next-arrow">
@@ -27,12 +28,12 @@
 import { ref } from 'vue'
 import ProductCardItem from './ProductCardItem.vue'
 import { Navigation } from 'swiper/modules'
-const swiperModules = ref([Navigation])
+
 import { usePcListStore } from '@/stores/pcList'
 
 import { storeToRefs } from 'pinia'
-
-const { getLimitedItemList } = storeToRefs(usePcListStore())
+const { getItemsList } = storeToRefs(usePcListStore())
+const swiperModules = ref([Navigation])
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'

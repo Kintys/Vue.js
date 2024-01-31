@@ -17,17 +17,6 @@
                         ></v-checkbox
                     ></template>
                 </MExpansionPanels>
-                <!-- <MExpansionPanels label="price">
-                    <template #spoller-container>
-                        <v-slider
-                            v-model="currentPrice"
-                            :min="getMaxAndMinPrice.minVal"
-                            :max="getMaxAndMinPrice.maxVal"
-                            :step="1"
-                            thumb-label
-                        ></v-slider>
-                    </template>
-                </MExpansionPanels> -->
                 <MExpansionPanels label="color">
                     <template #spoller-container>
                         <v-radio-group class="color__block" v-model="currentColor" inline>
@@ -47,9 +36,7 @@
             </div>
             <div class="filter-panel__spoller-filter">
                 <div width="100%">
-                    <v-btn @click="addSelectedParams" class="filter-panel__button button"
-                        >Apply Filters ({{ selected.length }})</v-btn
-                    >
+                    <v-btn @click="addSelectedParams" class="filter-panel__button button">Apply Filters </v-btn>
                 </div>
             </div>
         </div>
@@ -65,7 +52,7 @@ import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { storeToRefs } from 'pinia'
 
 const { focusesList, onFocus } = useFocus()
-const { getCurrentColor } = storeToRefs(useCatalogStore())
+const { getCurrentColor, filterValueObject } = storeToRefs(useCatalogStore())
 const { addFilterValueObject, clearFilterValue } = useCatalogStore()
 
 const currentColor = ref(null)
