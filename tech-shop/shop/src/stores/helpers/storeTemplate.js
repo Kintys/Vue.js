@@ -2,9 +2,6 @@ import DbOperations from './DbOperations'
 import { useGeneralStore } from '../general'
 import { ref, computed } from 'vue'
 
-import { helpersFunc } from '@/stores/helpers/helpersFunc'
-const { dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
-
 export default function getStoreTemplate(collectionTitle) {
     const collectionDB = new DbOperations(collectionTitle)
     const { generalApiOperation } = useGeneralStore()
@@ -97,43 +94,8 @@ export default function getStoreTemplate(collectionTitle) {
     const getItemsListWithNumber = computed(() => {
         return (number) => (getItemsList.value ?? []).slice(0, number)
     })
-
-    const getItemById = computed(() => {
-        return (productId) => getItemsList.value.find((product) => product.id === productId)
-    })
-
-    const getDividedAndSortList = computed(() => {
-        const newArr = sortItemListWithParams(getItemsList.value, sortListObject.value.sortValue)
-        return dividedIntoPagesItemList(newArr ?? [], sortListObject.value.numberPage)
-    })
-    const getItemListWithPageNumber = computed(() => {
-        return (pageNumber) => getDividedAndSortList.value.filter((item) => item.pageNumber === pageNumber)
-    })
-    const getPageNumbers = computed(() =>
-        getDividedAndSortList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0)
-    )
-
-    const getStyleValue = computed(() => sortListObject.value.isSelectedStyle)
-    const getMaxAndMinPrice = computed(() => {
-        if (getItemsList.value) {
-            const initPrice = getItemsList.value[0].currentPrice
-            return getItemsList.value.reduce(
-                (obj, item) => {
-                    return {
-                        minVal: Math.min(obj.minVal, item.currentPrice),
-                        maxVal: Math.max(obj.maxVal, item.currentPrice)
-                    }
-                },
-                { minVal: initPrice, maxVal: initPrice }
-            )
-        } else return 0
-    })
-    const getCurrentColor = computed(() => getItemsList?.value?.map((item) => item.color).flat())
     return {
-        getCurrentColor,
-        getMaxAndMinPrice,
         sortListObject,
-        getStyleValue,
         loadItemsList,
         addItem,
         addItemWithCustomId,
@@ -148,10 +110,8 @@ export default function getStoreTemplate(collectionTitle) {
         loadDocumentsFromIdsList,
         loadShortItemList,
         getItemsListWithNumber,
-        getItemListWithPageNumber,
-        getPageNumbers,
         loadFilteredList,
         addSortListObject,
-        getItemById
+        itemsList
     }
 }

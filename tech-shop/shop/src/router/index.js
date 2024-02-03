@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import {} from '@/views/shoppingCartPage/MainShoppingCart.vue'
+
+import { isAuthenticated, isRouteAvailable } from './helpers'
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -12,22 +14,31 @@ const router = createRouter({
         {
             path: '/catalog',
             name: 'catalog',
-            component: () => import('@/views/CatalogPage/CatalogPageMain.vue')
+            component: () => import('@/views/CatalogPage/CatalogPageMain.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/editor',
             name: 'editor',
-            component: () => import('../components/EditorPage.vue')
+            component: () => import('@/components/EditorPage.vue')
         },
         {
             path: '/product:id',
             name: 'product',
-            component: () => import('@/views/productPage/MainProductPage.vue')
+            component: () => import('@/views/productPage/MainProductPage.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/cart',
             name: 'cart',
-            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue')
+            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/login',
@@ -35,16 +46,37 @@ const router = createRouter({
                 {
                     path: '',
                     name: 'login',
-                    component: () => import('../views/LoginPage/LoginView.vue')
+                    component: () => import('../views/LoginPage/LoginView.vue'),
+                    meta: {
+                        requireAuth: false
+                    }
                 },
                 {
                     path: '/login/create',
                     name: 'create',
-                    component: () => import('../views/LoginPage/CreateAccountPage.vue')
+                    component: () => import('../views/LoginPage/CreateAccountPage.vue'),
+                    meta: {
+                        requireAuth: false
+                    }
                 }
             ]
+        },
+        {
+            path: '/:path(.*)*',
+            name: 'pageNotFound',
+            meta: {
+                requireAuth: false
+            },
+            component: () => import('@/views/PageNotFound.vue')
         }
     ]
 })
-
+router.beforeEach(async (to) => {
+    if (to.meta?.requireAuth) {
+        if (!isAuthenticated())
+            return {
+                name: 'login'
+            }
+    }
+})
 export default router

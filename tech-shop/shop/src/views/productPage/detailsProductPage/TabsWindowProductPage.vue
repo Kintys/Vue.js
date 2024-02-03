@@ -4,7 +4,7 @@
             <template #item-window>
                 <v-window-item value="one">
                     <p class="about-product__description">
-                        {{ getCurrentItem?.description[currentLocale] }}
+                        {{ getCurrentItem?.description.en }}
                     </p>
                     <div class="about-product__colors"></div>
                 </v-window-item>

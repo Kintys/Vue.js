@@ -6,10 +6,8 @@
             </div>
             <nav class="header__nav nav">
                 <router-link class="nav__item" :to="{ name: 'home' }"> home</router-link>
-                <router-link class="nav__item" :to="{ name: 'editor' }"> editor</router-link>
                 <router-link class="nav__item" :to="{ name: 'catalog' }"> catalog</router-link>
                 <router-link class="nav__item" :to="{ name: 'cart' }"> cart</router-link>
-                <!-- <router-link class="nav__item" :to="{ name: 'product' }"> product</router-link> -->
             </nav>
             <div class="header__actions actions">
                 <local-select />

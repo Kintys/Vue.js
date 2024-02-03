@@ -9,15 +9,16 @@ import { useGeneralStore } from '@/stores/general'
 const { isNewFilterObject, isFilteredList, dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
 
 export const useCatalogStore = defineStore('catalog', () => {
-    const { getItemsList: laptopList } = useLaptopListStore()
-    const { getItemsList: monitorsList } = useMonitorsStore()
-    const { getItemsList: pcList } = usePcListStore()
+    const { getItemsList: laptopList, loadItemById: loadLaptopItemById } = useLaptopListStore()
+    const { getItemsList: monitorsList, loadItemById: loadMonitorItemById } = useMonitorsStore()
+    const { getItemsList: pcList, loadItemById: loadPcListItemById } = usePcListStore()
     const { setLoading, startLoading } = useGeneralStore()
 
     const filterValueObject = ref({})
     const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
     const catalogList = ref(null)
     const currentItem = ref(null)
+
     async function addNewList() {
         return [...laptopList, ...pcList, ...monitorsList]
     }
@@ -29,13 +30,24 @@ export const useCatalogStore = defineStore('catalog', () => {
             setLoading(false)
         }
     }
-
     function addSortListObject(obj) {
         sortListObject.value = { ...sortListObject.value, ...obj }
     }
-    function loadItemById(id) {
-        console.log(id)
-        currentItem.value = catalogList.value.find((product) => product.id === id)
+    async function loadCatalogItemById(id) {
+        currentItem.value = null
+        await loadLaptopItemById(id).then((item) => {
+            if (item && item.title) currentItem.value = item
+            else return
+        })
+        await loadMonitorItemById(id).then((item) => {
+            if (item && item.title) currentItem.value = item
+            else return
+        })
+
+        await loadPcListItemById(id).then((item) => {
+            if (item && item.title) currentItem.value = item
+            else return
+        })
     }
     function addFilterValueObject(obj) {
         filterValueObject.value = { ...filterValueObject.value, ...obj }
@@ -46,15 +58,11 @@ export const useCatalogStore = defineStore('catalog', () => {
     function clearFilterValue() {
         filterValueObject.value = {}
     }
+
     const getCatalogList = computed(() => catalogList?.value)
 
-    const getCurrentItemById = computed(() => {
-        return (id) => {
-            console.log(id)
-            catalogList?.value.find((product) => product.id === id)
-        }
-    })
     const getCurrentItem = computed(() => currentItem.value)
+
     const getFilteredCatalogList = computed(() =>
         catalogList?.value?.filter((product) => isFilteredList(product, filterValueObject?.value))
     )
@@ -88,8 +96,8 @@ export const useCatalogStore = defineStore('catalog', () => {
         getCurrentColor,
         loadCatalogList,
         catalogList,
-        loadItemById,
+        loadCatalogItemById,
         getCurrentItem,
-        getCurrentItemById
+        currentItem
     }
 })

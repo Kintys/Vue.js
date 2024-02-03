@@ -1,22 +1,22 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useLaptopListStore } from './laptop'
 import DbOperations from './helpers/DbOperations'
 import { useAuthStore } from '@/stores/auth'
+import { useCatalogStore } from '@/stores/catalog'
 
 export const useCartStore = defineStore('cartList', () => {
     const orderDbList = new DbOperations('orderList')
     const user = useAuthStore()
     const cartList = ref([])
-    const laptop = useLaptopListStore()
+    const catalog = useCatalogStore()
 
     const getCartList = computed(() => {
         return cartList?.value.map((product) => {
-            const itemById = laptop.getItemById(product.productId)
             return {
                 qtyToBuy: product.inputCount,
-                ...itemById,
-                subTotal: itemById.currentPrice * product.inputCount
+                ...catalog.getCurrentItem,
+                id: product.productId,
+                subTotal: catalog.getCurrentItem.currentPrice * product.inputCount
             }
         })
     })

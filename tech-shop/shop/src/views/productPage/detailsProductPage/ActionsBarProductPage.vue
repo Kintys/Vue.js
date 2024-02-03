@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { useLaptopListStore } from '@/stores/laptop'
+import { useCatalogStore } from '@/stores/catalog'
 import { storeToRefs } from 'pinia'
 import { useCartStore } from '@/stores/cart'
 import { watch, ref, computed } from 'vue'
@@ -85,7 +85,7 @@ defineProps({
     }
 })
 
-const { getCurrentItem } = storeToRefs(useLaptopListStore())
+const { getCurrentItem } = storeToRefs(useCatalogStore())
 const { addToCartList } = useCartStore()
 const numberProduct = ref(1)
 
@@ -103,7 +103,7 @@ const priceWithCount = computed(() => {
 function atLeastOne() {
     if (numberProduct.value < 1) numberProduct.value = 1
 }
-function addProductToCart(id) {
+function addProductToCart() {
     addToCartList({
         inputCount: numberProduct.value,
         productId: route.params.id

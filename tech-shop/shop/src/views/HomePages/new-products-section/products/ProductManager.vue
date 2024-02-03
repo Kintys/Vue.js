@@ -17,6 +17,7 @@ import { usePcListStore } from '@/stores/pcList'
 import { useLaptopListStore } from '@/stores/laptop'
 import { useMonitorsStore } from '@/stores/monitoris'
 import { categorySettings } from './settings'
+
 const { getItemsListWithNumber: shortLaptopList } = useLaptopListStore()
 const { getItemsListWithNumber: shortPcList } = usePcListStore()
 const { getItemsListWithNumber: shortMonitorsList } = useMonitorsStore()

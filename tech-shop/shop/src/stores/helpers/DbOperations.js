@@ -13,7 +13,8 @@ import {
     query,
     where,
     documentId,
-    limit
+    limit,
+    collectionGroup
 } from 'firebase/firestore/lite'
 
 class DbOperations {
@@ -175,6 +176,10 @@ class DbOperations {
                     reject(error)
                 })
         })
+    }
+    loadItemByIdFromCollectionGrp() {
+        const collectionGrp = ['laptopList', 'monitorsList', 'pcList']
+        const museums = query(collectionGroup(db, ''), where('type', '==', 'museum'))
     }
 }
 

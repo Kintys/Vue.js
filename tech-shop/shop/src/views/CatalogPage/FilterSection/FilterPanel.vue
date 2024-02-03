@@ -80,7 +80,7 @@ function onSelectColor(index) {
 }
 function addSelectedParams() {
     addFilterValueObject({
-        color: [`${currentColor.value}`],
+        // color: [`${currentColor.value}`],
         category: selected.value
     })
 }

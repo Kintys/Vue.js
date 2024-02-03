@@ -30,7 +30,7 @@ export function helpersFunc() {
         for (const props in filterObj) {
             const params = filterObj[props].every((value) => {
                 if (Array.isArray(productList[props])) return productList[props].includes(...filterObj[props])
-                else return value === productList[props] || productList[props] <= value
+                else return value === productList[props]
             })
 
             if (filterObj[props] && !params) return false
