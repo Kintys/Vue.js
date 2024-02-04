@@ -77,7 +77,23 @@ export const useCatalogStore = defineStore('catalog', () => {
     const getPageNumbers = computed(() =>
         getDividedAndSortList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0)
     )
-
+    const getPriceList = computed(() =>
+        getFilteredCatalogList.value.reduce(
+            (acc, item) => {
+                if (item.currentPrice > 600) acc.hightPrice++
+                if (item.currentPrice <= 600) acc.priceUpTo600++
+                if (item.currentPrice <= 500) acc.priceUpTo500++
+                else acc.priceUpTo400++
+                return acc
+            },
+            {
+                priceUpTo400: 0,
+                priceUpTo500: 0,
+                priceUpTo600: 0,
+                hightPrice: 0
+            }
+        )
+    )
     const getStyleValue = computed(() => sortListObject.value.isSelectedStyle)
 
     const getCurrentColor = computed(() => catalogList?.value?.map((item) => item.color).flat())
@@ -98,6 +114,7 @@ export const useCatalogStore = defineStore('catalog', () => {
         catalogList,
         loadCatalogItemById,
         getCurrentItem,
-        currentItem
+        currentItem,
+        getPriceList
     }
 })

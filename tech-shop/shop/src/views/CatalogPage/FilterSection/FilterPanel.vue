@@ -2,7 +2,7 @@
     <div class="filter-panel">
         <div class="filter-panel__content">
             <h2 class="filter-panel__title">Filters</h2>
-            <v-btn class="filter-panel__button button" @click="clearFilterValue">Clear Filter</v-btn>
+            <v-btn class="filter-panel__button button" @click="onClearFilter">Clear Filter</v-btn>
             <div class="filter-panel__spollers">
                 <MExpansionPanels label="category">
                     <template #spoller-container>
@@ -33,6 +33,16 @@
                         </v-radio-group>
                     </template>
                 </MExpansionPanels>
+                <MExpansionPanels label="price">
+                    <template #spoller-container>
+                        <ul class="price-list">
+                            <li v-for="(price, i, key) in getPriceList" :key="price" class="price-list__item">
+                                <span class="price-list__text">$ {{ priceListCategory[key] }}</span
+                                ><span class="price-list__number">{{ price }}</span>
+                            </li>
+                        </ul>
+                    </template>
+                </MExpansionPanels>
             </div>
             <div class="filter-panel__spoller-filter">
                 <div width="100%">
@@ -51,8 +61,8 @@ import { ref, computed } from 'vue'
 import { useFocus } from '@/compositionFunctions/focusFunc.js'
 import { storeToRefs } from 'pinia'
 
-const { focusesList, onFocus } = useFocus()
-const { getCurrentColor, filterValueObject } = storeToRefs(useCatalogStore())
+const { focusesList, onFocus, offFocus } = useFocus()
+const { getCurrentColor, getPriceList } = storeToRefs(useCatalogStore())
 const { addFilterValueObject, clearFilterValue } = useCatalogStore()
 
 const currentColor = ref(null)
@@ -72,17 +82,27 @@ const filterCheckboxParams = ref([
         value: 'monitor'
     }
 ])
+const priceListCategory = ref(['0.00 - 400', '400 - 500', '500-600', '600 and above'])
 
 const colorList = computed(() => [...new Set(getCurrentColor.value)])
+async function onClearFilter() {
+    offFocus('focus-btn')
+    clearFilterValue()
+    selected.value = []
+}
 
 function onSelectColor(index) {
     onFocus(index, 'focus-btn')
 }
 function addSelectedParams() {
-    addFilterValueObject({
-        // color: [`${currentColor.value}`],
-        category: selected.value
-    })
+    if (selected.value)
+        addFilterValueObject({
+            category: selected.value
+        })
+    if (currentColor.value)
+        addFilterValueObject({
+            color: [`${currentColor.value}`]
+        })
 }
 </script>
 
@@ -172,6 +192,12 @@ function addSelectedParams() {
         position: absolute;
         left: -15%;
         top: -12%;
+    }
+}
+.price-list {
+    &__item {
+        display: flex;
+        justify-content: space-between;
     }
 }
 </style>
