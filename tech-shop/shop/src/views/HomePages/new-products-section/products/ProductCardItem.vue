@@ -28,7 +28,6 @@
                 >{{ $t('productCard.itemCard.textRev') }}<span>({{ cardItemData.review }})</span>
             </span>
         </div>
-
         <p class="card-item__description">{{ showShortDescription }}</p>
         <div class="card-item__prises">
             <div class="card-item__old-price">${{ cardItemData.oldPrice }}</div>

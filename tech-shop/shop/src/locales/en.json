@@ -50,10 +50,42 @@
         "offerBlock": {
             "text": "<b>own</b> it now, up to 6 months interest free",
             "titleLink": "learn more"
+        },
+        "previewCard": {
+            "titles": {
+                "customBuilds": "Custom Builds",
+                "msiLaptops": "MSI Laptops",
+                "monitors": "Gaming Monitors"
+            },
+            "link": "See All Products"
         }
     },
     "socialMediaSection": {
         "title": "Follow us on Instagram for News, Offers & More"
+    },
+    "filterAsidePanel": {
+        "compare": {
+            "title": "Compare Products",
+            "subTitle": "You have no items to compare."
+        },
+        "wishList": {
+            "title": "My Wish List",
+            "subTitle": "You have no items in your wish list."
+        }
+    },
+    "filterContentComp": {
+        "title": "Brand",
+        "button": "All brand"
+    },
+    "filterPanel": {
+        "title": "Filters",
+        "clearButton": "Clear Filter",
+        "filterCheckboxParams": {
+            "laptop": "laptop",
+            "pc": "Pc",
+            "monitors": "Monitors"
+        },
+        "applyButton": "Apply Filters"
     },
     "footerInfo": {
         "productSupport": {
@@ -68,5 +100,34 @@
             "title": "Amazing Savings",
             "description": "Up to 70% off new Products, you can be sure of the best price."
         }
+    },
+    "filterSection": {
+        "title": "MSI PS Series"
+    },
+    "card": {
+        "button": "Add to Cart"
+    },
+    "filterSortActionBar": {
+        "link": "Back",
+        "sortList": {
+            "position": "Position",
+            "review": "Review"
+        },
+        "pageNumbersList": {
+            "10perPage": "10 per page",
+            "15perPage": "15 per page",
+            "20perPage": "20 per page"
+        },
+        "selectPref": {
+            "placeholder": "Select",
+            "sortBy": "Sort by:",
+            "show": "Show:"
+        }
+    },
+    "footer": {
+        "title": "Sign Up To Our Newsletter.",
+        "subTitle": "Be the first to hear about the latest offers.",
+        "button": "Subscribe",
+        "inputSubLabel": "Your Email"
     }
 }

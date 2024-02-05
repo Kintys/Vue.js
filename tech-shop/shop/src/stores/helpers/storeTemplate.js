@@ -9,16 +9,11 @@ export default function getStoreTemplate(collectionTitle) {
     const itemsList = ref(null)
     const currentItem = ref(null)
 
-    const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
-
-    function addSortListObject(obj) {
-        sortListObject.value = { ...sortListObject.value, ...obj }
-    }
-
     async function loadItemsList() {
         itemsList.value = await generalApiOperation({
             operation: () => collectionDB.loadItemsList()
         })
+        return itemsList.value
     }
     async function loadShortItemList(num) {
         itemsList.value = await generalApiOperation({
@@ -95,7 +90,6 @@ export default function getStoreTemplate(collectionTitle) {
         return (number) => (getItemsList.value ?? []).slice(0, number)
     })
     return {
-        sortListObject,
         loadItemsList,
         addItem,
         addItemWithCustomId,
@@ -111,7 +105,6 @@ export default function getStoreTemplate(collectionTitle) {
         loadShortItemList,
         getItemsListWithNumber,
         loadFilteredList,
-        addSortListObject,
         itemsList
     }
 }

@@ -1,24 +1,27 @@
 <template>
     <a href="#" class="social-card">
         <div class="social-card__img">
-            <img src="../../../assets/img/socialMedia/inst.png" alt="#" />
+            <img m :src="socialItemData.img" />
         </div>
         <div class="social-card__content">
             <p class="social-card__text">
-                If you’ve recently made a desktop PC or laptop purchase, you might want to consider adding peripherals
-                to enhance your home office setup, your gaming rig, or your business workspace...
+                {{ socialItemData.description[currentLocale] }}
             </p>
-            <div class="social-card__post-date">01.09.2020</div>
+            <div class="social-card__post-date">
+                {{ socialItemData.data }}
+            </div>
         </div>
     </a>
 </template>
 
 <script setup>
+import { useLocales } from '@/modulHelpers/i18n'
 defineProps({
     socialItemData: {
         type: Object
     }
 })
+const { currentLocale } = useLocales()
 </script>
 
 <style lang="scss" scoped>

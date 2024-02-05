@@ -31,7 +31,7 @@
                 <div class="auth__sing-in">
                     <v-btn
                         @click="loginWithEmailAndPassword(email, password)"
-                        :disabled="!isDatavalue"
+                        :disabled="!isDataValue"
                         class="auth__button button"
                     >
                         {{ $t('loginBox.buttons.signIn') }}
@@ -88,7 +88,7 @@ watch([email, password], ([new_email, new_password]) => {
     emit('update:newPass', new_password)
 })
 
-const isDatavalue = computed(() => {
+const isDataValue = computed(() => {
     return email.value && password.value
 })
 

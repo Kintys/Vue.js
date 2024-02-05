@@ -37,7 +37,7 @@
                 </div>
             </div>
             <v-btn @click="addProductToCardList" class="card-item__add-cart button">
-                <font-awesome-icon icon="cart-shopping" /> Add to Cart</v-btn
+                <font-awesome-icon icon="cart-shopping" /> {{ $t('card.button') }}</v-btn
             >
         </div>
         <div class="card-item__status">

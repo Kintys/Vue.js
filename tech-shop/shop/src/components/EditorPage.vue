@@ -42,8 +42,8 @@ import { storeToRefs } from 'pinia'
 import { getSomeList } from '@/stores/firebase.js'
 const { isLoading, hasError } = storeToRefs(useGeneralStore())
 const page = ref(1)
-import { usePcListStore } from '@/stores/pcList'
-const { addItem, itemsList } = usePcListStore()
+import { useFeedbackStore } from '@/stores/feedback'
+const { addItem, itemsList } = useFeedbackStore()
 // const list = ref(null)
 
 const editObjct = ref({
@@ -61,7 +61,8 @@ const editObjct = ref({
 })
 
 function onSend() {
-    const newArr = getSomeList(itemsList)
+    const newArr = getSomeList()
+    console.log(newArr)
     newArr.forEach((element) => {
         addItem(element)
     })

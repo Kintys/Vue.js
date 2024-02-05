@@ -1,12 +1,12 @@
 <template>
     <div class="footer-list">
-        <h4 class="footer-list__list-title">{{ linkData?.title }}</h4>
+        <h4 class="footer-list__list-title">{{ linkData.title }}</h4>
         <div class="footer-list__links">
             <slot name="sentence">
-                <a v-if="linkData.linksArr" :href="link" v-for="{ label, link } in linkData?.linksArr" :key="label">{{
+                <a v-if="linkData.linksArr" :href="link" v-for="{ label, link } in linkData.linksArr" :key="label">{{
                     label
                 }}</a>
-                <p v-else v-for="({ label }, i) in linkData.addresItem" :key="i" v-html="label"></p>
+                <p v-else v-for="({ label }, i) in linkData.addressItem" :key="i" v-html="label"></p>
             </slot>
         </div>
     </div>

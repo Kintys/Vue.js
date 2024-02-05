@@ -2,7 +2,7 @@
     <div class="m-select" ref="dropDown">
         <div class="m-select__label">
             <span v-if="prefix" class="m-select__prefix">{{ prefix }}</span
-            ><span class="m-select__label-text" @click="onOpen()">{{ currentLabel }}</span>
+            ><span class="m-select__label-text" @click="onOpen()">{{ $t(currentLabel) }}</span>
             <span
                 ><span v-if="clearBtn && selectedOption" @click="onClearLabel" class="m-select__clear"
                     ><font-awesome-icon icon="circle-xmark" color="red" size="xl" /></span
@@ -21,7 +21,7 @@
                         @click="onSelect(option)"
                         :key="i"
                         class="m-select__options-item"
-                        >{{ option.name ?? option }}</span
+                        >{{ $t(option.name) ?? $t(option) }}</span
                     >
                 </div>
             </transition>

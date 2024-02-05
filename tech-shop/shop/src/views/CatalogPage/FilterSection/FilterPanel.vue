@@ -1,8 +1,10 @@
 <template>
     <div class="filter-panel">
         <div class="filter-panel__content">
-            <h2 class="filter-panel__title">Filters</h2>
-            <v-btn class="filter-panel__button button" @click="onClearFilter">Clear Filter</v-btn>
+            <h2 class="filter-panel__title">{{ $t('filterPanel.title') }}</h2>
+            <v-btn class="filter-panel__button button" @click="onClearFilter">{{
+                $t('filterPanel.clearButton')
+            }}</v-btn>
             <div class="filter-panel__spollers">
                 <MExpansionPanels label="category">
                     <template #spoller-container>
@@ -10,7 +12,7 @@
                             v-for="checkBox in filterCheckboxParams"
                             :key="checkBox.label"
                             v-model="selected"
-                            :label="checkBox.label"
+                            :label="$t(checkBox.label)"
                             :value="checkBox.value"
                             color="#0156ff"
                             class="filter-panel__check-box"
@@ -46,7 +48,9 @@
             </div>
             <div class="filter-panel__spoller-filter">
                 <div width="100%">
-                    <v-btn @click="addSelectedParams" class="filter-panel__button button">Apply Filters </v-btn>
+                    <v-btn @click="addSelectedParams" class="filter-panel__button button">{{
+                        $t('filterPanel.applyButton')
+                    }}</v-btn>
                 </div>
             </div>
         </div>
@@ -70,15 +74,15 @@ const selected = ref([])
 
 const filterCheckboxParams = ref([
     {
-        label: 'Laptop',
+        label: 'filterPanel.filterCheckboxParams.laptop',
         value: 'laptop'
     },
     {
-        label: 'PC',
+        label: 'filterPanel.filterCheckboxParams.pc',
         value: 'pc'
     },
     {
-        label: 'Monitors',
+        label: 'filterPanel.filterCheckboxParams.monitors',
         value: 'monitor'
     }
 ])

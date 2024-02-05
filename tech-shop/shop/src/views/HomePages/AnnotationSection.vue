@@ -9,16 +9,13 @@
                     :space-between="10"
                     :pagination="{ clickable: true, el: '.annotation__pagination' }"
                 >
-                    <swiper-slide v-for="annotation in 4" :key="annotation">
+                    <swiper-slide v-for="annotation in getItemsList" :key="annotation.userName">
                         <div class="annotation__content">
                             <div class="annotation__info">
                                 <p class="annotation__text">
-                                    My first order arrived today in perfect condition. From the time I sent a question
-                                    about the item to making the purchase, to the shipping and now the delivery, your
-                                    company, Tecs, has stayed in touch. Such great service. I look forward to shopping
-                                    on your site in the future and would highly recommend it.
+                                    {{ annotation.advice[currentLocale] }}
                                 </p>
-                                <span class="annotation__autor">- Tama Brown</span>
+                                <span class="annotation__autor">- {{ annotation.userName }}</span>
                             </div>
                         </div>
                     </swiper-slide>
@@ -36,7 +33,13 @@
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
+import { useFeedbackStore } from '@/stores/feedback'
+import { storeToRefs } from 'pinia'
+import { useLocales } from '@/modulHelpers/i18n'
+
 const modules = ref([Pagination])
+const { getItemsList } = storeToRefs(useFeedbackStore())
+const { currentLocale } = useLocales()
 // Import Swiper styles
 import 'swiper/scss'
 import 'swiper/scss/pagination'

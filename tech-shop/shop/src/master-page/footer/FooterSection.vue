@@ -3,21 +3,21 @@
         <div class="footer__container">
             <div class="footer__headline-block">
                 <div class="footer__headline">
-                    <h2 class="footer__title">Sign Up To Our Newsletter.</h2>
-                    <p class="footer__subtitle">Be the first to hear about the latest offers.</p>
+                    <h2 class="footer__title">{{ $t('footer.title') }}</h2>
+                    <p class="footer__subtitle">{{ $t('footer.subTitle') }}</p>
                 </div>
-                <div class="footer__subscripbe">
+                <div class="footer__subscribe">
                     <span class="footer__email">
                         <v-text-field
                             class="footer__input"
-                            label="Your Email"
+                            :label="$t('footer.inputSubLabel')"
                             bg-color="black"
                             color="white"
                             hide-details="auto"
                             variant="solo"
                         ></v-text-field>
                     </span>
-                    <v-btn class="footer__button button">Subscribe</v-btn>
+                    <v-btn class="footer__button button">{{ $t('footer.button') }}</v-btn>
                 </div>
             </div>
             <div class="footer__links-list">
@@ -75,7 +75,7 @@ $text-field-affix-color: #020203;
         line-height: 132.5%; /* 21.2px */
     }
 
-    &__subscripbe {
+    &__subscribe {
         display: flex;
         max-width: toRem(565);
         @include adaptiveValue('column-gap', 20, 10);

@@ -2,8 +2,10 @@
     <div class="filter-brand-panel">
         <slot name="filter-card">
             <header class="filter-brand-panel__header">
-                <h3 class="filter-brand-panel__title">Brand</h3>
-                <v-btn @click="onClearBrandList" class="filter-brand-panel__button button"> All brand</v-btn>
+                <h3 class="filter-brand-panel__title">{{ $t('filterContentComp.title') }}</h3>
+                <v-btn @click="onClearBrandList" class="filter-brand-panel__button button">{{
+                    $t('filterContentComp.button')
+                }}</v-btn>
             </header>
             <div class="filter-brand-panel__brands">
                 <div v-for="(brand, i) in brandsList" :key="brand.id" ref="focusesList">
@@ -56,11 +58,6 @@ function onClearBrandList() {
         text-align: center;
         font-size: toRem(16);
         font-weight: 700;
-    }
-
-    // .filter-brand-panel__button
-
-    &__button {
     }
 
     // .filter-brand-panel__brands

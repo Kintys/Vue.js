@@ -1,7 +1,7 @@
 <template>
     <section class="filter">
         <div class="filter__container">
-            <h2 class="filter__title">MSI PS Series</h2>
+            <h2 class="filter__title">{{ $t('filterSection.title') }}</h2>
             <FilterSortActionBar />
             <div class="filter__body">
                 <FilterAsidePanel />

@@ -50,10 +50,65 @@
         "offerBlock": {
             "text": "<b>власне</b> зараз, до 6 місяців безвідсоткового кредиту",
             "titleLink": "дізнатися більше"
+        },
+        "previewCard": {
+            "titles": {
+                "customBuilds": "Індивідуальні збірки",
+                "msiLaptops": "Ноутбуки MSI",
+                "monitors": "Ігрові монітори"
+            },
+            "link": "Переглянути всі продукти"
         }
     },
     "socialMediaSection": {
         "title": "Слідкуйте за нами в Instagram для новин, пропозицій та більше"
+    },
+    "filterAsidePanel": {
+        "compare": {
+            "title": "Порівняти продукти",
+            "subTitle": "У вас немає товарів для порівняння."
+        },
+        "wishList": {
+            "title": "Мій список бажань",
+            "subTitle": "У вас немає товарів у вашому списку бажань."
+        }
+    },
+    "filterContentComp": {
+        "title": "Бренд",
+        "button": "Усі бренди"
+    },
+    "filterPanel": {
+        "title": "Фільтри",
+        "clearButton": "Очистити фільтр",
+        "filterCheckboxParams": {
+            "laptop": "Ноутбуки",
+            "pc": "ПК",
+            "monitors": "Монітори"
+        },
+        "applyButton": "Застосувати фільтри"
+    },
+    "filterSection": {
+        "title": "Серія MSI PS"
+    },
+    "filterSortActionBar": {
+        "link": "Назад",
+        "sortList": {
+            "position": "Позиція",
+            "review": "Видгук"
+        },
+        "pageNumbersList": {
+            "10perPage": "10 на сторінці",
+            "15perPage": "15 на сторінці",
+            "20perPage": "20 на сторінці"
+        },
+        "selectPref": {
+            "placeholder": "Вибрати",
+            "sortBy": "Сортувати за:",
+            "show": "Показати:"
+        }
+    },
+    "card": {
+        "button": "Додати до кошика"
     },
     "footerInfo": {
         "productSupport": {
@@ -68,5 +123,11 @@
             "title": "Неймовірні заощадження",
             "description": "До 70% знижки на нові товари, ви можете бути впевнені в найкращій ціні."
         }
+    },
+    "footer": {
+        "title": "Підписатися на нашу розсилку.",
+        "subTitle": "Будьте першими, хто дізнається про останні пропозиції.",
+        "button": "Підписатися",
+        "inputSubLabel": "Твоя пошта"
     }
 }

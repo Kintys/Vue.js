@@ -3,7 +3,7 @@
         <div class="social-media__container">
             <h2 class="social-media__title">{{ $t('socialMediaSection.title') }}</h2>
             <div class="social-media__cards">
-                <SocialMediaItemCard v-for="card in 9" :key="card" />
+                <SocialMediaItemCard v-for="social in getItemsList" :key="social.img" :social-item-data="social" />
             </div>
         </div>
     </section>
@@ -11,6 +11,10 @@
 
 <script setup>
 import SocialMediaItemCard from './SocialMediaItemCard.vue'
+import { useSocialListStore } from '@/stores/social'
+import { storeToRefs } from 'pinia'
+
+const { getItemsList } = storeToRefs(useSocialListStore())
 </script>
 
 <style lang="scss" scoped>

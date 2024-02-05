@@ -2,15 +2,27 @@
     <div class="sort-bar">
         <div class="sort-bar__action-block">
             <div class="sort-bar__back">
-                <router-link :to="{ name: 'home' }"><font-awesome-icon icon="chevron-left" /> Back</router-link>
+                <router-link :to="{ name: 'home' }"
+                    ><font-awesome-icon icon="chevron-left" /> {{ $t('filterSortActionBar.link') }}</router-link
+                >
             </div>
         </div>
         <div class="sort-bar__select-block">
             <div style="width: 200px">
-                <MSelect label="Select" prefix="Sort by:" :options-list="sortList" v-model="valueSort" />
+                <MSelect
+                    :label="$t('filterSortActionBar.selectPref.placeholder')"
+                    :prefix="$t('filterSortActionBar.selectPref.sortBy')"
+                    :options-list="sortList"
+                    v-model="valueSort"
+                />
             </div>
             <div style="width: 200px">
-                <MSelect label="Select" prefix="Show:" :options-list="pageNumbersList" v-model="pageSortByNumber" />
+                <MSelect
+                    :label="$t('filterSortActionBar.selectPref.placeholder')"
+                    :prefix="$t('filterSortActionBar.selectPref.show')"
+                    :options-list="pageNumbersList"
+                    v-model="pageSortByNumber"
+                />
             </div>
         </div>
         <div class="sort-bar__show-card">
@@ -61,26 +73,26 @@ const valueSort = ref(null)
 const pageSortByNumber = ref(null)
 const sortList = ref([
     {
-        name: 'Position',
+        name: 'filterSortActionBar.sortList.position',
         value: 'position'
     },
     {
-        name: 'Review',
+        name: 'filterSortActionBar.sortList.review',
         value: 'review'
     }
 ])
 
 const pageNumbersList = ref([
     {
-        name: '10 per page',
+        name: 'filterSortActionBar.pageNumbersList.10perPage',
         value: 10
     },
     {
-        name: '15 per page',
+        name: 'filterSortActionBar.pageNumbersList.15perPage',
         value: 15
     },
     {
-        name: '20 per page',
+        name: 'filterSortActionBar.pageNumbersList.20perPage',
         value: 20
     }
 ])

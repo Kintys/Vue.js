@@ -5,16 +5,16 @@
         <FilterContentComp>
             <template #filter-card>
                 <div class="filter-content-box">
-                    <h3 class="filter-content-box__title">Compare Products</h3>
-                    <p class="filter-content-box__text">You have no items to compare</p>
+                    <h3 class="filter-content-box__title">{{ $t('filterAsidePanel.compare.title') }}</h3>
+                    <p class="filter-content-box__text">{{ $t('filterAsidePanel.compare.subTitle') }}</p>
                 </div>
             </template>
         </FilterContentComp>
         <FilterContentComp>
             <template #filter-card>
                 <div class="filter-content-box">
-                    <h3 class="filter-content-box__title">My Wish List</h3>
-                    <p class="filter-content-box__text">You have no items in your wish list.</p>
+                    <h3 class="filter-content-box__title">{{ $t('filterAsidePanel.wishList.title') }}</h3>
+                    <p class="filter-content-box__text">{{ $t('filterAsidePanel.wishList.subTitle') }}</p>
                 </div>
             </template>
         </FilterContentComp>

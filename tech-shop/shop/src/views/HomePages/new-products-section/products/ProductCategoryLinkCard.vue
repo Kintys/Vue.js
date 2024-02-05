@@ -5,9 +5,9 @@
         :style="{ '--background-image': `url('${getImageUrl(showCardData.image)}')` }"
     >
         <div class="show-card__box">
-            <h3 class="show-card__title">{{ showCardData.title }}</h3>
+            <h3 class="show-card__title">{{ $t(showCardData.title) }}</h3>
         </div>
-        <a :href="showCardData.link" class="show-card__link">See All Products</a>
+        <a :href="showCardData.link" class="show-card__link">{{ $t('newProductSection.previewCard.link') }}</a>
     </a>
 </template>
 
@@ -42,7 +42,6 @@ const getImageUrl = (name) => {
             outline: 1px solid #0156ff;
         }
     }
-
     &__box {
         display: flex;
         flex-grow: 1;
@@ -50,15 +49,13 @@ const getImageUrl = (name) => {
         text-align: center;
     }
     &__title {
-        font-size: toRem(22);
+        font-size: toRem(20);
         line-height: 130%;
         font-weight: 700;
-        max-width: toRem(100);
+        max-width: toRem(120);
         text-wrap: wrap;
     }
-
     // .show-card__link
-
     &__link {
         padding-bottom: toRem(32);
         @media (any-hover: hover) {

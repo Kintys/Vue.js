@@ -2,7 +2,7 @@
     <section class="info">
         <div class="info__container">
             <div class="info__content">
-                <div v-for="item in fooretInfoList" class="info__block">
+                <div v-for="item in footerInfoList" class="info__block">
                     <div class="info__icon">
                         <img :src="getImageUrl(item.img)" alt="#" />
                     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { fooretInfoList } from './settings'
+import { footerInfoList } from './settings'
 
 const getImageUrl = (img) => {
     return new URL(`../../assets/${img}`, import.meta.url).href

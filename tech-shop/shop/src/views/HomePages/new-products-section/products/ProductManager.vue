@@ -23,7 +23,7 @@ const { getItemsListWithNumber: shortPcList } = usePcListStore()
 const { getItemsListWithNumber: shortMonitorsList } = useMonitorsStore()
 
 const categoryProductsList = computed(() => {
-    return [shortLaptopList(5), shortPcList(5), shortMonitorsList(5)]
+    return [shortPcList(5), shortLaptopList(5), shortMonitorsList(5)]
 })
 </script>
 

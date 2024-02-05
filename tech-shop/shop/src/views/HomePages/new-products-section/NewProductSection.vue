@@ -63,7 +63,6 @@ import ProductOfferLine from './products/ProductOfferLine.vue'
         height: toRem(70);
         justify-content: center;
     }
-    // .home-new-product__offer-logo
     // .home-new-product__category
     &__category {
         &:not(:last-child) {

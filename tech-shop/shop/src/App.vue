@@ -4,21 +4,20 @@ import { onBeforeMount } from 'vue'
 import { usePcListStore } from '@/stores/pcList'
 import { useLaptopListStore } from '@/stores/laptop'
 import { useMonitorsStore } from '@/stores/monitoris'
-// import { useCatalogStore } from '@/stores/catalog'
+import { useSocialListStore } from '@/stores/social'
+import { useFeedbackStore } from '@/stores/feedback'
 
 const laptop = useLaptopListStore()
 const pcList = usePcListStore()
 const monitors = useMonitorsStore()
-// const catalog = useCatalogStore()
-
+const social = useSocialListStore()
+const feedback = useFeedbackStore()
 async function loadData() {
-    await laptop.loadShortItemList(25)
-    await pcList.loadShortItemList(25)
-    await monitors.loadShortItemList(25)
-
-    // setTimeout(() => {
-    //     catalog.loadCatalogList()
-    // }, 20000)
+    await laptop.loadShortItemList(5)
+    await pcList.loadShortItemList(10)
+    await monitors.loadShortItemList(5)
+    await social.loadItemsList()
+    await feedback.loadItemsList()
 }
 
 onBeforeMount(() => {

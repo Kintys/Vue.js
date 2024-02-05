@@ -4,31 +4,24 @@ import { ref, computed } from 'vue'
 import { useLaptopListStore } from './laptop'
 import { useMonitorsStore } from './monitoris'
 import { usePcListStore } from './pcList'
-import { useGeneralStore } from '@/stores/general'
 
 const { isNewFilterObject, isFilteredList, dividedIntoPagesItemList, sortItemListWithParams } = helpersFunc()
 
 export const useCatalogStore = defineStore('catalog', () => {
-    const { getItemsList: laptopList, loadItemById: loadLaptopItemById } = useLaptopListStore()
-    const { getItemsList: monitorsList, loadItemById: loadMonitorItemById } = useMonitorsStore()
-    const { getItemsList: pcList, loadItemById: loadPcListItemById } = usePcListStore()
-    const { setLoading, startLoading } = useGeneralStore()
+    const { loadItemsList: loadLaptopList, loadItemById: loadLaptopItemById } = useLaptopListStore()
+    const { loadItemsList: loadMonitorsList, loadItemById: loadMonitorItemById } = useMonitorsStore()
+    const { loadItemsList: LoadPcList, loadItemById: loadPcListItemById } = usePcListStore()
 
     const filterValueObject = ref({})
     const sortListObject = ref({ isSelectedStyle: true, numberPage: 15 })
     const catalogList = ref(null)
     const currentItem = ref(null)
 
-    async function addNewList() {
-        return [...laptopList, ...pcList, ...monitorsList]
-    }
     async function loadCatalogList() {
-        try {
-            startLoading(true)
-            catalogList.value = await addNewList()
-        } finally {
-            setLoading(false)
-        }
+        const pcList = await LoadPcList()
+        const laptopList = await loadLaptopList()
+        const monitorsList = await loadMonitorsList()
+        catalogList.value = [...pcList, ...laptopList, ...monitorsList]
     }
     function addSortListObject(obj) {
         sortListObject.value = { ...sortListObject.value, ...obj }
@@ -78,7 +71,7 @@ export const useCatalogStore = defineStore('catalog', () => {
         getDividedAndSortList.value.reduce((max, item) => Math.max(max, item.pageNumber), 0)
     )
     const getPriceList = computed(() =>
-        getFilteredCatalogList.value.reduce(
+        getFilteredCatalogList?.value.reduce(
             (acc, item) => {
                 if (item.currentPrice > 600) acc.hightPrice++
                 if (item.currentPrice <= 600) acc.priceUpTo600++

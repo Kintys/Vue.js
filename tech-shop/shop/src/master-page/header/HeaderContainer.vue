@@ -7,9 +7,9 @@
             <nav class="header__nav nav">
                 <router-link class="nav__item" :to="{ name: 'home' }"> home</router-link>
                 <router-link class="nav__item" :to="{ name: 'catalog' }"> catalog</router-link>
-                <router-link class="nav__item" :to="{ name: 'cart' }"> cart</router-link>
             </nav>
             <div class="header__actions actions">
+                <IconCard />
                 <local-select />
                 <user-profil v-if="getUser" :user="getUser" />
                 <v-btn v-else class="button" @click="toLoginPage">Login</v-btn>
@@ -20,9 +20,12 @@
 
 <script setup>
 import UserProfil from './UserProfil.vue'
-import { RouterLink, useRouter } from 'vue-router'
+import IconCard from '@/master-page/header/IconCard.vue'
 import LocalSelect from './LocalSelect.vue'
+
+import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
+
 const router = useRouter()
 const { getUser } = useAuthStore()
 
