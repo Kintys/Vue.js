@@ -2,19 +2,20 @@
     <aside class="summary">
         <div class="summary__body">
             <header class="summary__box">
-                <h4 class="summary__title">Summary</h4>
-                <MExpansionPanels label="Estimate Shipping and Tax">
+                <h4 class="summary__title">{{ $t('card.summaryAsideBar.summary') }}</h4>
+                <MExpansionPanels :label="$t('card.summaryAsideBar.selectLabel')">
                     <template #spoller-container>
                         <div class="summary__country-select">
-                            <label class="label"> Country </label>
-                            <MSelect label="Select" :options-list="countryList" />
+                            <label class="label"> {{ $t('card.addressSelect.country') }} </label>
+                            <MSelect label="card.addressSelect.selectCountryLabel" :options-list="countryList" />
                         </div>
                         <div class="summary__state-inp">
-                            <label class="label"> State/Province </label>
+                            <label class="label"> {{ $t('card.addressSelect.state') }} </label>
                             <input type="text" class="input" />
                         </div>
                         <div class="summary__postal-cod-inp">
-                            <label class="label"> Zip/Postal Code </label><input type="number" class="input" />
+                            <label class="label">{{ $t('card.addressSelect.zip') }} </label
+                            ><input type="number" class="input" />
                         </div>
                         <div class="summary__shipping-way">
                             <v-radio-group class="summary__radio-group" v-model="priceForDelivery">
@@ -22,7 +23,7 @@
                                     v-for="deliver in deliveryPriceData"
                                     :key="deliver.label"
                                     class="summary__radio-btn"
-                                    :label="deliver.label"
+                                    :label="$t(deliver.label)"
                                     :value="deliver.value"
                                     color="#0156FF"
                                 ></v-radio>
@@ -30,38 +31,41 @@
                         </div>
                     </template>
                 </MExpansionPanels>
-                <p class="summary__subtitle">Enter your destination to get a shipping estimate.</p>
+                <p class="summary__subtitle">{{ $t('card.summaryAsideBar.summarySubtitle') }}</p>
             </header>
             <footer class="summary__total-list">
                 <div class="summary__total-info">
                     <p class="summary__sub-total">
-                        <span>Subtotal</span><span>${{ dividedString(getSubtotalValue) ?? 0 }}</span>
+                        <span>{{ $t('card.summaryAsideBar.subtotal') }}</span
+                        ><span>${{ dividedString(getSubtotalValue) ?? 0 }}</span>
                     </p>
                     <p class="summary__shipping">
-                        <span>Shipping</span><span>${{ priceForDelivery ?? 0 }}</span>
+                        <span>{{ $t('card.summaryAsideBar.shipping') }}</span
+                        ><span>${{ priceForDelivery ?? 0 }}</span>
                     </p>
                     <p class="summary__subtitle-shipping">
-                        (Standard Rate - Price may vary depending on the item/destination. TECS Staff will contact you.)
+                        {{ $t('card.summaryAsideBar.shippingSubtitle') }}
                     </p>
                     <div class="summary__order-total">
-                        <span>Order Total</span><span>${{ showOrderTotalPrice ?? 0 }}</span>
+                        <span> {{ $t('card.summaryAsideBar.orderTotal') }}</span
+                        ><span>${{ showOrderTotalPrice ?? 0 }}</span>
                     </div>
                 </div>
                 <div class="summary__actions">
                     <v-btn :disabled="dialog" :loading="dialog" class="summary__button button" @click="addToOrder">
-                        Order Product
+                        {{ $t('card.summaryAsideBar.btnOrderProduct') }}
                     </v-btn>
                     <v-dialog v-model="dialog" :scrim="false" persistent width="auto">
                         <v-card class="dialog-card">
                             <v-card-text>
-                                Please wait a little while we process your order ...
+                                {{ $t('card.summaryAsideBar.dialogPopupText') }}
                                 <v-progress-linear indeterminate color="black" class="mb-0"></v-progress-linear>
                             </v-card-text>
                         </v-card>
                     </v-dialog>
 
                     <v-btn href="https://www.paypal.com/" class="summary__pay-pal button"
-                        ><span class="pay-pal-text">Check out with</span
+                        ><span class="pay-pal-text"> {{ $t('card.summaryAsideBar.checkOut') }}</span
                         ><svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="72"
@@ -138,15 +142,15 @@ const { addItemToOrderList, clearCartList } = useCartStore()
 
 const deliveryPriceData = ref([
     {
-        label: 'Courier Delivery',
+        label: 'card.addressSelect.courierRadioBtn.courier',
         value: 21
     },
     {
-        label: 'Postal Delivery',
+        label: 'card.addressSelect.courierRadioBtn.post',
         value: 15
     },
     {
-        label: 'Pickup from Point of Collection',
+        label: 'card.addressSelect.courierRadioBtn.courier',
         value: 0
     }
 ])

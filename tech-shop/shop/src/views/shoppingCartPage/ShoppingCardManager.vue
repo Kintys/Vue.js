@@ -1,14 +1,14 @@
 <template>
     <div class="cart-product">
         <div class="cart-product__table-titles table-titles">
-            <span class="table-titles__item">Item</span>
-            <span class="table-titles__price">Price</span>
-            <span class="table-titles__qty">Qty</span>
-            <span class="table-titles__subtotal">Subtotal</span>
+            <span class="table-titles__item">{{ $t('card.itemList.item') }}</span>
+            <span class="table-titles__price">{{ $t('card.itemList.price') }}</span>
+            <span class="table-titles__qty">{{ $t('card.itemList.qty') }}</span>
+            <span class="table-titles__subtotal">{{ $t('card.itemList.subtotal') }}</span>
         </div>
         <div class="cart-product__product-box product-box" v-for="item in getCartList">
             <div class="product-box__image"><v-img width="120" height="120" :src="item.img"></v-img></div>
-            <p class="product-box__description">{{ item.description.en }}</p>
+            <p class="product-box__description">{{ item.description[currentLocale] }}</p>
             <div class="product-box__price">${{ dividedString(item.currentPrice) }}</div>
             <div class="product-box__input">{{ item.qtyToBuy }}</div>
             <div class="product-box__subtotal">${{ dividedString(item.subTotal) }}</div>
@@ -18,7 +18,7 @@
             </button>
         </div>
         <div class="cart-product__actions">
-            <v-btn class="cart-product__btn" @click="clearCartList">Clear Shopping Cart</v-btn>
+            <v-btn class="cart-product__btn" @click="clearCartList">{{ $t('card.itemList.clearButton') }}</v-btn>
         </div>
     </div>
 </template>
@@ -26,6 +26,8 @@
 <script setup>
 import { useCartStore } from '@/stores/cart'
 import { storeToRefs } from 'pinia'
+import { useLocales } from '@/modulHelpers/i18n'
+const { currentLocale } = useLocales()
 const { deleteFromCartList, clearCartList } = useCartStore()
 const { getCartList } = storeToRefs(useCartStore())
 

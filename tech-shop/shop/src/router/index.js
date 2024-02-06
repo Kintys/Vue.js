@@ -35,10 +35,10 @@ const router = createRouter({
         {
             path: '/cart',
             name: 'cart',
-            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue'),
-            meta: {
-                requireAuth: true
-            }
+            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue')
+            // meta: {
+            //     requireAuth: true
+            // }
         },
         {
             path: '/login',

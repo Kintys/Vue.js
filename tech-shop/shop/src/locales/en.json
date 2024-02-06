@@ -105,7 +105,37 @@
         "title": "MSI PS Series"
     },
     "card": {
-        "button": "Add to Cart"
+        "addButton": "Add to Cart",
+        "itemList": {
+            "item": "Item",
+            "price": "Price",
+            "qty": "Qty",
+            "subtotal": "Subtotal",
+            "clearButton": "CLEAR SHOPPING CART"
+        },
+        "summaryAsideBar": {
+            "summary": "Summary",
+            "selectLabel": "Estimate Shipping and Tax",
+            "subtotal": "Subtotal",
+            "shipping": "Shipping",
+            "summarySubtitle": "Enter your destination to get a shipping estimate.",
+            "shippingSubtitle": "(Standard Rate - Price may vary depending on the item/destination. TECS Staff will contact you.)",
+            "orderTotal": "Order Total",
+            "btnOrderProduct": "ORDER PRODUCT",
+            "dialogPopupText": "Please wait a little while we process your order ...",
+            "checkOut": "CHECK OUT WITH"
+        },
+        "addressSelect": {
+            "country": "Country",
+            "selectCountryLabel": "Select",
+            "state": "State/Province",
+            "zip": "Zip/Postal Code",
+            "courierRadioBtn": {
+                "courier": "Courier Delivery",
+                "post": "Postal Delivery",
+                "pickup": "Pickup from Point of Collection"
+            }
+        }
     },
     "filterSortActionBar": {
         "link": "Back",
