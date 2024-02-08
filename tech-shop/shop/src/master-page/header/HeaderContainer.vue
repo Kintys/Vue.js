@@ -4,9 +4,9 @@
             <div class="header__logo-img">
                 <img src="../../assets/icons/menu/logo.svg" class="img-logo ibg" alt="Logo" />
             </div>
-            <nav class="header__nav nav">
-                <router-link class="nav__item" :to="{ name: 'home' }"> home</router-link>
-                <router-link class="nav__item" :to="{ name: 'catalog' }"> catalog</router-link>
+            <nav class="header__nav navigation">
+                <router-link class="navigation__item" :to="{ name: 'home' }"> home</router-link>
+                <router-link class="navigation__item" :to="{ name: 'catalog' }">catalog</router-link>
             </nav>
             <div class="header__actions actions">
                 <IconCard />
@@ -14,11 +14,19 @@
                 <user-profil v-if="getUser" :user="getUser" />
                 <v-btn v-else class="button" @click="toLoginPage">Login</v-btn>
             </div>
+            <Slide class="icon" :right="true">
+                <nav class="header__nav navigation">
+                    <router-link class="navigation__item" :to="{ name: 'home' }"> home</router-link>
+                    <router-link class="navigation__item" :to="{ name: 'catalog' }">catalog</router-link>
+                </nav>
+            </Slide>
         </div>
     </div>
 </template>
 
 <script setup>
+import { Slide } from 'vue3-burger-menu'
+import { ref, watch } from 'vue'
 import UserProfil from './UserProfil.vue'
 import IconCard from '@/master-page/header/IconCard.vue'
 import LocalSelect from './LocalSelect.vue'
@@ -26,8 +34,15 @@ import LocalSelect from './LocalSelect.vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 
+const emit = defineEmits(['update:openMenuAction'])
+
+const drawer = ref(false)
 const router = useRouter()
 const { getUser } = useAuthStore()
+
+// watch(drawer, (newVal) => {
+//     if (newVal) document.body.style.overflow = 'hidden'
+// })
 
 function toLoginPage() {
     router.push({
@@ -40,6 +55,7 @@ function toLoginPage() {
 @import '@/assets/adaptive.scss';
 
 $blueColor: #0156ff;
+
 .header {
     background: #ffff;
     z-index: 50;
@@ -49,12 +65,13 @@ $blueColor: #0156ff;
     width: 100%; // .header__container
 
     &__container {
+        position: relative;
         display: grid;
         grid-template-columns: auto 1fr auto;
-        padding-top: 2.3rem;
-        padding-bottom: 2.3rem;
+        @include adaptiveValue('padding-top', 37, 20);
+        @include adaptiveValue('padding-bottom', 34, 20);
         align-items: center;
-        border-bottom: 1px solid gray;
+        border-bottom: toRem(1) solid gray;
     }
     &__logo-img {
         .img-logo {
@@ -67,15 +84,27 @@ $blueColor: #0156ff;
         column-gap: toRem(10);
     }
 }
-.nav {
+.navigation {
     @include adaptiveValue('margin-left', 61, 15);
     margin: 0 0.3125rem;
-    font-size: toRem(14);
+    @include adaptiveValue('font-size', 14, 12);
     display: flex;
-    row-gap: 10px;
+    row-gap: toRem(10);
     flex-wrap: wrap;
     @include adaptiveValue('column-gap', 5, 1);
     font-weight: 600;
+    @media (max-width: $tablet) {
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        visibility: hidden;
+        right: -100%;
+        background: #0156ff4d;
+        transition: all 0.3s;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
 
     &__item {
         @include adaptiveValue('padding-right', 26, 1);
@@ -93,5 +122,26 @@ $blueColor: #0156ff;
 }
 .button {
     padding: toRem(10) toRem(15);
+}
+.icon {
+    display: none;
+    @media (max-width: em(720)) {
+        display: block;
+    }
+}
+// .show-bar {
+//     position: absolute;
+//     top: 0;
+//     left: -100%;
+//     width: %;
+//     height: 100%;
+//     background: white;
+//     transition: all 0.5s;
+//     z-index: 100;
+// }
+.open-menu {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
 }
 </style>

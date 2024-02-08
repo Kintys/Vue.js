@@ -7,6 +7,23 @@
             nextEl: '.next-arrow',
             prevEl: '.prev-arrow'
         }"
+        :breakpoints="{
+            320: {
+                slidesPerView: 1
+            },
+            480: {
+                slidesPerView: 2
+            },
+            720: {
+                slidesPerView: 4
+            },
+            1000: {
+                slidesPerView: 5
+            },
+            1100: {
+                slidesPerView: 6
+            }
+        }"
     >
         <swiper-slide class="swiper-box" v-for="product in getItemsList" :key="product.id">
             <ProductCardItem :card-item-data="product"

@@ -2,7 +2,7 @@
     <MainMasterPage>
         <div class="create">
             <div class="create__container">
-                <LoginCard :login-card-data="cteateTitleObj" v-model:newEmail="newEmail" v-model:newPass="newPassword">
+                <LoginCard :login-card-data="createTitleObj" v-model:newEmail="newEmail" v-model:newPass="newPassword">
                     <template #card-actions>
                         <div>
                             <v-btn @click="onCreateNewAcc(newEmail, newPassword)" class="button">{{
@@ -36,7 +36,7 @@ function onCreateNewAcc(email, password) {
     )
 }
 
-const cteateTitleObj = reactive({
+const createTitleObj = reactive({
     title: 'createAccPage.title'
 })
 </script>
