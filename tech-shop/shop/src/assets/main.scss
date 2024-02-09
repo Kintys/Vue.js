@@ -74,14 +74,14 @@
 }
 
 .button {
-    padding: toRem(30) toRem(35);
+    padding: toRem(20) toRem(35);
     background-color: #0156ff;
     border-radius: toRem(50);
 	align-items: center;
 	display: flex;
 	justify-content: center;
     color: #fff;
-	font-size: toRem(14);
+	@include adaptiveValue("font-size",14 ,12 );
     font-weight: 500;
 	box-shadow: none;
     @media (any-hover: hover) {

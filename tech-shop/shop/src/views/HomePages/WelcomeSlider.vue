@@ -1,6 +1,6 @@
 <template>
     <section class="welcome">
-        <div class="weclome__container">
+        <div class="welcome__container">
             <swiper
                 class="welcome-swiper"
                 :space-between="5"
@@ -53,8 +53,14 @@ const modules = ref([Navigation, Autoplay])
 
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';
+.welcome {
+    // .weclome__container
+
+    &__container {
+        position: relative;
+    }
+}
 .welcome-swiper {
-    position: relative;
     // .welcome-swiper__slider
 
     &__slider {
@@ -72,6 +78,9 @@ const modules = ref([Navigation, Autoplay])
         position: absolute;
         top: 45%;
         z-index: 2;
+        @media (max-width: $tablet) {
+            display: none;
+        }
     }
 }
 .next-arrow {

@@ -25,8 +25,11 @@ const getImageUrl = (img) => {
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';
 .info {
-    @include adaptiveValue('padding-top', 100, 50);
+    @include adaptiveValue('padding-top', 100, 90);
     @include adaptiveValue('padding-bottom', 45, 25);
+    @media (max-width: $mobileSmall) {
+        padding-top: toRem(40);
+    }
     // .info__container
 
     &__container {
@@ -39,18 +42,24 @@ const getImageUrl = (img) => {
     &__content {
         display: flex;
         justify-content: space-between;
+        row-gap: toRem(50);
         max-width: toRem(1055);
+        @media (max-width: $mobile) {
+            flex-direction: column;
+        }
     }
 
     // .info__icon
     &__block {
-        width: 18.402778%;
-        height: 60.805861%; /* 166/273 */
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        text-align: center;
+        @media (min-width: $mobile) {
+            justify-content: center;
+            text-align: center;
+            width: 18.402778%;
+            height: 60.805861%; /* 166/273 */
+        }
     }
     &__icon {
         display: flex;

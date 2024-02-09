@@ -35,16 +35,18 @@ import ProductOfferLine from './products/ProductOfferLine.vue'
     &__headline {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         &:not(:last-child) {
             margin-bottom: toRem(14);
         }
     }
     &__title {
-        font-size: toRem(22);
+        @include adaptiveValue('font-size', 22, 18);
         font-weight: 600;
         padding-left: toRem(6);
     }
     &__show-more {
+        @include adaptiveValue('font-size', 14, 12);
         color: #0156ff;
         @media (any-hover: hover) {
             &:hover {

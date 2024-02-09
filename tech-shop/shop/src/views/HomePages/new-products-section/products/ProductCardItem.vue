@@ -15,7 +15,7 @@
         <a @click="goToDetailsProduct" class="card-item__picture">
             <img class="card-item__img ibg" :src="cardItemData.img" alt="#" />
         </a>
-        <div class="card-item__opinion">
+        <div class="card-item__opinion center-text">
             <span class="card-item__stars"
                 ><star-rating
                     :inline="true"
@@ -28,10 +28,10 @@
                 >{{ $t('productCard.itemCard.textRev') }}<span>({{ cardItemData.review }})</span>
             </span>
         </div>
-        <p class="card-item__description">{{ showShortDescription }}</p>
+        <p class="card-item__description center-text">{{ showShortDescription }}</p>
         <div class="card-item__prises">
-            <div class="card-item__old-price">${{ cardItemData.oldPrice }}</div>
-            <div class="card-item__price">${{ cardItemData.currentPrice }}</div>
+            <div class="card-item__old-price center-text">${{ cardItemData.oldPrice }}</div>
+            <div class="card-item__price center-text">${{ cardItemData.currentPrice }}</div>
         </div>
     </article>
 </template>
@@ -166,6 +166,11 @@ function goToDetailsProduct() {
         font-size: toRem(18);
         font-weight: 600;
         line-height: 140%;
+    }
+    .center-text {
+        @media (max-width: $tablet) {
+            align-self: center;
+        }
     }
 }
 </style>

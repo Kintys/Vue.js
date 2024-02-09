@@ -42,6 +42,7 @@ $text-field-affix-color: #020203;
     // .footer__container
 
     &__container {
+        @include adaptiveValue('padding-bottom', 20, 10);
     }
 
     // .footer__headline-block
@@ -50,14 +51,20 @@ $text-field-affix-color: #020203;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        @media (max-width: $tablet) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            @include adaptiveValue('row-gap', 10, 7);
+        }
         &:not(:last-child) {
-            margin-bottom: toRem(45);
+            @include adaptiveValue('margin-bottom', 45, 15);
         }
     }
     // .footer__title
 
     &__title {
-        font-size: toRem(38);
+        @include adaptiveValue('font-size', 38, 20);
         font-weight: 500;
         line-height: 132.5%; /* 50.35px */
         &:not(:last-child) {
@@ -68,22 +75,33 @@ $text-field-affix-color: #020203;
     // .footer__subtitle
 
     &__subtitle {
-        font-size: toRem(16);
-
+        @include adaptiveValue('font-size', 16, 13);
         font-weight: 300;
-        column-gap: toRem(23);
+        @include adaptiveValue('column-gap', 23, 10);
         line-height: 132.5%; /* 21.2px */
     }
 
     &__subscribe {
         display: flex;
-        max-width: toRem(565);
+        width: 100%;
+        align-items: center;
+        justify-content: center;
         @include adaptiveValue('column-gap', 20, 10);
+        @media (min-width: $tablet) {
+            max-width: toRem(565);
+        }
+        @media (max-width: $mobileSmall) {
+            flex-direction: column;
+            row-gap: toRem(10);
+        }
     }
 
     &__email {
-        width: toRem(391);
+        width: 100%;
         margin-right: toRem(2);
+        @media (min-width: $mobileSmall) {
+            width: toRem(391);
+        }
     }
     &__input {
         border: toRem(1) solid white;
@@ -94,6 +112,18 @@ $text-field-affix-color: #020203;
     &__links-list {
         display: grid;
         grid-template-columns: repeat(5, auto);
+        row-gap: toRem(8);
+        column-gap: toRem(8);
+        @media (max-width: $tablet) {
+            grid-template-columns: repeat(4, auto);
+        }
+        @media (max-width: $mobile) {
+            grid-template-columns: repeat(3, auto);
+        }
+        @media (max-width: $mobileSmall) {
+            grid-template-columns: auto;
+            text-align: center;
+        }
     }
 }
 </style>

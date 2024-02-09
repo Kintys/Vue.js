@@ -56,17 +56,19 @@ function goToCreate() {
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';
 .login {
-    &__container {
-    }
     &__card {
         display: flex;
         justify-content: center;
-        column-gap: toRem(30);
+        @include adaptiveValue('column-gap', 30, 15);
+        row-gap: toRem(10);
+        @media (max-width: $tablet) {
+            flex-direction: column;
+        }
     }
     // .login__page-title
 
     &__page-title {
-        font-size: toRem(32);
+        @include adaptiveValue('font-size', 32, 18);
         font-weight: 600;
         &:not(:last-child) {
             margin-bottom: toRem(21);
@@ -87,7 +89,7 @@ function goToCreate() {
 
     &__title {
         &:not(:last-child) {
-            margin-bottom: toRem(25);
+            @include adaptiveValue('margin-bottom', 25, 15);
         }
     }
 
@@ -108,5 +110,8 @@ function goToCreate() {
             content: '•';
         }
     }
+}
+.button {
+    align-self: flex-start;
 }
 </style>

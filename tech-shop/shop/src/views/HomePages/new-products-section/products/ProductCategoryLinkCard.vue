@@ -36,11 +36,15 @@ const getImageUrl = (name) => {
     align-items: center;
     flex-direction: column;
     width: toRem(235);
+    min-height: 100%;
     background: var(--background-image) 0 0 / cover;
     @media (any-hover: hover) {
         &:hover {
-            outline: 1px solid #0156ff;
+            outline: toRem(1) solid #0156ff;
         }
+    }
+    @media (max-width: $tablet) {
+        width: 100%;
     }
     &__box {
         display: flex;

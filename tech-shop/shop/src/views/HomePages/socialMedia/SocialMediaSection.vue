@@ -21,10 +21,11 @@ const { getItemsList } = storeToRefs(useSocialListStore())
 @import '@/assets/adaptive.scss';
 .social-media {
     @include adaptiveValue('padding-top', 43, 20);
+
     // .social-media__title
 
     &__title {
-        font-size: toRem(22);
+        @include adaptiveValue('font-size', 22, 18);
         font-weight: 600;
         &:not(:last-child) {
             margin-bottom: toRem(21);
@@ -35,9 +36,20 @@ const { getItemsList } = storeToRefs(useSocialListStore())
 
     &__cards {
         display: grid;
+        justify-content: center;
         grid-template-columns: repeat(6, auto);
+        @media (max-width: em(1210)) {
+            grid-template-columns: repeat(4, auto);
+        }
+        @media (max-width: $mobile) {
+            grid-template-columns: repeat(2, auto);
+        }
+        @media (max-width: $mobileSmall) {
+            grid-template-columns: auto;
+        }
         column-gap: toRem(8);
-        row-gap: toRem(20);
+        @include adaptiveValue('row-gap', 20, 10);
+        @include adaptiveValue('column-gap', 8, 5);
     }
 }
 </style>

@@ -32,7 +32,7 @@ const { currentLocale } = useLocales()
     flex-direction: column;
     align-items: center;
     max-width: toRem(225);
-    height: toRem(322);
+    min-height: toRem(322);
     padding: toRem(1);
     @media (any-hover: hover) {
         &:hover {

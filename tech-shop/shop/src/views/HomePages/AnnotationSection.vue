@@ -15,7 +15,7 @@
                                 <p class="annotation__text">
                                     {{ annotation.advice[currentLocale] }}
                                 </p>
-                                <span class="annotation__autor">- {{ annotation.userName }}</span>
+                                <span class="annotation__author">- {{ annotation.userName }}</span>
                             </div>
                         </div>
                     </swiper-slide>
@@ -61,6 +61,10 @@ import 'swiper/scss/pagination'
         width: 80.555556%;
         height: 79.487179%;
         padding: toRem(49) toRem(119);
+        @include adaptiveValue('padding-top', 49, 15);
+        @include adaptiveValue('padding-bottom', 49, 15);
+        @include adaptiveValue('padding-left', 119, 40);
+        @include adaptiveValue('padding-right', 119, 40);
         position: relative;
     }
 
@@ -68,12 +72,11 @@ import 'swiper/scss/pagination'
         position: absolute;
         top: 5.806452%; /* 49/310 */
         left: 6%; /* 119/1160 */
-        font-size: toRem(96);
+        @include adaptiveValue('font-size', 96, 40);
     }
     // .annotation__content
     &__content {
         display: flex;
-        // column-gap: toRem(26);
     }
     // .annotation__icon
 
@@ -84,13 +87,13 @@ import 'swiper/scss/pagination'
 
     // .annotation__text
     &__text {
-        font-size: toRem(18);
+        @include adaptiveValue('font-size', 18, 13);
         &:not(:last-child) {
-            margin-bottom: toRem(20);
+            @include adaptiveValue('margin-bottom', 20, 5);
         }
     }
     // .annotation__autor
-    &__autor {
+    &__author {
         text-align: right;
         font-size: toRem(14);
     }
@@ -100,6 +103,10 @@ import 'swiper/scss/pagination'
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @media (max-width: $mobile) {
+            flex-direction: column-reverse;
+            row-gap: toRem(10);
+        }
     }
 
     // .annotation__button

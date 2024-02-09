@@ -9,7 +9,7 @@
                 hide-details="auto"
                 :rules="emailRules"
                 v-model="email"
-                class="login-card__input"
+                class="login-card__input input-email"
                 variant="solo"
             ></v-text-field>
             <label> {{ $t('loginBox.inputPassword.label') }}<span class="login-card__req-star">*</span> </label>
@@ -22,6 +22,7 @@
                 :label="$t('loginBox.inputPassword.placeholder')"
                 hint="At least 8 characters"
                 counter
+                class="login-card__input input-password"
                 @click:append="show1 = !show1"
                 variant="solo"
             ></v-text-field>
@@ -118,8 +119,10 @@ function loginWithGoogleEmailPopup() {
     @include adaptiveValue('padding-bottom', 37, 20);
     display: flex;
     flex-direction: column;
-    flex: 0 1 toRem(564);
     row-gap: toRem(25);
+    @media (min-width: $tablet) {
+        flex: 0 1 toRem(564);
+    }
     &__title {
         font-size: toRem(20);
     }
@@ -138,7 +141,6 @@ function loginWithGoogleEmailPopup() {
     }
 
     &__input {
-        max-width: toRem(410);
     }
     &__actions {
         display: flex;
@@ -178,11 +180,6 @@ function loginWithGoogleEmailPopup() {
                 text-decoration: underline;
             }
         }
-    }
-
-    // .auth__google
-
-    &__google {
     }
 }
 </style>

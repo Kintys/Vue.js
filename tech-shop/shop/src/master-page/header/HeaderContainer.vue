@@ -4,29 +4,23 @@
             <div class="header__logo-img">
                 <img src="../../assets/icons/menu/logo.svg" class="img-logo ibg" alt="Logo" />
             </div>
-            <nav class="header__nav navigation">
+            <nav class="header__nav navigation" :class="{ ['open-menu']: burger }">
                 <router-link class="navigation__item" :to="{ name: 'home' }"> home</router-link>
                 <router-link class="navigation__item" :to="{ name: 'catalog' }">catalog</router-link>
             </nav>
+            <v-app-bar-nav-icon class="burger-icon" @click="burger = !burger"></v-app-bar-nav-icon>
             <div class="header__actions actions">
                 <IconCard />
                 <local-select />
                 <user-profil v-if="getUser" :user="getUser" />
                 <v-btn v-else class="button" @click="toLoginPage">Login</v-btn>
             </div>
-            <Slide class="icon" :right="true">
-                <nav class="header__nav navigation">
-                    <router-link class="navigation__item" :to="{ name: 'home' }"> home</router-link>
-                    <router-link class="navigation__item" :to="{ name: 'catalog' }">catalog</router-link>
-                </nav>
-            </Slide>
         </div>
     </div>
 </template>
 
 <script setup>
-import { Slide } from 'vue3-burger-menu'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import UserProfil from './UserProfil.vue'
 import IconCard from '@/master-page/header/IconCard.vue'
 import LocalSelect from './LocalSelect.vue'
@@ -36,13 +30,9 @@ import { useAuthStore } from '@/stores/auth.js'
 
 const emit = defineEmits(['update:openMenuAction'])
 
-const drawer = ref(false)
+const burger = ref(false)
 const router = useRouter()
 const { getUser } = useAuthStore()
-
-// watch(drawer, (newVal) => {
-//     if (newVal) document.body.style.overflow = 'hidden'
-// })
 
 function toLoginPage() {
     router.push({
@@ -55,7 +45,6 @@ function toLoginPage() {
 @import '@/assets/adaptive.scss';
 
 $blueColor: #0156ff;
-
 .header {
     background: #ffff;
     z-index: 50;
@@ -74,11 +63,13 @@ $blueColor: #0156ff;
         border-bottom: toRem(1) solid gray;
     }
     &__logo-img {
+        z-index: 50;
         .img-logo {
             aspect-ratio: 33.5/41;
         }
     }
     &__actions {
+        z-index: 50;
         margin-left: 0.3125rem;
         display: flex;
         column-gap: toRem(10);
@@ -94,16 +85,28 @@ $blueColor: #0156ff;
     @include adaptiveValue('column-gap', 5, 1);
     font-weight: 600;
     @media (max-width: $tablet) {
-        position: absolute;
+        position: fixed;
+        flex-direction: column;
+        font-size: toRem(20);
+        color: white;
         top: 0;
-        opacity: 0;
-        visibility: hidden;
-        right: -100%;
-        background: #0156ff4d;
+        right: -120%;
+        background: #0156ff;
         transition: all 0.3s;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 100%;
-        z-index: 10;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background-color: white;
+            @include adaptiveValue('min-height', 170, 100);
+        }
     }
 
     &__item {
@@ -129,19 +132,13 @@ $blueColor: #0156ff;
         display: block;
     }
 }
-// .show-bar {
-//     position: absolute;
-//     top: 0;
-//     left: -100%;
-//     width: %;
-//     height: 100%;
-//     background: white;
-//     transition: all 0.5s;
-//     z-index: 100;
-// }
 .open-menu {
     right: 0;
-    opacity: 1;
-    visibility: visible;
+}
+.burger-icon {
+    @include adaptiveValue('margin-left', 30, 5);
+    @media (min-width: $tablet) {
+        display: none;
+    }
 }
 </style>

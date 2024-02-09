@@ -19,15 +19,18 @@
     width: 100%;
     column-gap: toRem(2);
     align-items: center;
+    padding: toRem(0) toRem(7);
 
     // .offer__logo
 
     &__logo {
-        margin-right: toRem(14);
-        width: toRem(77);
+        @include adaptiveValue('margin-right', 14, 5);
+        // width: toRem(77);
         height: toRem(27);
-        padding-right: toRem(11);
+        @include adaptiveValue('padding-right', 11, 5);
         border-right: toRem(2) solid #00aeb8;
+        @include adaptiveValue('width', 77, 63);
+        @include adaptiveValue('height', 27, 24);
     }
 
     // .offer__text
@@ -37,18 +40,22 @@
         align-items: center;
         column-gap: toRem(5);
         color: #272560;
-        font-size: toRem(18);
+        @include adaptiveValue('font-size', 18, 14);
         line-height: 120.5%;
         b {
             font-weight: 600;
+        }
+        @media (max-width: $tablet) {
+            display: block;
         }
     }
 
     // .offer__link
 
     &__link {
+        text-wrap: nowrap;
         color: #0156ff;
-        font-size: toRem(14);
+        @include adaptiveValue('font-size', 14, 12);
         @media (any-hover: hover) {
             &:hover {
                 text-decoration: underline;

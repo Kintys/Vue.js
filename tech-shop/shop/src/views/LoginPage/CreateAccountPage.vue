@@ -42,6 +42,7 @@ const createTitleObj = reactive({
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/adaptive.scss';
 .create {
     // .create__container
 

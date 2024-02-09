@@ -31,7 +31,7 @@ const categoryProductsList = computed(() => {
 @import '@/assets/adaptive.scss';
 .product-manager {
     &:not(:last-child) {
-        margin-bottom: toRem(31);
+        @include adaptiveValue('margin-bottom', 31, 15);
     }
 }
 </style>
