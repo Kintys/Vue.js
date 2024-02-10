@@ -50,13 +50,14 @@ function onClearBrandList() {
         display: grid;
         row-gap: toRem(16);
         padding: toRem(28) toRem(17);
+        // @include adaptiveValue('padding-bottom', 17, 15);
     }
 
     // .filter-brand-panel__title
 
     &__title {
         text-align: center;
-        font-size: toRem(16);
+        @include adaptiveValue('font-size', 16, 14);
         font-weight: 700;
     }
 
@@ -68,6 +69,9 @@ function onClearBrandList() {
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(3, auto);
         gap: toRem(3);
+        @media (max-width: $mobile) {
+            grid-template-columns: repeat(3, auto);
+        }
     }
     &__item-brand {
         border: toRem(0.5) solid rgba(102, 102, 102, 0.209);

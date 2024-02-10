@@ -6,7 +6,6 @@
                     <p class="about-product__description">
                         {{ getCurrentItem?.description[currentLocale] }}
                     </p>
-                    <div class="about-product__colors"></div>
                 </v-window-item>
             </template>
             <template #item-window-2>

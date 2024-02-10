@@ -12,7 +12,6 @@
             <div class="product-box__price">${{ dividedString(item.currentPrice) }}</div>
             <div class="product-box__input">{{ item.qtyToBuy }}</div>
             <div class="product-box__subtotal">${{ dividedString(item.subTotal) }}</div>
-
             <button class="product-box__delete" @click="deleteFromCartList(item.id)">
                 <font-awesome-icon icon="circle-xmark" style="color: #a2a6b0" />
             </button>
@@ -51,6 +50,11 @@ const { dividedString } = useSeparateDotFunc()
 
     &__product-box {
     }
+    &__actions {
+        @media (max-width: em(520)) {
+            justify-self: center;
+        }
+    }
     &__btn {
         border-radius: toRem(20);
         background-color: black;
@@ -71,10 +75,16 @@ const { dividedString } = useSeparateDotFunc()
     font-weight: 600;
     border-bottom: toRem(1) solid #cacdd8;
     display: grid;
+    @media (max-width: em(520)) {
+        display: none;
+    }
+    &:not(:last-child) {
+        margin-bottom: toRem(10);
+    }
 
     grid:
         'item item item price qty subtotal subtotal' 1fr
-        / 1fr 1fr 1fr 1fr 1fr 1fr auto;
+        / toRem(140) 1fr 1fr 1fr 1fr 1fr auto;
     // .table-titles__item
     justify-items: center;
     &__item {
@@ -102,16 +112,24 @@ const { dividedString } = useSeparateDotFunc()
     }
 }
 .product-box {
-    display: flex;
     align-items: center;
     padding-bottom: toRem(15);
     border-bottom: toRem(1) solid #cacdd8;
     display: grid;
     justify-items: center;
+    @media (max-width: em(520)) {
+        display: flex;
+        flex-direction: column;
+        row-gap: toRem(10);
+        text-align: center;
+    }
+    &:not(:last-child) {
+        margin-bottom: toRem(10);
+    }
 
     grid:
         'img description description current-price input total delete' 1fr
-        / 1fr 1fr 1fr 1fr 1fr 1fr auto;
+        / toRem(150) 1fr 1fr 1fr 1fr 1fr auto;
     // .product-box__description
 
     &__description {
@@ -125,19 +143,42 @@ const { dividedString } = useSeparateDotFunc()
 
     &__price {
         grid-area: current-price;
+        @media (max-width: em(520)) {
+            &::before {
+                content: 'Price:';
+                font-weight: 600;
+                margin-right: toRem(5);
+            }
+        }
     }
 
     // .product-box__input
 
     &__input {
         grid-area: input;
+        @media (max-width: em(520)) {
+            &::before {
+                content: 'Qty:';
+                font-weight: 600;
+                margin-right: toRem(5);
+            }
+        }
     }
 
     // .product-box__subtotal
 
     &__subtotal {
         grid-area: total;
-        margin-left: toRem(20);
+        @media (max-width: em(520)) {
+            &::before {
+                content: 'Subtotal:';
+                font-weight: 600;
+                margin-right: toRem(5);
+            }
+        }
+        @media (min-width: em(520)) {
+            margin-left: toRem(20);
+        }
     }
 
     // .product-box__delete
@@ -145,6 +186,9 @@ const { dividedString } = useSeparateDotFunc()
     &__delete {
         grid-area: delete;
         justify-self: end;
+        @media (max-width: em(500)) {
+            align-self: flex-end;
+        }
     }
 }
 </style>

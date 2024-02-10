@@ -47,8 +47,10 @@ const createTitleObj = reactive({
     // .create__container
 
     &__container {
-        display: flex;
-        justify-content: center;
+        @media (min-width: $tablet) {
+            display: flex;
+            justify-content: center;
+        }
     }
 }
 </style>

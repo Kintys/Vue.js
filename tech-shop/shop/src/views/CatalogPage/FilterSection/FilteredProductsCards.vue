@@ -43,11 +43,20 @@ onMounted(() => {
     &__products {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        @media (max-width: em(1210)) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (max-width: $tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: $mobile) {
+            grid-template-columns: auto;
+        }
     }
     &__inline-product {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 330px;
+        &:not(:last-child) {
+            margin-bottom: toRem(20);
+        }
     }
 }
 </style>

@@ -72,6 +72,10 @@ const modules = ref([Pagination])
     &__pagination {
         display: flex;
         justify-content: flex-end;
+        @media (max-width: $tablet) {
+            justify-content: center;
+        }
+        margin-top: toRem(10);
         width: 100%;
     }
 }

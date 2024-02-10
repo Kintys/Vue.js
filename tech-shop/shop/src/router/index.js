@@ -14,10 +14,10 @@ const router = createRouter({
         {
             path: '/catalog',
             name: 'catalog',
-            component: () => import('@/views/CatalogPage/CatalogPageMain.vue'),
-            meta: {
-                requireAuth: true
-            }
+            component: () => import('@/views/CatalogPage/CatalogPageMain.vue')
+            // meta: {
+            //     requireAuth: true
+            // }
         },
         {
             path: '/editor',
@@ -27,10 +27,10 @@ const router = createRouter({
         {
             path: '/product:id',
             name: 'product',
-            component: () => import('@/views/productPage/MainProductPage.vue'),
-            meta: {
-                requireAuth: true
-            }
+            component: () => import('@/views/productPage/MainProductPage.vue')
+            // meta: {
+            //     requireAuth: true
+            // }
         },
         {
             path: '/cart',

@@ -3,29 +3,30 @@
         <h4 class="login-card__title">{{ $t(`${loginCardData.title}`) }}</h4>
         <p v-if="loginCardData.subTitle" class="block-login__subtitle">{{ $t(`${loginCardData.subTitle}`) }}</p>
         <slot name="card-block">
-            <label> {{ $t('loginBox.inputLogin.label') }}<span class="login-card__req-star">*</span></label>
-            <v-text-field
-                :label="$t('loginBox.inputLogin.placeholder')"
-                hide-details="auto"
-                :rules="emailRules"
-                v-model="email"
-                class="login-card__input input-email"
-                variant="solo"
-            ></v-text-field>
-            <label> {{ $t('loginBox.inputPassword.label') }}<span class="login-card__req-star">*</span> </label>
-            <v-text-field
-                v-model="password"
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[passwordRules.required, passwordRules.min]"
-                :type="show1 ? 'text' : 'password'"
-                name="input-10-1"
-                :label="$t('loginBox.inputPassword.placeholder')"
-                hint="At least 8 characters"
-                counter
-                class="login-card__input input-password"
-                @click:append="show1 = !show1"
-                variant="solo"
-            ></v-text-field>
+            <div class="login-card__forms">
+                <label> {{ $t('loginBox.inputLogin.label') }}<span class="login-card__req-star">*</span></label>
+                <v-text-field
+                    :label="$t('loginBox.inputLogin.placeholder')"
+                    hide-details="auto"
+                    :rules="emailRules"
+                    v-model="email"
+                    class="login-card__input"
+                    variant="solo"
+                ></v-text-field>
+                <label> {{ $t('loginBox.inputPassword.label') }}<span class="login-card__req-star">*</span> </label>
+                <v-text-field
+                    v-model="password"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :rules="[passwordRules.required, passwordRules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    :label="$t('loginBox.inputPassword.placeholder')"
+                    hint="At least 8 characters"
+                    counter
+                    @click:append="show1 = !show1"
+                    variant="solo"
+                ></v-text-field>
+            </div>
         </slot>
         <slot name="card-actions"
             ><div class="login-card__actions auth">
@@ -119,18 +120,26 @@ function loginWithGoogleEmailPopup() {
     @include adaptiveValue('padding-bottom', 37, 20);
     display: flex;
     flex-direction: column;
+    align-items: center;
     row-gap: toRem(25);
     @media (min-width: $tablet) {
         flex: 0 1 toRem(564);
+        align-items: flex-start;
     }
     &__title {
-        font-size: toRem(20);
+        @include adaptiveValue('font-size', 20, 18);
+        @media (max-width: $tablet) {
+        }
     }
 
     &__subtitle {
-        font-size: toRem(14);
+        @include adaptiveValue('font-size', 14, 12);
         font-weight: 300;
         line-height: 214.285714%; /* 30/14 */
+    }
+    &__forms {
+        align-self: flex-start;
+        width: 100%;
     }
     &__req-star {
         color: #c94d3f;
@@ -141,6 +150,7 @@ function loginWithGoogleEmailPopup() {
     }
 
     &__input {
+        margin-right: toRem(40);
     }
     &__actions {
         display: flex;
@@ -179,6 +189,11 @@ function loginWithGoogleEmailPopup() {
             &:hover {
                 text-decoration: underline;
             }
+        }
+    }
+    &__google {
+        @media (max-width: $tablet) {
+            text-align: center;
         }
     }
 }

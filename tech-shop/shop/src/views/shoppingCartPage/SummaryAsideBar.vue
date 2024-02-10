@@ -184,7 +184,10 @@ async function addToOrder() {
     // .summary__body
 
     &__body {
-        padding: toRem(30) toRem(25);
+        @include adaptiveValue('padding-bottom', 30, 15);
+        @include adaptiveValue('padding-top', 30, 15);
+        @include adaptiveValue('padding-left', 25, 12);
+        @include adaptiveValue('padding-right', 25, 12);
     }
 
     // .summary__box
@@ -222,7 +225,7 @@ async function addToOrder() {
     }
     // .summary__title
     &__title {
-        font-size: toRem(24);
+        @include adaptiveValue('font-size', 24, 18);
         font-weight: 600;
 
         &:not(:last-child) {

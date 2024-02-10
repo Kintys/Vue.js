@@ -22,7 +22,12 @@ import ShoppingCardManager from './ShoppingCardManager.vue'
 
     &__container {
         display: grid;
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: 1fr auto;
+        @media (max-width: em(1100)) {
+            grid-template-columns: auto;
+            row-gap: toRem(10);
+        }
+
         @include adaptiveValue('column-gap', 35, 20);
         &:first-child {
             align-items: start;

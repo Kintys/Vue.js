@@ -14,10 +14,12 @@
         </v-tabs>
         <div class="actions-bar__add-actions">
             <div class="actions-bar__cost">
-                <span>On Sale from</span>
-                <b>${{ priceWithCount }}</b>
+                <div>
+                    <span>On Sale from</span>
+                    <b>${{ priceWithCount }}</b>
+                </div>
+                <input v-model="numberProduct" class="actions-bar__input" type="number" />
             </div>
-            <input v-model="numberProduct" class="actions-bar__input" type="number" />
             <div class="actions-bar__buttons">
                 <v-btn class="actions-bar__button button" @click="addProductToCart">Add to Cart</v-btn>
                 <v-btn href="https://www.paypal.com/" class="actions-bar__pay-pal button"
@@ -121,17 +123,20 @@ watch(selectedTab, (newVal) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: toRem(30) 0;
+    @include adaptiveValue('padding-bottom', 30, 15);
+    @include adaptiveValue('padding-top', 30, 15);
     border-bottom: toRem(1) solid gray;
-    // .actions-bar__tabs-bar
-
-    &__tabs-bar {
+    @media (max-width: $tablet) {
+        flex-direction: column-reverse;
+        row-gap: toRem(5);
     }
 
     // .actions-bar__add-actions
     &__tabs-item {
-        font-size: toRem(14);
-        font-weight: 600;
+        @include adaptiveValue('font-size', 14, 12);
+        @media (min-width: $tablet) {
+            font-weight: 600;
+        }
         color: grey;
     }
 
@@ -139,14 +144,18 @@ watch(selectedTab, (newVal) => {
         align-items: center;
         display: flex;
         column-gap: toRem(21);
+        @media (max-width: $mobile) {
+            flex-direction: column;
+            row-gap: toRem(5);
+        }
     }
 
     // .actions-bar__cost
 
     &__cost {
         display: flex;
+        align-items: center;
         column-gap: toRem(4);
-        margin-right: toRem(10);
     }
 
     &__input {

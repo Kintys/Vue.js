@@ -23,20 +23,28 @@ import FilterSortActionBar from './FilterSortActionBar.vue'
     // .filter__title
 
     &__title {
+        @include adaptiveValue('font-size', 32, 25);
         font-size: toRem(32);
         font-weight: 600;
         &:not(:last-child) {
-            margin-bottom: toRem(19);
+            @include adaptiveValue('margin-bottom', 19, 10);
         }
     }
 
     // .filter__body
 
     &__body {
-        display: grid;
-        column-gap: toRem(40);
+        @include adaptiveValue('column-gap', 40, 15);
+        // column-gap: toRem(40);
         align-items: start;
-        grid-template-columns: 17.524823% auto;
+        grid-template-columns: auto 1fr;
+        // grid-template-columns: 17.524823% auto;
+        @media (max-width: $mobile) {
+            grid-template-columns: auto;
+        }
+        @media (min-width: $mobileSmall) {
+            display: grid;
+        }
     }
 }
 </style>

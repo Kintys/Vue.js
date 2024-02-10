@@ -132,6 +132,7 @@ function addSelectedParams() {
     // .filter-panel__button
 
     &__button {
+        width: 100%;
         &:not(:last-child) {
             margin-bottom: toRem(35);
         }
@@ -184,7 +185,6 @@ function addSelectedParams() {
             margin-bottom: toRem(10);
         }
         width: toRem(30);
-
         height: toRem(30);
         position: relative;
     }

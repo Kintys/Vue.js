@@ -34,9 +34,10 @@ const { getCurrentItem } = storeToRefs(useCatalogStore())
 @import '@/assets/adaptive.scss';
 .about-product {
     &:not(:last-child) {
-        margin-bottom: toRem(100);
+        @include adaptiveValue('margin-bottom', 100, 20, 0, 1240, 998);
     }
-    padding-left: toRem(60);
+    @include adaptiveValue('padding-left', 60, 10);
+
     // .about-product__header
 
     &__header {
@@ -104,6 +105,10 @@ const { getCurrentItem } = storeToRefs(useCatalogStore())
         flex-grow: 1;
         display: flex;
         justify-content: space-between;
+        @media (max-width: $mobile) {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     // .about-product__contacts

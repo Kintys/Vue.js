@@ -20,7 +20,7 @@
         </FilterContentComp>
         <FilterContentComp>
             <template #filter-card>
-                <a href="#">
+                <a class="filter-content-box__link" href="#">
                     <v-img src="../../../assets/img/filter/filterImgBar.png" height="100%" aspect-ratio="1/1"
                 /></a>
             </template>
@@ -57,6 +57,11 @@ import FilterContentComp from './FilterContentComp.vue'
         font-size: toRem(13);
         font-weight: 400;
         line-height: 130%; /* 16.9px */
+    }
+    &__link {
+        @media (max-width: $tablet) {
+            display: none;
+        }
     }
 }
 </style>

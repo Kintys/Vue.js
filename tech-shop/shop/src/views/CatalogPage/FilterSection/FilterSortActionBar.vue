@@ -118,6 +118,10 @@ watch(isSelectedStyle, (newVal) => {
 .sort-bar {
     display: flex;
     // .sort-bar__back-link
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        row-gap: toRem(10);
+    }
     width: 100%;
     align-items: center;
     &__action-block {
@@ -136,11 +140,21 @@ watch(isSelectedStyle, (newVal) => {
     &__select-block {
         display: flex;
         column-gap: toRem(10);
+        &:not(:last-child) {
+            margin-bottom: toRem(10);
+        }
+        @media (max-width: em(425)) {
+            flex-direction: column;
+            row-gap: toRem(5);
+        }
     }
 
     // .sort-bar__show-card
 
     &__show-card {
+        @media (max-width: $mobile) {
+            display: none;
+        }
     }
 
     // .sort-bar__grid
@@ -176,30 +190,3 @@ watch(isSelectedStyle, (newVal) => {
     }
 }
 </style>
-
-<!--   <v-autocomplete
-                flat
-                variant="outlined"
-                prefix="Sort By:"
-                :items="sortList"
-                rounded="2px"
-                base-color="#CACDD8"
-                autofocus="none"
-                density="default"
-                center-affix="true"
-                color="black"
-            >
-            </v-autocomplete>
-            <v-autocomplete
-                flat
-                variant="outlined"
-                prefix="Sort By:"
-                :items="sortList"
-                rounded="2px"
-                base-color="#CACDD8"
-                autofocus="none"
-                density="default"
-                center-affix="true"
-                color="black"
-            >
-            </v-autocomplete> -->

@@ -102,6 +102,12 @@ function addProductToCardList() {
     display: flex;
     // .card-item__media
     padding: toRem(14) toRem(36);
+    @media (max-width: $tablet) {
+        flex-direction: column;
+        align-items: center;
+        row-gap: toRem(10);
+        border-bottom: toRem(1) solid black;
+    }
     @media (any-hover: hover) {
         &:hover {
             box-shadow: 0 toRem(5) toRem(15) 0 rgba(0, 0, 0, 0.14);
@@ -160,6 +166,9 @@ function addProductToCardList() {
     }
     &__status {
         text-wrap: nowrap;
+        @media (max-width: $tablet) {
+            align-self: flex-end;
+        }
     }
     // .card-item__info-wrapper
 
@@ -235,13 +244,16 @@ function addProductToCardList() {
     &__status-info {
         display: flex;
         gap: toRem(5);
-        align-items: center;
+        align-items: flex-start;
+
+        &--in-stock {
+            color: #78a962;
+        }
+        &--info--absence {
+            color: red;
+        }
     }
 
     // .card-item__status-info--in-stock
-
-    &__status-info--in-stock {
-        color: #78a962;
-    }
 }
 </style>

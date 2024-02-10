@@ -36,13 +36,21 @@ const tab = ref('one')
     // .details-product__body
 
     &__body {
-        display: grid;
         grid-template-columns: 55% 50%;
+        @media (max-width: em(1075)) {
+            grid-template-columns: auto;
+        }
+        @media (min-width: em(550)) {
+            display: grid;
+        }
     }
 
     // .details-product__product-description
 
     &__product-description {
+        &:not(:last-child) {
+            margin-bottom: toRem(10);
+        }
         background: #f5f7ff;
         @include adaptiveValue('padding-top', 50, 20);
         @include adaptiveValue('padding-bottom', 30, 15);
@@ -54,6 +62,10 @@ const tab = ref('one')
 
     &__product-picture {
         align-self: end;
+        @media (max-width: em(1075)) {
+            justify-self: center;
+            text-align: center;
+        }
     }
 }
 </style>

@@ -112,6 +112,8 @@ function goToCreate() {
     }
 }
 .button {
-    align-self: flex-start;
+    @media (max-width: $tablet) {
+        align-self: center;
+    }
 }
 </style>
