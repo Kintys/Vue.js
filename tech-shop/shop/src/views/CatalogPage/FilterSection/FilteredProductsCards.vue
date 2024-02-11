@@ -42,9 +42,9 @@ onMounted(() => {
 
     &__products {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        @media (max-width: em(1210)) {
-            grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        @media (max-width: em(1050)) {
+            grid-template-columns: repeat(3, 1fr);
         }
         @media (max-width: $tablet) {
             grid-template-columns: repeat(2, 1fr);

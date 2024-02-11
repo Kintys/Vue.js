@@ -41,15 +41,6 @@ const { dividedString } = useSeparateDotFunc()
     display: grid;
     grid-template-rows: repeat(2, 1f);
 
-    // .cart-product__table-titles
-
-    &__table-titles {
-    }
-
-    // .cart-product__product-box
-
-    &__product-box {
-    }
     &__actions {
         @media (max-width: em(520)) {
             justify-self: center;

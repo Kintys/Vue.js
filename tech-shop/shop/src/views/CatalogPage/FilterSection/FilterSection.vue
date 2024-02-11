@@ -34,10 +34,9 @@ import FilterSortActionBar from './FilterSortActionBar.vue'
     // .filter__body
 
     &__body {
-        @include adaptiveValue('column-gap', 40, 15);
         // column-gap: toRem(40);
         align-items: start;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto auto;
         // grid-template-columns: 17.524823% auto;
         @media (max-width: $mobile) {
             grid-template-columns: auto;

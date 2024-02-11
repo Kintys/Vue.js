@@ -14,31 +14,26 @@ const router = createRouter({
         {
             path: '/catalog',
             name: 'catalog',
-            component: () => import('@/views/CatalogPage/CatalogPageMain.vue')
-            // meta: {
-            //     requireAuth: true
-            // }
-        },
-        {
-            path: '/editor',
-            name: 'editor',
-            component: () => import('@/components/EditorPage.vue')
+            component: () => import('@/views/CatalogPage/CatalogPageMain.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/product:id',
             name: 'product',
-            component: () => import('@/views/productPage/MainProductPage.vue')
-            // meta: {
-            //     requireAuth: true
-            // }
+            component: () => import('@/views/productPage/MainProductPage.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/cart',
             name: 'cart',
-            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue')
-            // meta: {
-            //     requireAuth: true
-            // }
+            component: () => import('@/views/shoppingCartPage/MainShoppingCart.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '/login',

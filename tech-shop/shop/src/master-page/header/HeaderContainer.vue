@@ -5,15 +5,15 @@
                 <img src="../../assets/icons/menu/logo.svg" class="img-logo ibg" alt="Logo" />
             </router-link>
             <nav class="header__nav navigation" :class="{ ['open-menu']: burger }">
-                <router-link class="navigation__item" :to="{ name: 'home' }"> home</router-link>
-                <router-link class="navigation__item" :to="{ name: 'catalog' }">catalog</router-link>
+                <router-link class="navigation__item" :to="{ name: 'home' }"> {{ $t('nav.home') }}</router-link>
+                <router-link class="navigation__item" :to="{ name: 'catalog' }">{{ $t('nav.catalog') }}</router-link>
             </nav>
             <v-app-bar-nav-icon class="burger-icon" @click="burger = !burger"></v-app-bar-nav-icon>
             <div class="header__actions actions">
                 <IconCard />
                 <local-select />
                 <user-profil v-if="getUser" :user="getUser" />
-                <v-btn v-else class="button" @click="toLoginPage">Login</v-btn>
+                <v-btn v-else class="button" @click="toLoginPage">{{ $t('nav.login') }}</v-btn>
             </div>
         </div>
     </div>

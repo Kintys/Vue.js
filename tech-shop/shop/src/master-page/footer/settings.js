@@ -1,65 +1,62 @@
 export const linksList = [
     {
-        title: 'Information',
+        title: 'footer.links.information.title',
         linksArr: [
-            { link: '#', label: 'About Us' },
-            { link: '#', label: 'About Zip' },
-            { link: '#', label: 'Privacy Policy' },
-            { link: '#', label: 'Search' },
-            { link: '#', label: 'Terms' },
-            { link: '#', label: 'Orders and Returns' },
-            { link: '#', label: 'Contact Us' },
-            { link: '#', label: 'Advanced Search' },
-            { link: '#', label: 'Newsletter Subscription' }
+            { link: '#', label: 'footer.links.information.linksArr.aboutUs' },
+            { link: '#', label: 'footer.links.information.linksArr.aboutZip' },
+            { link: '#', label: 'footer.links.information.linksArr.privacyPolicy' },
+            { link: '#', label: 'footer.links.information.linksArr.search' },
+            { link: '#', label: 'footer.links.information.linksArr.terms' },
+            { link: '#', label: 'footer.links.information.linksArr.ordersAndReturns' },
+            { link: '#', label: 'footer.links.information.linksArr.contactUs' },
+            { link: '#', label: 'footer.links.information.linksArr.advancedSearch' },
+            { link: '#', label: 'footer.links.information.linksArr.newsletterSubscription' }
         ]
     },
     {
-        title: 'PC Parts',
+        title: 'footer.links.psParts.title',
         linksArr: [
-            { link: '#', label: 'CPUS' },
-            { link: '#', label: 'Add On Cards' },
-            { link: '#', label: 'Privacy Policy' },
-            { link: '#', label: 'Hard Drives (Internal)' },
-            { link: '#', label: 'Graphic Cards' },
-            { link: '#', label: 'Keyboards / Mice' },
-            { link: '#', label: 'Cases / Power Supplies / Cooling' },
-            { link: '#', label: 'RAM (Memory)' },
-            { link: '#', label: 'Software' },
-            { link: '#', label: 'Speakers / Headsets' },
-            { link: '#', label: 'Motherboards' }
+            { link: '#', label: 'footer.links.psParts.linksArr.addOnCards' },
+            { link: '#', label: 'footer.links.psParts.linksArr.privacyPolicy' },
+            { link: '#', label: 'footer.links.psParts.linksArr.graphicCards' },
+            { link: '#', label: 'footer.links.psParts.linksArr.keyboardsMice' },
+            { link: '#', label: 'footer.links.psParts.linksArr.ram' },
+            { link: '#', label: 'footer.links.psParts.linksArr.software' },
+            { link: '#', label: 'footer.links.psParts.linksArr.speakers' },
+            { link: '#', label: 'footer.links.psParts.linksArr.motherboards' }
         ]
     },
     {
-        title: 'Desktop PCs',
+        title: 'footer.links.laptops.title',
         linksArr: [
-            { link: '#', label: 'Custom PCs' },
-            { link: '#', label: 'Servers' },
-            { link: '#', label: 'MSI All-In-One PCs' },
-            { link: '#', label: 'HP/Compaq PCs' },
-            { link: '#', label: 'ASUS PCs' },
-            { link: '#', label: 'Tecs PCs' }
+            { link: '#', label: 'footer.links.laptops.linksArr.everyday' },
+            { link: '#', label: 'footer.links.laptops.linksArr.workstation' },
+            { link: '#', label: 'footer.links.laptops.linksArr.prestige' },
+            { link: '#', label: 'footer.links.laptops.linksArr.tablets' },
+            { link: '#', label: 'footer.links.laptops.linksArr.netbooks' },
+            { link: '#', label: 'footer.links.laptops.linksArr.gamingNotebooks' }
         ]
     },
     {
-        title: 'Laptops',
+        title: 'footer.links.desktopPc.title',
         linksArr: [
-            { link: '#', label: 'Evryday Use Notebooks' },
-            { link: '#', label: 'MSI Workstation Series' },
-            { link: '#', label: 'MSI Prestige Series' },
-            { link: '#', label: 'Tablets and Pads' },
-            { link: '#', label: 'Netbooks' },
-            { link: '#', label: 'Infinity Gaming Notebooks' }
+            { link: '#', label: 'footer.links.desktopPc.linksArr.customPcs' },
+            { link: '#', label: 'footer.links.desktopPc.linksArr.servers' },
+            { link: '#', label: 'footer.links.desktopPc.linksArr.msiAll' },
+            { link: '#', label: 'footer.links.desktopPc.linksArr.hp' },
+            { link: '#', label: 'footer.links.desktopPc.linksArr.asus' },
+            { link: '#', label: 'footer.links.desktopPc.linksArr.tecs' }
         ]
     },
     {
-        title: 'Address',
-        addressItem: [
-            { label: 'Address: 1234 Street Adress City Address, 1234' },
-            { label: 'Phones: <span style="color:#01A4FF;">(00) 1234 5678</span>' },
-            { label: 'We are open: Monday-Thursday: 9:00 AM - 5:30 PM' },
-            { label: 'Friday: 9:00 AM - 6:00 PM' },
-            { label: 'Saturday: 11:00 AM - 5:00 PM' },
-            { label: 'E-mail:  <span style="color:#01A4FF;">shop@email.com</span>' }
+        title: 'footer.links.address.title',
+        linksArr: [
+            { link: '#', label: 'footer.links.address.addressItem.address' },
+            { link: '#', label: 'footer.links.address.addressItem.phones' },
+            { link: '#', label: 'footer.links.address.addressItem.open' },
+            { link: '#', label: 'footer.links.address.addressItem.friday' },
+            { link: '#', label: 'footer.links.address.addressItem.saturday' },
+            { link: '#', label: 'footer.links.address.addressItem.email' }
         ]
     }
 ]
@@ -80,68 +77,3 @@ export const footerInfoList = [
         description: 'footerInfo.amazingSavings.description'
     }
 ]
-//[
-//     ({
-//         title: 'Інформація',
-//         linksArr: [
-//             { link: '#', label: 'Про нас' },
-//             { link: '#', label: 'Про Zip' },
-//             { link: '#', label: 'Політика конфіденційності' },
-//             { link: '#', label: 'Пошук' },
-//             { link: '#', label: 'Умови використання' },
-//             { link: '#', label: 'Замовлення та повернення' },
-//             { link: '#', label: "Зв'язок з нами" },
-//             { link: '#', label: 'Розширений пошук' },
-//             { link: '#', label: 'Підписка на новини' }
-//         ]
-//     },
-//     {
-//         title: 'Комплектуючі для ПК',
-//         linksArr: [
-//             { link: '#', label: 'Процесори' },
-//             { link: '#', label: 'Додаткові картки' },
-//             { link: '#', label: 'Політика конфіденційності' },
-//             { link: '#', label: 'Жорсткі диски (внутрішні)' },
-//             { link: '#', label: 'Відеокарти' },
-//             { link: '#', label: 'Клавіатури / Миші' },
-//             { link: '#', label: 'Корпуси / Блоки живлення / Системи охолодження' },
-//             { link: '#', label: "ОЗП (Пам'ять)" },
-//             { link: '#', label: 'Програмне забезпечення' },
-//             { link: '#', label: 'Колонки / Навушники' },
-//             { link: '#', label: 'Материнські плати' }
-//         ]
-//     },
-//     {
-//         title: 'Настільні ПК',
-//         linksArr: [
-//             { link: '#', label: 'Індивідуальні ПК' },
-//             { link: '#', label: 'Сервери' },
-//             { link: '#', label: 'MSI Все-в-одному ПК' },
-//             { link: '#', label: 'ПК HP/Compaq' },
-//             { link: '#', label: 'ПК ASUS' },
-//             { link: '#', label: 'ПК Tecs' }
-//         ]
-//     },
-//     {
-//         title: 'Ноутбуки',
-//         linksArr: [
-//             { link: '#', label: 'Ноутбуки для повсякденного використання' },
-//             { link: '#', label: 'Серія робочих станцій MSI' },
-//             { link: '#', label: 'Серія престижних ноутбуків MSI' },
-//             { link: '#', label: 'Планшети та плити' },
-//             { link: '#', label: 'Нетбуки' },
-//             { link: '#', label: 'Ігрові ноутбуки Infinity' }
-//         ]
-//     },
-//     {
-//         title: 'Адреса',
-//         addressItem: [
-//             { label: 'Адреса: 1234 Вулиця, Місто, 1234' },
-//             { label: 'Телефони: <span style="color:#01A4FF;">(00) 1234 5678</span>' },
-//             { label: 'Ми працюємо: Пн-Чт: 9:00 - 17:30' },
-//             { label: 'Пт: 9:00 - 18:00' },
-//             { label: 'Сб: 11:00 - 17:00' },
-//             { label: 'Електронна пошта: <span style="color:#01A4FF;">shop@email.com</span>' }
-//         ]
-//     })
-// ]

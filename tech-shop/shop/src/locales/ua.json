@@ -2,6 +2,25 @@
     "loginPage": {
         "pageTitle": "Вхід для клієнтів"
     },
+    "nav": {
+        "home": "Головна",
+        "catalog": "Каталог",
+        "login": "Увійти"
+    },
+    "detailsProductPage": {
+        "actionsBarProductPage": {
+            "aboutProduct": "ПРО ТОВАР",
+            "details": "ДЕТАЛІ",
+            "specs": "Характеристики"
+        },
+        "countCost": "Загальна вартість",
+        "descriptionProductPage": {
+            "subLink": "Будьте першим, хто напише відгук про цей товар",
+            "questionTitle": "Є питання",
+            "contactsLink": "Зв'яжіться з нами",
+            "info": "Додаткова інформація"
+        }
+    },
     "loginBox": {
         "title": "Зареєстровані клієнти",
         "subTitle": "Якщо у вас є обліковий запис, увійдіть за допомогою своєї електронної адреси.",
@@ -138,6 +157,10 @@
                 "post": "Поштова доставка",
                 "pickup": "Самовивіз з пункту збору"
             }
+        },
+        "countryList": {
+            "ua": "Україна",
+            "en": "Велика Британія"
         }
     },
     "footerInfo": {
@@ -158,6 +181,69 @@
         "title": "Підписатися на нашу розсилку.",
         "subTitle": "Будьте першими, хто дізнається про останні пропозиції.",
         "button": "Підписатися",
-        "inputSubLabel": "Твоя пошта"
+        "inputSubLabel": "Твоя пошта",
+        "links": {
+            "information": {
+                "title": "Інформація",
+                "linksArr": {
+                    "aboutUs": "Про нас",
+                    "aboutZip": "Про Zip",
+                    "privacyPolicy": "Політика конфіденційності",
+                    "search": "Пошук",
+                    "terms": "Замовлення та повернення",
+                    "ordersAndReturns": "Замовлення та повернення",
+                    "contactUs": "Зв'язатися з нами",
+                    "advancedSearch": "Розширений пошук",
+                    "newsletterSubscription": "Підписка на розсилку"
+                }
+            },
+            "psParts": {
+                "title": "Частини ПК",
+                "linksArr": {
+                    "addOnCards": "Додаткові картки",
+                    "privacyPolicy": "Політика конфіденційності",
+                    "hardDrives ": "Жорсткі диски (Внутрішні)",
+                    "graphicCards": "Графічні картки",
+                    "keyboardsMice": "Клавіатури / Миші",
+                    "cases ": "Корпуси / Блоки живлення / Системи охолодження",
+                    "ram": "ОЗУ (Пам'ять)",
+                    "software": "Програмне забезпечення",
+                    "speakers": "Динаміки / Навушники",
+                    "motherboards": "Материнські плати"
+                }
+            },
+            "desktopPc": {
+                "title": "Настільні ПК",
+                "linksArr": {
+                    "customPcs": "Індивідуальні ПК",
+                    "servers": "Сервери",
+                    "msiAll": "Всі-в-одному ПК від MSI",
+                    "hp": "ПК HP/Compaq",
+                    "asus": "ПК ASUS",
+                    "tecs": "ПК Tecs"
+                }
+            },
+            "laptops": {
+                "title": "Ноутбуки",
+                "linksArr": {
+                    "everyday": "Ноутбуки для щоденного використання",
+                    "workstation": "Серія робочих ноутбуків MSI",
+                    "prestige": "Серія престижних ноутбуків MSI",
+                    "tablets": "Планшети та планшетні ПК",
+                    "netbooks": "Нетбуки",
+                    "gamingNotebooks": "Ноутбуки для ігор серії Infinity"
+                }
+            },
+            "address": {
+                "title": "Адреса",
+                "addressItem": {
+                    "address": "Адреса: 1234 Вулиця Адреса Місто Адреса, 1234",
+                    "phones": "Телефони: (00) 1234 5678",
+                    "open": "Ми працюємо: Понеділок-Четвер: 9:00 - 17:30",
+                    "friday": "П'ятниця: 9:00 - 18:00",
+                    "saturday": "Субота: 11:00 - 17:00"
+                }
+            }
+        }
     }
 }

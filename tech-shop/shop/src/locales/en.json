@@ -2,6 +2,25 @@
     "loginPage": {
         "pageTitle": "Customer Login"
     },
+    "nav": {
+        "home": "Home",
+        "catalog": "Catalog",
+        "login": "Login"
+    },
+    "detailsProductPage": {
+        "actionsBarProductPage": {
+            "aboutProduct": "ABOUT PRODUCT",
+            "details": "DETAILS",
+            "specs": "specs"
+        },
+        "countCost": "total cost",
+        "descriptionProductPage": {
+            "subLink": "Be the first to review this product",
+            "questionTitle": "Have a Question",
+            "contactsLink": "Contact Us",
+            "info": "More information"
+        }
+    },
     "loginBox": {
         "title": "Registered Customers",
         "subTitle": "If you have an account, sign in with your email address.",
@@ -135,6 +154,10 @@
                 "post": "Postal Delivery",
                 "pickup": "Pickup from Point of Collection"
             }
+        },
+        "countryList": {
+            "ua": "Ukraine",
+            "en": "The UK"
         }
     },
     "filterSortActionBar": {
@@ -158,6 +181,69 @@
         "title": "Sign Up To Our Newsletter.",
         "subTitle": "Be the first to hear about the latest offers.",
         "button": "Subscribe",
-        "inputSubLabel": "Your Email"
+        "inputSubLabel": "Your Email",
+        "links": {
+            "information": {
+                "title": "Information",
+                "linksArr": {
+                    "aboutUs": "About Us",
+                    "aboutZip": "About Zip",
+                    "privacyPolicy": "Privacy Policy",
+                    "search": "Search",
+                    "terms": "Orders and Returns",
+                    "ordersAndReturns": "Orders and Returns",
+                    "contactUs": "Contact Us",
+                    "advancedSearch": "Advanced Search",
+                    "newsletterSubscription": "Newsletter Subscription"
+                }
+            },
+            "psParts": {
+                "title": "PC Parts",
+                "linksArr": {
+                    "addOnCards": "Add On Cards",
+                    "privacyPolicy": "Privacy Policy",
+                    "hardDrives ": "Hard Drives (Internal)",
+                    "graphicCards": "Graphic Cards",
+                    "keyboardsMice": "Keyboards / Mice",
+                    "cases ": "Cases / Power Supplies / Cooling",
+                    "ram": "RAM (Memory)",
+                    "software": "Software",
+                    "speakers": "Speakers / Headsets",
+                    "motherboards": "Motherboards"
+                }
+            },
+            "desktopPc": {
+                "title": "Desktop PCs",
+                "linksArr": {
+                    "customPcs": "Custom PCs",
+                    "servers": "Servers",
+                    "msiAll": "MSI All-In-One PCs",
+                    "hp": "HP/Compaq PCs",
+                    "asus": "ASUS PCs",
+                    "tecs": "Tecs PCs"
+                }
+            },
+            "laptops": {
+                "title": "Laptops",
+                "linksArr": {
+                    "everyday": "Everyday Use Notebooks",
+                    "workstation": "MSI Workstation Series",
+                    "prestige": "MSI Prestige Series",
+                    "tablets": "Tablets and Pads",
+                    "netbooks": "Netbooks",
+                    "gamingNotebooks": "Infinity Gaming Notebooks"
+                }
+            },
+            "address": {
+                "title": "Address",
+                "addressItem": {
+                    "address": "Address: 1234 Street Adress City Address, 1234",
+                    "phones": "Phones: (00) 1234 5678",
+                    "open": "We are open: Monday-Thursday: 9:00 AM - 5:30 PM",
+                    "friday": "Friday: 9:00 AM - 6:00 PM",
+                    "saturday": "Saturday: 11:00 AM - 5:00 PM"
+                }
+            }
+        }
     }
 }

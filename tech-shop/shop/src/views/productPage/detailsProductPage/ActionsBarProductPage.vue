@@ -8,20 +8,26 @@
             class="actions-bar__tabs-bar"
             density="compact"
         >
-            <v-tab class="actions-bar__tabs-item" value="one">About Product</v-tab>
-            <v-tab class="actions-bar__tabs-item" value="two">Details</v-tab>
-            <v-tab class="actions-bar__tabs-item" value="three">Specs</v-tab>
+            <v-tab class="actions-bar__tabs-item" value="one">{{
+                $t('detailsProductPage.actionsBarProductPage.aboutProduct')
+            }}</v-tab>
+            <v-tab class="actions-bar__tabs-item" value="two">{{
+                $t('detailsProductPage.actionsBarProductPage.details')
+            }}</v-tab>
+            <v-tab class="actions-bar__tabs-item" value="three">{{
+                $t('detailsProductPage.actionsBarProductPage.specs')
+            }}</v-tab>
         </v-tabs>
         <div class="actions-bar__add-actions">
             <div class="actions-bar__cost">
-                <div>
-                    <span>On Sale from</span>
+                <div class="actions-bar__block">
+                    <span>{{ $t('detailsProductPage.countCost') }}</span>
                     <b>${{ priceWithCount }}</b>
                 </div>
                 <input v-model="numberProduct" class="actions-bar__input" type="number" />
             </div>
             <div class="actions-bar__buttons">
-                <v-btn class="actions-bar__button button" @click="addProductToCart">Add to Cart</v-btn>
+                <v-btn class="actions-bar__button button" @click="addProductToCart">{{ $t('card.addButton') }}</v-btn>
                 <v-btn href="https://www.paypal.com/" class="actions-bar__pay-pal button"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +163,10 @@ watch(selectedTab, (newVal) => {
         align-items: center;
         column-gap: toRem(4);
     }
-
+    &__block {
+        display: flex;
+        column-gap: toRem(4);
+    }
     &__input {
         width: toRem(70);
         background-color: #f5f7ff;
@@ -171,11 +180,6 @@ watch(selectedTab, (newVal) => {
         align-items: center;
         column-gap: toRem(13);
     }
-
-    // .actions-bar__button
-
-    &__button {
-    }
     &__pay-pal {
         background-color: #ffb800;
         @media (any-hover: hover) {
@@ -184,11 +188,5 @@ watch(selectedTab, (newVal) => {
             }
         }
     }
-    // .actions-bar__pay-pal
-
-    &__pay-pal {
-    }
-}
-.button {
 }
 </style>

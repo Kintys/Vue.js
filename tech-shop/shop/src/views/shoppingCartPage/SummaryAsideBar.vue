@@ -155,7 +155,7 @@ const deliveryPriceData = ref([
     }
 ])
 
-const countryList = ref(['Ukraine', 'The UK'])
+const countryList = ref(['card.countryList.ua', 'card.countryList.en'])
 const priceForDelivery = ref(null)
 const dialog = ref(false)
 

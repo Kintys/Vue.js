@@ -21,7 +21,7 @@
                         @click="onSelect(option)"
                         :key="i"
                         class="m-select__options-item"
-                        >{{ option.name ?? option }}</span
+                        >{{ $t(option.name ?? option) }}</span
                     >
                 </div>
             </transition>

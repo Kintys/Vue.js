@@ -25,16 +25,6 @@ const tab = ref('one')
 <style lang="scss" scoped>
 @import '@/assets/adaptive.scss';
 .details-product {
-    &__container {
-    }
-
-    // .details-product__actions-bar
-
-    &__actions-bar {
-    }
-
-    // .details-product__body
-
     &__body {
         grid-template-columns: 55% 50%;
         @media (max-width: em(1075)) {

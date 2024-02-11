@@ -2,7 +2,9 @@
     <div class="about-product">
         <header class="about-product__header">
             <h2 class="about-product__title">{{ getCurrentItem?.title }}</h2>
-            <a href="#" class="about-product__subtitle">Be the first to review this product</a>
+            <a href="#" class="about-product__subtitle">{{
+                $t('detailsProductPage.descriptionProductPage.subLink')
+            }}</a>
         </header>
         <slot name="about-product-content">
             <div class="about-product__content">
@@ -14,14 +16,20 @@
         <footer class="about-product__footer">
             <div class="about-product__block">
                 <div class="about-product__contacts contacts">
-                    <b class="contacts__question">Have a Question?</b>
-                    <a class="contacts__contacts-link" href="#">Contact Us</a>
+                    <b class="contacts__question"
+                        >{{ $t('detailsProductPage.descriptionProductPage.questionTitle') }} ?</b
+                    >
+                    <a class="contacts__contacts-link" href="#">{{
+                        $t('detailsProductPage.descriptionProductPage.contactsLink')
+                    }}</a>
                 </div>
                 <p class="about-product__id">SKU D5515AI</p>
             </div>
         </footer>
     </div>
-    <a href="#" class="about-product__info"><b>+ More information</b></a>
+    <a href="#" class="about-product__info"
+        ><b>+ {{ $t('detailsProductPage.descriptionProductPage.info') }}</b></a
+    >
 </template>
 
 <script setup>
