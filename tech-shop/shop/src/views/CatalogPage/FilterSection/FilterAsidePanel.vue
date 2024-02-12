@@ -37,6 +37,10 @@ import FilterContentComp from './FilterContentComp.vue'
 @import '@/assets/adaptive.scss';
 .filter-aside-block {
     display: grid;
+
+    @media (min-width: $mobile) {
+        max-width: toRem(300);
+    }
 }
 .filter-content-box {
     text-align: center;
